@@ -75,8 +75,10 @@ public class ManagerClient {
 
 		// String requestDataType = "11112AA";
 		// String requestData = "Actions speak louder than words! AA";
-		String header = "11112DD";
+		String header = "11112CC";
 		String requestData = "No zuo No die!";
+//		String header = "11112DD";
+//		String requestData = "No zuo No die!";
 
 		new NioClient(hostname, port).send(header, requestData);
 	}
