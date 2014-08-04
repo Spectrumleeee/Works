@@ -1,3 +1,10 @@
+/**
+ * Subject entity
+ * Copyright (c) 2014, TP-Link Co.,Ltd.
+ * Author: liguangpu <liguangpu@tp-link.net>
+ * Updated: Aug 4, 2014
+ */
+
 package com.tplink.cloud.lgp.Observer;
 
 import java.util.ArrayList;
@@ -24,27 +31,18 @@ public abstract class Subject {
 	public List<Observer> getObservers(){
 		return observers;
 	}
-	
-    /// <summary>
-    /// 增加观察者
-    /// </summary>
-    /// <param name="observer"></param>
+
     public void attach(Observer observer)
     {
         observers.add(observer);
     }
 
-    /// <summary>
-    /// 移除观察者
-    /// </summary>
-    /// <param name="observer"></param>
     public void detach(Observer observer)
     {
         observers.remove(observer);
     }
     
     public void notify(String mess){
-    	
     	for(Observer ob : observers){
     		ob.update(name + ":" + mess);
     	}

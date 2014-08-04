@@ -1,3 +1,10 @@
+/**
+ * NioServer entity
+ * Copyright (c) 2014, TP-Link Co.,Ltd.
+ * Author: liguangpu <liguangpu@tp-link.net>
+ * Updated: Aug 4, 2014
+ */
+
 package com.tplink.cloud.lgp.NioServer;
 
 import java.io.IOException;
@@ -12,27 +19,20 @@ import java.util.logging.Logger;
 import com.tplink.cloud.lgp.handler.Handler;
 import com.tplink.cloud.lgp.handler.*;
 
-/**
- * Hello world!
- *
- */
+
 public class NioServer 
 {
     public static void main( String[] args )
     {
-//        System.out.println( "Hello World!" );
-    	
     	Thread thread = new NioTcpServer("127.0.0.1", 8888);
     	thread.start();
     }
-    
 }
 
 class NioTcpServer extends Thread {
 
 	private static final Logger log = Logger.getLogger(NioTcpServer.class.getName());
 	private InetSocketAddress inetSocketAddress;
-//	private Handler handler = new ServerHandler();
 	private Handler handler ;
 
 	public NioTcpServer(String hostname, int port) {
@@ -43,14 +43,19 @@ class NioTcpServer extends Thread {
 	@Override
 	public void run() {
 		try {
-			Selector selector = Selector.open(); // 打开选择器
-			ServerSocketChannel serverSocketChannel = ServerSocketChannel.open(); // 打开通道
-			serverSocketChannel.configureBlocking(false); // 非阻塞
+			// open a selector
+			Selector selector = Selector.open(); 
+			// open a server socket channel
+			ServerSocketChannel serverSocketChannel = ServerSocketChannel.open(); 
+			// set the channel not blocking
+			serverSocketChannel.configureBlocking(false); 
+			// bind the channel to a socket
 			serverSocketChannel.socket().bind(inetSocketAddress);
-			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT); // 向通道注册选择器和对应事件标识
+			// register the channel to selector
+			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT); 
 			log.info("Server: socket server started.");
-			while(true) { // 轮询
-				
+			// try polling
+			while(true) { 
 				int nKeys = selector.select();
 				
 				if(nKeys>0) {
@@ -58,17 +63,17 @@ class NioTcpServer extends Thread {
 					Iterator<SelectionKey> it = selectedKeys.iterator();
 					
 					while(it.hasNext()) {
-						
 						SelectionKey key = it.next();
+						
 						if(key.isAcceptable()) {
 							log.info("Server: SelectionKey is acceptable.");
 							handler.handleAccept(key);
-							
-						} else if(key.isReadable()) {
+						} 
+						else if(key.isReadable()) {
 							log.info("Server: SelectionKey is readable.");
 							handler.handleRead(key);
-							
-						} else if(key.isWritable()) {
+						} 
+						else if(key.isWritable()) {
 							log.info("Server: SelectionKey is writable.");
 							handler.handleWrite(key);					
 						}
@@ -80,7 +85,7 @@ class NioTcpServer extends Thread {
 			e.printStackTrace();
 		}
 	}
-
+	// NioTcpServer main , just for testing
 	public static void main(String[] args) {
 		NioTcpServer server = new NioTcpServer("localhost", 1000);
 		server.start();

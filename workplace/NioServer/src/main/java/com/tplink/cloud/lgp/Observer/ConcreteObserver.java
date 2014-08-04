@@ -1,3 +1,10 @@
+/**
+ * ConcreteObserver entity
+ * Copyright (c) 2014, TP-Link Co.,Ltd.
+ * Author: liguangpu <liguangpu@tp-link.net>
+ * Updated: Aug 4, 2014
+ */
+
 package com.tplink.cloud.lgp.Observer;
 
 public class ConcreteObserver extends Observer{
@@ -25,7 +32,4 @@ public class ConcreteObserver extends Observer{
 		// TODO Auto-generated method stub
 		sub.detach(this);
 	}
-	
-	
-
 }

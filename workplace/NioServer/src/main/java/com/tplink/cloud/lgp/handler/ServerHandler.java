@@ -1,3 +1,10 @@
+/**
+ * ServerHandler entity
+ * Copyright (c) 2014, TP-Link Co.,Ltd.
+ * Author: liguangpu <liguangpu@tp-link.net>
+ * Updated: Aug 4, 2014
+ */
+
 package com.tplink.cloud.lgp.handler;
 
 import java.io.IOException;
@@ -12,6 +19,7 @@ public class ServerHandler implements Handler{
 	private static final Logger log = Logger.getLogger(ServerHandler.class.getName());
 	
 	public void handleAccept(SelectionKey key) throws IOException {
+		
 		ServerSocketChannel serverSocketChannel = (ServerSocketChannel)key.channel();
 		SocketChannel socketChannel = serverSocketChannel.accept();
 		log.info("Server: accept client socket " + socketChannel);
@@ -36,20 +44,17 @@ public class ServerHandler implements Handler{
 		while(true) {
 			
 			readBytes = socketChannel.read(byteBuffer);
-			if(readBytes>0) {
-//				log.info("Server: readBytes = " + readBytes);
-//				log.info("Server: data = " + new String(byteBuffer.array(), 0, readBytes));				
+			if(readBytes>0) {		
 				strb.append(new String(byteBuffer.array(), 0, readBytes));
 				byteBuffer.clear();
-//				byteBuffer.flip();
-//				socketChannel.write(byteBuffer);
-//				System.out.println("read!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+readBytes);
-			}else{
+			}
+			else{
 				log.info(strb.toString());
 				socketChannel.write(ByteBuffer.wrap(strb.toString().getBytes()));
 				break;
 			}
 		}
+		
 		socketChannel.close();
 	}
 
@@ -72,5 +77,4 @@ public class ServerHandler implements Handler{
 			strb.append("No, ");
 		}
 	}
-
 }

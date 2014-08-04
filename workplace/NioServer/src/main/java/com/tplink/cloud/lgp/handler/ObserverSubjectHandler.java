@@ -1,3 +1,10 @@
+/**
+ * ObserverSubjectHandler entity
+ * Copyright (c) 2014, TP-Link Co.,Ltd.
+ * Author: liguangpu <liguangpu@tp-link.net>
+ * Updated: Aug 4, 2014
+ */
+
 package com.tplink.cloud.lgp.handler;
 
 import java.io.IOException;
@@ -17,8 +24,7 @@ import com.tplink.cloud.lgp.Observer.Subject;
 public class ObserverSubjectHandler implements Handler {
 
 	private static final Logger log = Logger.getLogger(ServerHandler.class.getName());
-	
-	//In Fact, this subjects must be persistent
+	// in reality, this subjects must be persistent
 	private static Map<String, Subject> subjects = new HashMap<String, Subject>();
 	private static Map<String, Observer> observers = new HashMap<String, Observer>();
 	
@@ -49,12 +55,12 @@ public class ObserverSubjectHandler implements Handler {
 		
 		SocketChannel socketChannel = (SocketChannel)key.channel();
 		
-		//Read the Client Id
+		// read the Client Id
 		int idLen = socketChannel.read(clientId);
 		log.info("Client Id is:" + new String(clientId.array(), 0, idLen));
 		clientId.clear();
 		
-		//Read the Operation Code :  0  or  1  or 2
+		// read the Operation Code :  0  or  1  or 2
 		int readBytes = socketChannel.read(operation);
 		log.info("Client Operatioin Code is:" + new String(operation.array(), 0, readBytes));
 		
@@ -63,7 +69,7 @@ public class ObserverSubjectHandler implements Handler {
 			ConcreteObserver co = new ConcreteObserver(new String(clientId.array(), 0, idLen));
 			observers.put(new String(clientId.array(), 0, idLen), co);
 			
-			//Read subscribe item
+			// read subscribe item
 			readBytes = socketChannel.read(subscribeItem);
 			byte[] subscri = subscribeItem.array();
 			
@@ -77,21 +83,20 @@ public class ObserverSubjectHandler implements Handler {
 			socketChannel.write(ByteBuffer.wrap("Register Successful !!!".getBytes()));
 			
 		}else if(operation.array()[0] == '0'){
-			//send message to client
+			// send message to client
 			ConcreteObserver co = (ConcreteObserver) observers.get(new String(clientId.array(), 0, idLen));
 			socketChannel.write(ByteBuffer.wrap(co.getInterest().getBytes()));
 		
 		}else if(operation.array()[0] == '2'){
-			//Manager notify message
+			// manager notify message
 			readBytes = socketChannel.read(byteBuffer);
 			String subjectId = new String(byteBuffer.array(), 0, 2);
 			String subjectContent = new String(byteBuffer.array(), 2, readBytes - 2);
 			
 			ConcreteSubject cs = (ConcreteSubject) subjects.get(subjectId);
 			cs.notify(subjectContent);
-			
 		}
-
+		
 		socketChannel.close();
 	}
 
@@ -116,5 +121,4 @@ public class ObserverSubjectHandler implements Handler {
 			strb.append("No, ");
 		}
 	}
-
 }

@@ -1,5 +1,5 @@
 /**
- * NioClient entity
+ * ManagerClient entity
  * Copyright (c) 2014, TP-Link Co.,Ltd.
  * Author: liguangpu <liguangpu@tp-link.net>
  * Updated: Aug 4, 2014
