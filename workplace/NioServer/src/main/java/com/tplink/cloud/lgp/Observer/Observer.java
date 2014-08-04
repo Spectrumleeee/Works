@@ -9,14 +9,14 @@ package com.tplink.cloud.lgp.Observer;
 
 public abstract class Observer {
 
-	private String ObserverName;
+	protected String ObserverName;
 	
-	private String interest;
+	protected String interest;
 	
 	public Observer(String name){
 		
 		this.ObserverName = name;
-		this.interest = "";
+		this.interest = "xxxxxx";
 	}
 	
 	public void setInterset(String info){
@@ -25,7 +25,7 @@ public abstract class Observer {
 	
 	public String getInterest(){
 		String temp = this.interest;
-		this.interest = "";
+		this.interest = "XXXXXX";
 		return temp;
 	}
 	

@@ -85,11 +85,11 @@ public class NioClient {
 		String header2 = "001110011";
 		String header22 = "00110XXXX";
 		String requestData = "Words useless";
+//
+		new NioClient(hostname, port).send(header1, requestData);
+		new NioClient(hostname, port).send(header2, requestData);
 
-		// new NioClient(hostname, port).send(header1, requestData);
-		// new NioClient(hostname, port).send(header2, requestData);
-
-		new NioClient(hostname, port).send(header11, requestData);
-		new NioClient(hostname, port).send(header22, requestData);
+//		new NioClient(hostname, port).send(header11, requestData);
+//		new NioClient(hostname, port).send(header22, requestData);
 	}
 }
