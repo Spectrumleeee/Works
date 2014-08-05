@@ -129,6 +129,7 @@ public class ObserverSubjectHandler implements Handler {
 			}
 		}
 
+		socketChannel.socket().close();
 		socketChannel.close();
 	}
 
