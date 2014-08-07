@@ -14,26 +14,28 @@ import com.tplink.cloud.lgp.handler.Handler;
 
 public class Reader implements Runnable {
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	private SelectionKey sk;
-	private Handler osh;
-	
-	public Reader(SelectionKey key, Handler osh){
-		this.sk = key;
-		this.osh = osh;
-	}
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		try {
-			osh.handleRead(sk);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Runnable#run()
+     */
+    private SelectionKey sk;
+    private Handler osh;
+
+    public Reader(SelectionKey key, Handler osh) {
+        this.sk = key;
+        this.osh = osh;
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        try {
+            osh.handleRead(sk);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }

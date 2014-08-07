@@ -9,28 +9,28 @@ package com.tplink.cloud.lgp.Observer;
 
 public class ConcreteSubject extends Subject {
 
-	// private static ConcreteSubject cs;
-	//
-	// private ConcreteSubject(String name) {
-	// super(name);
-	// // TODO Auto-generated constructor stub
-	// }
-	//
-	// public static ConcreteSubject getSubject(String name){
-	// if(cs == null){
-	// synchronized(ConcreteSubject.class){
-	// if(cs == null){
-	// cs = new ConcreteSubject(name);
-	// }
-	// }
-	// }
-	//
-	// return cs;
-	// }
+    // private static ConcreteSubject cs;
+    //
+    // private ConcreteSubject(String name) {
+    // super(name);
+    // // TODO Auto-generated constructor stub
+    // }
+    //
+    // public static ConcreteSubject getSubject(String name){
+    // if(cs == null){
+    // synchronized(ConcreteSubject.class){
+    // if(cs == null){
+    // cs = new ConcreteSubject(name);
+    // }
+    // }
+    // }
+    //
+    // return cs;
+    // }
 
-	public ConcreteSubject(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	}
+    public ConcreteSubject(String name) {
+        super(name);
+        // TODO Auto-generated constructor stub
+    }
 
 }

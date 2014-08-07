@@ -14,27 +14,29 @@ import com.tplink.cloud.lgp.handler.Handler;
 
 public class Writer implements Runnable {
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	
-	private SelectionKey sk;
-	private Handler osh;
-	
-	public Writer(SelectionKey key, Handler osh){
-		this.sk = key;
-		this.osh = osh;
-	}
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		try {
-			osh.handleWrite(sk);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Runnable#run()
+     */
+
+    private SelectionKey sk;
+    private Handler osh;
+
+    public Writer(SelectionKey key, Handler osh) {
+        this.sk = key;
+        this.osh = osh;
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        try {
+            osh.handleWrite(sk);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }
