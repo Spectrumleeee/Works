@@ -16,3 +16,9 @@
 17:23 2014/8/7
 1、【Java 代码格式】 可以把Eclipse/MyEclipse的TAB调为4个空格，步骤网上查询，之后在项目上右键-->source-->Format
 2、【测试工具】 apache-JMeter-2.11 非常方便用的测试工具，可以测试web稳定性，并发量，还能测试Socket服务器并发，功能强大。
+
+15:11 2014/8/8
+【计算机语言】
+动态语言  ：python(tornado),ruby,go,lisp,pascall.
+半静态语言：java
+静态语言  ：c,c++,object-c
