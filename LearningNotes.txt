@@ -19,6 +19,8 @@
 
 15:11 2014/8/8
 【计算机语言】
-动态语言  ：python(tornado),ruby,go,lisp,pascall.
-半静态语言：java
-静态语言  ：c,c++,object-c
+	（1）动态语言  ：python(tornado),ruby,go,lisp,pascall.
+	（2）半静态语言：java
+	（3）静态语言  ：c,c++,object-c
+【十大网站使用的web服务器观察】					http://blog.csdn.net/kimsoft/article/details/5912941
+
