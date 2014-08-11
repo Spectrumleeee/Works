@@ -1,8 +1,8 @@
 /**
- * Client Abstract Class
+ * TestClient entity
  * Copyright (c) 2014, TP-Link Co.,Ltd.
  * Author: liguangpu <liguangpu@tp-link.net>
- * Updated: Aug 11, 2014
+ * Updated: Aug 4, 2014
  */
 
 package com.tplink.cloud.lgp.NioClient;
@@ -14,14 +14,14 @@ import java.nio.channels.SocketChannel;
 import org.apache.log4j.*;
 
 /**
- * The class Client is a base class
+ * The class creates a Client based on NIO TCP
  */
-public abstract class Client {
+public class TestClient {
 
-    protected static Logger log;
-    protected InetSocketAddress inetSocketAddress;
+    private static Logger log;
+    private InetSocketAddress inetSocketAddress;
 
-    public Client(String hostname, int port) {
+    public TestClient(String hostname, int port) {
         PropertyConfigurator.configure("log4j.properties");
         log = Logger.getLogger(NioClient.class.getName());
         inetSocketAddress = new InetSocketAddress(hostname, port);
@@ -45,6 +45,10 @@ public abstract class Client {
 
             try {
                 Thread.sleep(100);
+
+                // printSocketChannelStatus(socketChannel);
+                log.debug("debug");
+                log.error("error");
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -60,13 +64,11 @@ public abstract class Client {
                     log.info("Client: data = "
                             + new String(byteBuffer.array(), 0, readBytes));
                 } else {
-                    /**
-                     * until here, socketChannel is
-                     * connected(socketChannel.isConnected() == true), even
-                     * though you invoke Thread.sleep(long) in this place,
-                     * socketChannel will always be Connected.
-                     * printSocketChannelStatus(socketChannel);
-                     */
+                    // until here, socketChannel is
+                    // connected(socketChannel.isConnected() == true), even
+                    // though you invoke Thread.sleep(long) in this place ,
+                    // socketChannel will always be Connected.
+                    // printSocketChannelStatus(socketChannel);
 
                     socketChannel.close();
                     break;
@@ -100,5 +102,27 @@ public abstract class Client {
     public boolean isSocketClosed(SocketChannel sc) {
         return sc.socket().isClosed();
     }
-    
+
+    public static void main(String[] args) {
+
+        String hostname = "localhost";
+        int port = 8888;
+        /**
+         * The header is consist of 9 bits, the former 4 bits stand for the
+         * client id, the laster 4 bits stand for the subject this client will
+         * subscribe, the middle bit '1' means establish a connection and '0'
+         * means get message from server
+         */
+        String header1 = "000011010";
+        String header11 = "00000XXXX";
+        String header2 = "001110011";
+        String header22 = "00110XXXX";
+        String requestData = "Words useless";
+        //
+        new TestClient(hostname, port).send(header1, requestData);
+        new TestClient(hostname, port).send(header2, requestData);
+
+        // new NioClient(hostname, port).send(header11, requestData);
+        // new NioClient(hostname, port).send(header22, requestData);
+    }
 }
