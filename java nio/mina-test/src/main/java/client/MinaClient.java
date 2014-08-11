@@ -80,6 +80,7 @@ public class MinaClient {
     public static void main(String[] args) throws InterruptedException {
         MinaClient clent = new MinaClient();
         for (int i = 0; i < 3; i++) {
+            System.err.println(i);
             clent.sendMessage("Hello World " + i);
         }
 
