@@ -23,6 +23,11 @@ import com.tplink.cloud.lgp.Observer.Subject;
 
 public class ObserverSubjectHandler implements Handler {
 
+    // message type flags
+    final static byte CLIENT_PULL_MESSAGE = '0';
+    final static byte CLIENT_REGISTER = '1';
+    final static byte MANAGER_PUBLISH = '2';
+    
     private static final Logger log = Logger.getLogger(ServerHandler.class
             .getName());
     // in reality, this subjects must be persistent
@@ -32,12 +37,6 @@ public class ObserverSubjectHandler implements Handler {
     public ObserverSubjectHandler() {
 
         synchronized (this) {
-
-            // subjects.put("AA", ConcreteSubject.getSubject("AA"));
-            // subjects.put("BB", ConcreteSubject.getSubject("BB"));
-            // subjects.put("CC", ConcreteSubject.getSubject("CC"));
-            // subjects.put("DD", ConcreteSubject.getSubject("DD"));
-
             subjects.put("AA", new ConcreteSubject("AA"));
             subjects.put("BB", new ConcreteSubject("BB"));
             subjects.put("CC", new ConcreteSubject("CC"));
@@ -65,7 +64,6 @@ public class ObserverSubjectHandler implements Handler {
         ByteBuffer subscribeItem = ByteBuffer.allocate(4);
 
         SocketChannel socketChannel = (SocketChannel) key.channel();
-
         // read the Client Id
         int idLen = socketChannel.read(clientId);
         log.info("Client Id is:" + new String(clientId.array(), 0, idLen));
@@ -76,7 +74,29 @@ public class ObserverSubjectHandler implements Handler {
         log.info("Client Operatioin Code is:"
                 + new String(operation.array(), 0, readBytes));
 
-        if (operation.array()[0] == '1') {
+        if (CLIENT_PULL_MESSAGE == operation.array()[0]) {
+            // send message to client
+
+            String clientName = new String(clientId.array(), 0, idLen);
+            synchronized (this) {
+                if (observers.containsKey(clientName)) {
+                    ConcreteObserver co = (ConcreteObserver) observers
+                            .get(clientName);
+                    socketChannel.write(ByteBuffer.wrap(co.getInterest()
+                            .getBytes()));
+                }
+            }
+        } else if (MANAGER_PUBLISH == operation.array()[0]) {
+            // manager notify message
+            readBytes = socketChannel.read(byteBuffer);
+            String subjectId = new String(byteBuffer.array(), 0, 2);
+            String subjectContent = new String(byteBuffer.array(), 2,
+                    readBytes - 2);
+            synchronized (this) {
+                ConcreteSubject cs = (ConcreteSubject) subjects.get(subjectId);
+                cs.notify(subjectContent);
+            }
+        } else if (CLIENT_REGISTER == operation.array()[0]) {
             // if Operation Code is 1, we will create a concrete observer and
             // register it
             ConcreteObserver co = new ConcreteObserver(new String(
@@ -103,32 +123,7 @@ public class ObserverSubjectHandler implements Handler {
             }
             socketChannel.write(ByteBuffer.wrap("Register Successful !!!"
                     .getBytes()));
-
-        } else if (operation.array()[0] == '0') {
-            // send message to client
-
-            String clientName = new String(clientId.array(), 0, idLen);
-            synchronized (this) {
-                if (observers.containsKey(clientName)) {
-                    ConcreteObserver co = (ConcreteObserver) observers
-                            .get(clientName);
-                    socketChannel.write(ByteBuffer.wrap(co.getInterest()
-                            .getBytes()));
-                }
-            }
-
-        } else if (operation.array()[0] == '2') {
-            // manager notify message
-            readBytes = socketChannel.read(byteBuffer);
-            String subjectId = new String(byteBuffer.array(), 0, 2);
-            String subjectContent = new String(byteBuffer.array(), 2,
-                    readBytes - 2);
-            synchronized (this) {
-                ConcreteSubject cs = (ConcreteSubject) subjects.get(subjectId);
-                cs.notify(subjectContent);
-            }
         }
-
         socketChannel.socket().close();
         socketChannel.close();
     }
@@ -146,12 +141,12 @@ public class ObserverSubjectHandler implements Handler {
         byteBuffer.compact();
     }
 
-    public void initType(StringBuilder strb, String type) {
-
-        if (type.equals("1111")) {
-            strb.append("Yes, ");
-        } else if (type.equals("0000")) {
-            strb.append("No, ");
-        }
-    }
+//    public void initType(StringBuilder strb, String type) {
+//
+//        if (type.equals("1111")) {
+//            strb.append("Yes, ");
+//        } else if (type.equals("0000")) {
+//            strb.append("No, ");
+//        }
+//    }
 }
