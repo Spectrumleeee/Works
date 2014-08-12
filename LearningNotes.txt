@@ -24,3 +24,6 @@
 	（3）静态语言  ：c,c++,object-c
 【十大网站使用的web服务器观察】					http://blog.csdn.net/kimsoft/article/details/5912941
 
+17:42 2014/8/12
+【thrift的安装和简单事例】					http://www.open-open.com/lib/view/open1400460273402.html
+
