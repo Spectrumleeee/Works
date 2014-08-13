@@ -13,7 +13,6 @@ public class ConcreteObserver extends Observer {
 
     public ConcreteObserver(String name) {
         super(name);
-        // TODO Auto-generated constructor stub
         this.observerStatus = false;
     }
 
@@ -23,13 +22,11 @@ public class ConcreteObserver extends Observer {
 
     @Override
     public void subscribe(Subject sub) {
-        // TODO Auto-generated method stub
         sub.attach(this);
     }
 
     @Override
-    public void cancell(Subject sub) {
-        // TODO Auto-generated method stub
+    public void cancel(Subject sub) {
         sub.detach(this);
     }
 }

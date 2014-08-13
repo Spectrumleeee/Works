@@ -29,11 +29,9 @@ public class Reader implements Runnable {
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
         try {
             osh.handleRead(sk);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

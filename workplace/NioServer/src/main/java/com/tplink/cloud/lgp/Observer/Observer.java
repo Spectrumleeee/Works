@@ -16,7 +16,7 @@ public abstract class Observer {
     public Observer(String name) {
 
         this.ObserverName = name;
-        this.interest = "xxxxxx";
+        this.interest = "[OBSERVER]";
     }
 
     public void setInterset(String info) {
@@ -25,7 +25,7 @@ public abstract class Observer {
 
     public String getInterest() {
         String temp = this.interest;
-        this.interest = "XXXXXX";
+        this.interest = "[OBSERVER]";
         return temp;
     }
 
@@ -35,9 +35,9 @@ public abstract class Observer {
 
     public abstract void subscribe(Subject sub);
 
-    public abstract void cancell(Subject sub);
+    public abstract void cancel(Subject sub);
 
     public void update(String mess) {
-        this.interest += mess + "\n";
+        this.interest += " " + mess;
     }
 }
