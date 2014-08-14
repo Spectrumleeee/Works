@@ -79,6 +79,7 @@ public class HandlerProcess {
                 return;
             }
             cs.notify(subjectContent);
+            sc.write(ByteBuffer.wrap(ReturnType.SUCCESS_PUBLISHED.getBytes()));
         }
     }
 
@@ -115,6 +116,6 @@ public class HandlerProcess {
                 }
             }
         }
-        sc.write(ByteBuffer.wrap("Register Successful !!!".getBytes()));
+        sc.write(ByteBuffer.wrap(ReturnType.SUCCESS_REGISTERED.getBytes()));
     }
 }

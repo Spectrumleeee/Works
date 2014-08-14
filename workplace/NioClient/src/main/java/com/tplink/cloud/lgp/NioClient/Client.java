@@ -16,24 +16,25 @@ import org.apache.log4j.*;
 /**
  * The class Client is a base class
  */
-public abstract class Client {
+public class Client {
 
     protected static Logger log;
     protected InetSocketAddress inetSocketAddress;
 
     public Client(String hostname, int port) {
         PropertyConfigurator.configure("log4j.properties");
-        log = Logger.getLogger(NioClient.class.getName());
+        log = Logger.getLogger(Client.class.getName());
         inetSocketAddress = new InetSocketAddress(hostname, port);
     }
 
     /**
      * send the request data with different header type
-     * 
      * @param requestData
      * @throws InterruptedException
      */
-    public void send(String requestDataType, String requestData) {
+    public String send(String requestDataType, String requestData) {
+        String messageReceived = "";
+        
         try {
             SocketChannel socketChannel = SocketChannel.open(inetSocketAddress);
             socketChannel.configureBlocking(false);
@@ -55,6 +56,7 @@ public abstract class Client {
                 int readBytes = socketChannel.read(byteBuffer);
 
                 if (readBytes > 0) {
+                    messageReceived = new String(byteBuffer.array(), 0, readBytes);
                     byteBuffer.flip();
                     log.info("Client: readBytes = " + readBytes);
                     log.info("Client: data = "
@@ -67,15 +69,14 @@ public abstract class Client {
                      * socketChannel will always be Connected.
                      * printSocketChannelStatus(socketChannel);
                      */
-
                     socketChannel.close();
                     break;
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return messageReceived;
     }
 
     public void printSocketChannelStatus(SocketChannel sc) {

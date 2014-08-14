@@ -32,17 +32,14 @@ public class ObserverSubjectHandler implements Handler {
     private static final Logger log = Logger.getLogger(ServerHandler.class
             .getName());
     // in reality, this subjects must be persistent
-    private static Map<String, Subject> subjects = new HashMap<String, Subject>();
-    private static Map<String, Observer> observers = new HashMap<String, Observer>();
+    private  Map<String, Subject> subjects = new HashMap<String, Subject>();
+    private  Map<String, Observer> observers = new HashMap<String, Observer>();
 
     public ObserverSubjectHandler() {
-
-        synchronized (this) {
             subjects.put("AA", new ConcreteSubject("AA"));
             subjects.put("BB", new ConcreteSubject("BB"));
             subjects.put("CC", new ConcreteSubject("CC"));
             subjects.put("DD", new ConcreteSubject("DD"));
-        }
     }
 
     @Override

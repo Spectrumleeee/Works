@@ -23,9 +23,25 @@ import com.tplink.cloud.lgp.thread.Reader;
 import com.tplink.cloud.lgp.thread.Writer;
 
 public class NioServer {
+
+    private Thread thread = null;
+
     public static void main(String[] args) {
         Thread thread = new NioTcpServer("127.0.0.1", 8888);
         thread.start();
+    }
+
+    public void start(int port) {
+        this.thread = new NioTcpServer("127.0.0.1", port);
+        this.thread.start();
+    }
+
+    @SuppressWarnings("deprecation")
+    public void stop() {
+        if (this.thread != null) {
+            this.thread.stop();
+            this.thread = null;
+        }
     }
 }
 

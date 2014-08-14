@@ -61,30 +61,29 @@ public class Validate {
         return isOneOrZero(info);
     }
     
-    private static boolean isDigit(String clientId){
+    public static boolean isDigit(String clientId){
         for(int i=0; i<clientId.length(); i++)
             if(!Character.isDigit(clientId.charAt(i)))
                 return false;
         return true;
     }
     
-    @SuppressWarnings("unused")
-    private static boolean isDigit(byte[] clientId){
+    public static boolean isDigit(byte[] clientId){
         for(int i=0; i<clientId.length; i++){
             if( clientId[i] < 48 || clientId[i] > 57)
                 return false;
         }
-        return false;
+        return true;
     }
     
-    private static boolean isUpperChar(ByteBuffer bb, int length){
+    public static boolean isUpperChar(ByteBuffer bb, int length){
         for(int i=0; i<length; i++)
             if(!Character.isUpperCase(bb.array()[i]))
                 return false;
         return true;   
     }
     
-    private static boolean isOneOrZero(byte[] info){
+    public static boolean isOneOrZero(byte[] info){
         for(int i=0; i<info.length; i++)
             if(info[i]<48 || info[i]>49)
                 return false;
