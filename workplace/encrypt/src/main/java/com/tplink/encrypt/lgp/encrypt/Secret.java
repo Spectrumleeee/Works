@@ -17,18 +17,18 @@ public class Secret {
 
         CryptTool tool = new CryptTool("AES");
 
-        if (3 == args.length && args[2].equals("enc")) {
+        if (3 == args.length && args[1].equals("enc")) {
             try {
-                tool.EncryptFile(args[0], args[1]);
+                tool.EncryptFile(args[0], args[2]);
                 System.out.println("Success to Encrypt the file!");
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 System.out.println("Failed to Encrypt the file!");
                 return;
             }
-        } else if (3 == args.length && args[2].equals("dec")) {
+        } else if (3 == args.length && args[1].equals("dec")) {
             try {
-                tool.DecryptFile(args[0], args[1]);
+                tool.DecryptFile(args[0], args[2]);
                 System.out.println("Success to Decrypt the file!");
             } catch (Exception e) {
                 // TODO Auto-generated catch block

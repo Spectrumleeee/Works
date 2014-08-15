@@ -1,5 +1,9 @@
 package com.tplink.encrypt.lgp.encrypt;
 
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+
 /**
  * Hello world!
  * 
@@ -8,11 +12,36 @@ public class TestMain {
     public static void main(String[] args){
 
 //        testEnDecryptString();
-        testEnDecryptFile();
+//        testAESEnDecryptFile();
+//        testRSAEnDecryptFile();
         
     }
     
-    public static void testEnDecryptFile(){
+    public static void testRSAEnDecryptFile(){
+        CryptTool tool = new CryptTool("RSA");
+        String fileIn = "d:/ThreadPool-li.java";
+        
+        KeyPair keyPair = tool.getKeyPair();
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
+        
+        try {
+            tool.EncryptFile(fileIn, publicKey);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            System.out.println("Failed to RSA Encrypt file");
+            e.printStackTrace();
+        }
+        try {
+            tool.DecryptFile(fileIn+"_rsa", privateKey);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            System.out.println("Failed to RSA Decrypt file");
+            return;
+        }
+    }
+    
+    public static void testAESEnDecryptFile(){
         CryptTool tool = new CryptTool("AES");
         String fileIn = "d:/JUnit In Action.pdf";
         String password = "123456";
@@ -21,14 +50,14 @@ public class TestMain {
             tool.EncryptFile(fileIn, password);
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            System.out.println("Failed to Encrypt file");
+            System.out.println("Failed to AES Encrypt file");
             return;
         }
         try {
             tool.DecryptFile(fileIn+"_enc", password);
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            System.out.println("Failed to Decrypt file");
+            System.out.println("Failed to AES Decrypt file");
             return;
         }
         
