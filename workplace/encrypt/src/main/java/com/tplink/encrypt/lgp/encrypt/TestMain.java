@@ -13,13 +13,13 @@ public class TestMain {
 
 //        testEnDecryptString();
 //        testAESEnDecryptFile();
-//        testRSAEnDecryptFile();
+        testRSAEnDecryptFile();
         
     }
     
     public static void testRSAEnDecryptFile(){
         CryptTool tool = new CryptTool("RSA");
-        String fileIn = "d:/ThreadPool-li.java";
+        String fileIn = "D:/TEST/ThreadPool-li.java";
         
         KeyPair keyPair = tool.getKeyPair();
         PublicKey publicKey = keyPair.getPublic();
