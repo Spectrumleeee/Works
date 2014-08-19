@@ -51,26 +51,28 @@ public class TestHttpGet {
     }
 
     /**
-     * 用例：响应状态码为200且有响应内容。
+     * response code is 200
+     * @throws Exception
      */
     @Test
     public void testGetSomeThing4Success() throws Exception {
         String response = "Hello, The World!";
         _mock.start(response, "text/plain");
 
-        String content = _httpGet.getSomeThing("http://localhost:9191/hello");
+        String content = _httpGet.getSomeThing("http://localhost:8080/hello");
         assertEquals(response, content);
     }
 
     /**
-     * 用例：响应状态码为非200。
+     * response code is not 200
+     * @throws Exception
      */
     @Test
     public void testGetSomeThing4Fail() throws Exception {
         String response = "Hello, The World!";
         _mock.start(response, "text/plain", 500);
 
-        String content = _httpGet.getSomeThing("http://localhost:9191/hello");
+        String content = _httpGet.getSomeThing("http://localhost:8080/hello");
         assertNull(content);
     }
 

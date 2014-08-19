@@ -13,12 +13,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.ContextHandler;
 
 public class HttpServerMock {
-    public final static int DEFAULT_PORT = 9191;
+    public final static int DEFAULT_PORT = 8080;
     public final static String DEFAULT_CONTENT_TYPE = "application/json";
     public final static int DEFAULT_STATUS_CODE = 200;
 
@@ -60,6 +62,13 @@ public class HttpServerMock {
             int statuCode) throws Exception {
          
         _httpServer = new Server(_port);
+  
+        ContextHandler context = new ContextHandler();
+        context.setContextPath("/hello");
+        context.setResourceBase(".");
+        context.setClassLoader(Thread.currentThread().getContextClassLoader());
+        _httpServer.setHandler(context);
+//        _httpServer.setHandler((Handler) new HelloHandler());
         _httpServer.setHandler(createHandler(content, contentType, statuCode));
         _httpServer.start();
         
@@ -75,21 +84,37 @@ public class HttpServerMock {
         }
     }
 
+    class HelloHandler extends AbstractHandler {  
+
+        /* (non-Javadoc)
+         * @see org.eclipse.jetty.server.Handler#handle(java.lang.String, org.eclipse.jetty.server.Request, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+         */
+        public HelloHandler(){
+            
+        }
+        @Override
+        public void handle(String target, Request baseRequest, HttpServletRequest arg2,
+                HttpServletResponse response) throws IOException, ServletException {
+            // TODO Auto-generated method stub
+            response.setContentType("text/html;charset=utf-8");  
+            response.setStatus(HttpServletResponse.SC_OK);  
+            baseRequest.setHandled(true);
+            response.setStatus(404);
+            response.getWriter().println("<h1>Hello World</h1>");  
+            response.getWriter().println("Request url:"+target);  
+        }   
+    }
+    
     private Handler createHandler(final String content, final String contentType, 
             final int statusCode) {
         return new AbstractHandler() {
-
             @Override
-            public void handle(String target, HttpServletRequest request,
-                    HttpServletResponse response, int dispatch)
-                    throws IOException, ServletException {
-                // TODO Auto-generated method stub
-                
-                System.out.println("Hello");
+            public void handle(String target, Request baseRequest, HttpServletRequest request,
+                    HttpServletResponse response) throws IOException, ServletException {
                 response.setContentType(contentType);
                 response.setStatus(statusCode);
+                baseRequest.setHandled(true);
                 response.getWriter().print(content);
-                System.out.println(content);
             }
         };
     }

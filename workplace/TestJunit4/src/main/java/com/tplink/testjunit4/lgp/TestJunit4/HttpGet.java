@@ -26,7 +26,7 @@ public class HttpGet {
 
         InputStream ins = null;
         try {
-            System.out.println(urlConn.getResponseCode());
+//            System.out.println(urlConn.getResponseCode());
             if (200 == urlConn.getResponseCode()) {
                 ins = urlConn.getInputStream();
                 ByteArrayOutputStream outs = new ByteArrayOutputStream(1024);
