@@ -27,3 +27,7 @@
 17:42 2014/8/12
 【thrift的安装和简单事例】					http://www.open-open.com/lib/view/open1400460273402.html
 
+15:03 2014/8/19
+【jetty嵌入式使用方法】						http://zyn010101.iteye.com/blog/1679798
+【 Java解析XML汇总】						http://blog.csdn.net/smcwwh/article/details/7183869
+
