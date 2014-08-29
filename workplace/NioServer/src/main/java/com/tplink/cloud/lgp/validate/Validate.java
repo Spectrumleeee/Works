@@ -21,10 +21,11 @@ public class Validate {
         if(4 != length)
             return false;
         
-        return isDigit(new String(clientId.array(), 0, length));
+        return isDigitByRegex(new String(clientId.array(), 0, length));
     }
     /**
-     * this method will validate the operation code
+     * this method will validate the operation code , here we define the 
+     * operation code can just be 0,1 or 2.
      * @param oper
      * @param length
      * @return
@@ -66,6 +67,15 @@ public class Validate {
             if(!Character.isDigit(clientId.charAt(i)))
                 return false;
         return true;
+    }
+    
+    public static boolean isDigitByRegex(String clientId){
+        if(!clientId.matches("[0-9]+"))
+            return false;
+        else
+            return true;
+          
+            
     }
     
     public static boolean isDigit(byte[] clientId){

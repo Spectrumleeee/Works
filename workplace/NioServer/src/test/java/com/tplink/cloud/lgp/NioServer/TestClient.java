@@ -9,6 +9,8 @@ package com.tplink.cloud.lgp.NioServer;
 
 import static org.junit.Assert.*;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,21 +22,23 @@ import com.tplink.cloud.lgp.NioClient.Client;
 import com.tplink.cloud.lgp.validate.ReturnType;
 
 public class TestClient {
-
-    protected final static String HOSTNAME = "127.0.0.1";
-    protected final static int PORT = 8888;
-    protected static String header = "";
-    protected static String message = "";
-    protected static String result = "";
-    protected Client clt;
-    protected NioServer thread;
+    
+    private final static String HOSTNAME = "127.0.0.1";
+    private static Logger log;
+    private NioServer thread;
+    private Client clt;
+    private String header = "";
+    private String message = "";
+    private String result = "";
     
     /**
      * @throws java.lang.Exception
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-        System.out.println("BeforeClass, run once before all");
+        PropertyConfigurator.configure("log4j.properties");
+        log = Logger.getLogger(TestClient.class.getName());
+        log.info("BeforeClass, run once before all, JUnit started");
     }
 
     /**
@@ -42,7 +46,7 @@ public class TestClient {
      */
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
-        System.out.println("AfterClass, run once after all");
+        log.info("AfterClass, run once after all, Junit finished");
     }
 
     /**
@@ -70,6 +74,7 @@ public class TestClient {
     
     @Test
     public void testInputError(){
+        log.info("JUnit testInputError!");
         thread.start(6666);
         clt = new Client(HOSTNAME, 6666);
         
@@ -94,6 +99,7 @@ public class TestClient {
     
     @Test
     public void testRegister() {
+        log.info("JUnit testRegister!");
         thread.start(7777);
         clt = new Client(HOSTNAME, 7777);
 
@@ -113,7 +119,7 @@ public class TestClient {
 
     @Test
     public void testPublisher() {
-        
+        log.info("JUnit testPublisher!");
         thread.start(8888);
         clt = new Client(HOSTNAME, 8888);
         
@@ -153,6 +159,7 @@ public class TestClient {
 
     @Test
     public void testPullMessage() {
+        log.info("JUnit testPublisher!");
         thread.start(9999);
         clt = new Client(HOSTNAME, 9999);
         
