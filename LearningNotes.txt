@@ -31,5 +31,6 @@
 【jetty嵌入式使用方法】						http://zyn010101.iteye.com/blog/1679798
 【 Java解析XML汇总】						http://blog.csdn.net/smcwwh/article/details/7183869
 
-住房补贴： http://pan.baidu.com/s/1qWLQBSS
-
+16:44 2014/8/29
+【住房补贴】 							http://pan.baidu.com/s/1qWLQBSS
+【为什么有IP地址还需要MAC地址】					http://www.zhihu.com/question/21546408
