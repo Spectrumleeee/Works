@@ -34,3 +34,6 @@
 16:44 2014/8/29
 【住房补贴】 							http://pan.baidu.com/s/1qWLQBSS
 【为什么有IP地址还需要MAC地址】					http://www.zhihu.com/question/21546408
+
+17:50 2014/9/2
+【dubbo】 							http://alibaba.github.io/dubbo-doc-static/User+Guide-zh.htm
