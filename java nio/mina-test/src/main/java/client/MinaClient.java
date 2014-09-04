@@ -15,20 +15,19 @@ import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.SocketConnector;
+import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MinaClient {
-
-    public SocketConnector socketConnector;
-
-    /**
-     * 缺省连接超时时间
-     */
-    public static final int DEFAULT_CONNECT_TIMEOUT = 5;
-
-    public static final String HOST = "localhost";
-
-    public static final int PORT = 9999;
+    
+    private static Logger logger = LoggerFactory.getLogger(MinaClient.class);
+    private SocketConnector socketConnector;
+    private SocketSessionConfig sessionConfig;
+    private static final int DEFAULT_CONNECT_TIMEOUT = 10;
+    private static final String HOST = "localhost";
+    private static final int PORT = 9999;
 
     public MinaClient() {
         init();
@@ -37,26 +36,23 @@ public class MinaClient {
     public void init() {
 
         socketConnector = new NioSocketConnector();
+        sessionConfig = socketConnector.getSessionConfig();
+        // sessionConfig.setKeepAlive(true);
+        // socketConnector.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT);
 
-        // socketConnector.getSessionConfig().setKeepAlive(true);
-
-        socketConnector.setConnectTimeout(DEFAULT_CONNECT_TIMEOUT);
-
-        socketConnector.getSessionConfig().setReaderIdleTime(
-                DEFAULT_CONNECT_TIMEOUT);
-        socketConnector.getSessionConfig().setWriterIdleTime(
-                DEFAULT_CONNECT_TIMEOUT);
-        socketConnector.getSessionConfig().setBothIdleTime(
-                DEFAULT_CONNECT_TIMEOUT);
-
+        // sessionConfig.setReaderIdleTime(DEFAULT_CONNECT_TIMEOUT);
+        // sessionConfig.setWriterIdleTime(DEFAULT_CONNECT_TIMEOUT);
+        sessionConfig.setBothIdleTime(DEFAULT_CONNECT_TIMEOUT);
+        // close the tcp connection without step into TIME_WAIT
+        sessionConfig.setSoLinger(0);
         socketConnector.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new TextLineCodecFactory()));
 
         ClientSessionHandler ioHandler = new ClientSessionHandler();
         socketConnector.setHandler(ioHandler);
-
     }
 
+    @SuppressWarnings("deprecation")
     public void sendMessage(final String msg) {
 
         InetSocketAddress addr = new InetSocketAddress(HOST, PORT);
@@ -64,7 +60,7 @@ public class MinaClient {
         try {
             cf.awaitUninterruptibly();
             cf.getSession().write(msg);
-            System.out.println("send message " + msg);
+            logger.info("send message " + msg);
         } catch (RuntimeIoException e) {
             if (e.getCause() instanceof ConnectException) {
                 try {
@@ -79,12 +75,10 @@ public class MinaClient {
 
     public static void main(String[] args) throws InterruptedException {
         MinaClient clent = new MinaClient();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 100; i++) {
             clent.sendMessage("Hello World " + i);
         }
-
-        clent.getSocketConnector().dispose();
-
+        // clent.getSocketConnector().dispose();
     }
 
     public SocketConnector getSocketConnector() {

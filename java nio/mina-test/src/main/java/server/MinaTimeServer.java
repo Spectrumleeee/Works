@@ -17,20 +17,17 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MinaTimeServer {
 
-    /**
-     * @param args
-     */
     private static final int PORT = 9999;
-
+    // default log4j.properties path is '/src/main/resources'
+    private static Logger logger = LoggerFactory.getLogger(MinaTimeServer.class);
+    
     public static void main(String[] args) throws IOException {
-        // TODO Auto-generated method stub
-        // If use relative address, "log4j.properties" must be put in
-        // "src/main/"
-        System.setProperty("log4j.configuration", "log4j.properties");
-
+  
         IoAcceptor acceptor = new NioSocketAcceptor();
 
         acceptor.getFilterChain().addLast("logger", new LoggingFilter());
@@ -43,9 +40,11 @@ public class MinaTimeServer {
 
         acceptor.getSessionConfig().setReadBufferSize(2048);
         // every 10 seconds idle will execute method sessionIdle()
-        acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
+        acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 5);
 
         acceptor.bind(new InetSocketAddress(PORT));
+        
+        logger.info("server started! ");
 
     }
 
