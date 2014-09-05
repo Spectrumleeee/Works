@@ -37,3 +37,11 @@
 
 17:50 2014/9/2
 【dubbo】 							http://alibaba.github.io/dubbo-doc-static/User+Guide-zh.htm
+
+8:52 2014/9/3
+【开源中国-dubbo】						http://www.oschina.net/p/dubbo
+【代理模式】							http://www.cnblogs.com/cbf4life/archive/2010/01/27/1657438.html
+
+8:46 2014/9/5
+【思维导图工具】						MindManager(比较大100M+)	FreeMind(比较小，10M+ 基于Java,易用)
+	
