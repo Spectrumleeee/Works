@@ -52,4 +52,7 @@
 
 9:23 2014/9/10
 【spring context:property-placeholder】				http://blog.sina.com.cn/s/blog_4550f3ca0100ubmt.html
+
+18:02 2014/9/12
+【百度开发者平台】						http://developer.baidu.com/
 	
