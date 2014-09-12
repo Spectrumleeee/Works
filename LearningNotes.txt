@@ -44,4 +44,12 @@
 
 8:46 2014/9/5
 【思维导图工具】						MindManager(比较大100M+)	FreeMind(比较小，10M+ 基于Java,易用)
+【根据IP查询详细物理地址】					http://comedsh.iteye.com/blog/707304
+【纯真IP结构】							百度文库，纯真ip库的格式详解
+
+11:22 2014/9/9
+【java异常机制】						http://www.cnblogs.com/alexlo/archive/2013/04/10/3011895.html
+
+9:23 2014/9/10
+【spring context:property-placeholder】				http://blog.sina.com.cn/s/blog_4550f3ca0100ubmt.html
 	
