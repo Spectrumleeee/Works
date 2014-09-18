@@ -55,4 +55,12 @@
 
 18:02 2014/9/12
 【百度开发者平台】						http://developer.baidu.com/
-	
+
+15:28 2014/9/16
+【Mina启动与绑定】						http://javabeezer.iteye.com/blog/1119505
+
+11:19 2014/9/17
+【volatile】							http://hehongwei44.iteye.com/blog/1244732
+
+15:09 2014/9/18
+【mina框架详解】								http://blog.csdn.net/ljx8928358/article/details/7759024

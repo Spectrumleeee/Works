@@ -1,0 +1,709 @@
+Mina-2.0.7源码学习（1）
+
+从一段基于Mina的简单的服务端程序开始，代码如下：
+
+package server;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+
+import org.apache.mina.core.service.IoAcceptor;
+import org.apache.mina.core.session.IdleStatus;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
+import org.apache.mina.filter.logging.LoggingFilter;
+import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class MinaTimeServer {
+
+    private static final int PORT = 9999;
+    // default log4j.properties path is '/src/main/resources'
+    private static Logger logger = LoggerFactory.getLogger(MinaTimeServer.class);
+    
+    public static void main(String[] args) throws IOException {
+  
+        IoAcceptor acceptor = new NioSocketAcceptor();
+
+        acceptor.getFilterChain().addLast("logger", new LoggingFilter());
+        acceptor.getFilterChain().addLast(
+                "codec",
+                new ProtocolCodecFilter(new TextLineCodecFactory(Charset
+                        .forName("UTF-8"))));
+
+        acceptor.setHandler(new TimeServerHandler());
+
+        acceptor.getSessionConfig().setReadBufferSize(2048);
+        // every 10 seconds idle will execute method sessionIdle()
+        acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 5);
+
+        acceptor.bind(new InetSocketAddress(PORT));
+        
+        logger.info("server started! ");
+
+    }
+
+}
+
+PS:本人是使用Eclipse导入Mina的项目源码进行查看，这样既可以看到现有的项目文件目录结构，而且使用“Ctrl + 鼠标左键”很方便查看类的继承关系以及方法变量的定义,还能debug查看运行时顺序。开始使用Notepad++或者Sublime查看源码不是很方便，或许安装插件可以弥补。
+
+首先从代码主函数第一行开始：
+
+	IoAcceptor acceptor = new NioSocketAcceptor();
+
+Ctrl + MouseLeft 点击 NioSocketAcceptor 弹出菜单选择 Open Implementation ：
+
+	public final class NioSocketAcceptor extends AbstractPollingIoAcceptor<NioSession, ServerSocketChannel> implements
+			SocketAcceptor {
+
+		private volatile Selector selector;
+
+		public NioSocketAcceptor() {
+			super(new DefaultSocketSessionConfig(), NioProcessor.class);
+			((DefaultSocketSessionConfig) getSessionConfig()).init(this);
+		}
+		
+		@Override
+		protected void init() throws Exception {
+			selector = Selector.open();
+		}
+
+		@Override
+		protected void destroy() throws Exception {
+			if (selector != null) {
+				selector.close();
+			}
+		}
+		
+		// ······
+	}
+
+首先，可以看到 NioSocketAcceptor 的父类是 AbstractPollingIoAcceptor， 并且实现了 SocketAcceptor 接口方法。 接口SocketAcceptor extends 接口IoAcceptor extends 接口IoService.
+其次，它封装了一个java.nio.channels.Selector类型的私有成员变量，并用volatile修饰，这是java多线程程序中经常会出现的关键字，为了保证并发访问它修饰的变量的原子性、可见性和顺序性。这暗示着每个线程访问一个volatile域时讲读到当前的内存中的值，而不是(有可能)使用一个缓存值。Selector的实例selector在方法init()中初始化，在destroy()中销毁，这两个以及其它与selector相关的一些方法是在父类 AbstractPollingIoAcceptor中定义的抽象方法，最终在父类 AbstractPollingIoAcceptor的某个构造函数（模板方法）中被调用，从而实现了selector变量的初始化。
+接着， NioSocketAcceptor的构造函数中调用父类的构造函数，并且传入两个参数，一个是 DefaultSocketSessionConfig类型实例，其中定义了默认的会话参数配置，另外一个参数 NioProcessor.class 看到*.class就可以联想到在某个地方会用到Java Reflection来生成它的实例，为什么不像前一个参数一样直接new一个对象实例呢？想想或许是因为后面我们需要的NioProcessor实例个数不定（CPU核+1），这里相当于只传入一个名字，后面根据实际需要创建它的对象吧，当然反射的好处不止这些。DefaultSocketSessionConfig类以及它的向上继承体系中相关类和接口都是与Session相关的属性和方法，这里暂时不讨论，NioProcessor类等主要负责处理与会话相关的所有I/O操作，包括加入会话到Processor,flush用户强制刷用户写请求队列中数据，remove删除Processor中会话并释放资源，updateTrafficMask控制会话I/O行为，如只读或只写。
+
+下面接着分析 NioSocketAcceptor的父类：AbstractPollingIoAcceptor 模板类，这里它带两个模板参数 NioSession 和 ServerSocketChannel：
+	public abstract class AbstractPollingIoAcceptor<S extends AbstractIoSession, H> extends AbstractIoAcceptor {
+		/** A lock used to protect the selector to be waked up before it's created */
+		private final Semaphore lock = new Semaphore(1);	
+		
+		private final IoProcessor<S> processor;
+		private final boolean createdProcessor;
+		
+		private final Queue<AcceptorOperationFuture> registerQueue = new ConcurrentLinkedQueue<AcceptorOperationFuture>();
+		private final Queue<AcceptorOperationFuture> cancelQueue = new ConcurrentLinkedQueue<AcceptorOperationFuture>();
+		
+		private final Map<SocketAddress, H> boundHandles = Collections.synchronizedMap(new HashMap<SocketAddress, H>());
+		private final ServiceOperationFuture disposalFuture = new ServiceOperationFuture();
+		
+		/** A flag set when the acceptor has been created and initialized */
+		private volatile boolean selectable;
+
+		/** The thread responsible of accepting incoming requests */
+		private AtomicReference<Acceptor> acceptorRef = new AtomicReference<Acceptor>();
+
+		protected boolean reuseAddress = false;
+		
+		/**
+		 * Define the number of socket that can wait to be accepted. Default
+		 * to 50 (as in the SocketServer default).
+		 */
+		protected int backlog = 50;
+
+		protected AbstractPollingIoAcceptor(IoSessionConfig sessionConfig, Class<? extends IoProcessor<S>> processorClass) {
+			this(sessionConfig, null, new SimpleIoProcessorPool<S>(processorClass), true);
+		}
+		
+		@Override
+		protected final Set<SocketAddress> bindInternal(List<? extends SocketAddress> localAddresses) throws Exception {
+
+			//******
+			
+		}
+		
+		/**
+		 * This method is called by the doBind() and doUnbind()
+		 * methods.  If the acceptor is null, the acceptor object will
+		 * be created and kicked off by the executor.  If the acceptor
+		 * object is null, probably already created and this class
+		 * is now working, then nothing will happen and the method
+		 * will just return.
+		 */
+		private void startupAcceptor() throws InterruptedException {
+			//******
+		}
+		
+		/**
+		 * This class is called by the startupAcceptor() method and is
+		 * placed into a NamePreservingRunnable class.
+		 * It's a thread accepting incoming connections from clients.
+		 * The loop is stopped when all the bound handlers are unbound.
+		 */
+		private class Acceptor implements Runnable {
+		
+			//******
+			
+		}
+		
+		//······
+	}
+
+它有一个信号量变量，根据注释可知，该信号量用于防止在selector被创建之前就调用wakeup方法。selector.wakeup主要是为了唤醒阻塞在selector.select选择上的线程，让该线程及时去处理其他事情，例如注册channel，改变interestOps、判断超时等等，selector.select()的选择过程是阻塞的，即如果没有感兴趣的事件发生，就会阻塞等待直到发生为止。
+这里有几个方法讲解下，构造方法AbstractPollingIoAcceptor()，普通方法bindInternal()、startupAcceptor()以及内部Runnable类 Acceptor。先看看构造方法：
+		
+		protected AbstractPollingIoAcceptor(IoSessionConfig sessionConfig, Class<? extends IoProcessor<S>> processorClass) {
+			this(sessionConfig, null, new SimpleIoProcessorPool<S>(processorClass), true);
+		}
+
+其中有一个processorClass类型的线程池对象 SimpleIoProcessorPool, 通过反射创建一个IoProcessor的线程池executor, 这个线程池专门用于启动 IoProcessor线程用于 处理Session的I/O操作。
+this(···)的第二个参数null表示传入Executor为null, 最终传入到抽象类 AbstractIoService 中:
+
+public abstract class AbstractIoService implements IoService {
+	
+	// The associated executor, responsible for handling execution of I/O events.
+	private final Executor executor;
+    
+	// The IoHandler in charge of managing all the I/O Events
+	private IoHandler handler;
+
+	// The default {@link IoSessionConfig} which will be used to configure new sessions.
+    private final IoSessionConfig sessionConfig;
+	
+	private IoFilterChainBuilder filterChainBuilder = new DefaultIoFilterChainBuilder();
+	
+	private IoSessionDataStructureFactory sessionDataStructureFactory = new DefaultIoSessionDataStructureFactory();
+	
+	// Maintains the {@link IoServiceListener}s of this service.
+	private final IoServiceListenerSupport listeners;
+	
+	private final IoServiceListener serviceActivationListener = new IoServiceListener() {
+        public void serviceActivated(IoService service) {
+            // Update lastIoTime.
+            AbstractIoService s = (AbstractIoService) service;
+            IoServiceStatistics _stats = s.getStatistics();
+            _stats.setLastReadTime(s.getActivationTime());
+            _stats.setLastWriteTime(s.getActivationTime());
+            _stats.setLastThroughputCalculationTime(s.getActivationTime());
+
+        }
+
+        public void serviceDeactivated(IoService service) {
+            // Empty handler
+        }
+
+        public void serviceIdle(IoService service, IdleStatus idleStatus) {
+            // Empty handler
+        }
+
+        public void sessionCreated(IoSession session) {
+            // Empty handler
+        }
+
+        public void sessionDestroyed(IoSession session) {
+            // Empty handler
+        }
+    };
+	
+	protected AbstractIoService(IoSessionConfig sessionConfig, Executor executor) {
+        //***
+		if (executor == null) {
+            this.executor = Executors.newCachedThreadPool();
+            createdExecutor = true;
+        } else {
+            this.executor = executor;
+            createdExecutor = false;
+        }
+		//***
+	}
+	
+	protected final void executeWorker(Runnable worker) {
+        executeWorker(worker, null);
+    }
+
+    protected final void executeWorker(Runnable worker, String suffix) {
+        String actualThreadName = threadName;
+        if (suffix != null) {
+            actualThreadName = actualThreadName + '-' + suffix;
+        }
+        executor.execute(new NamePreservingRunnable(worker, actualThreadName));
+    }
+	
+	//***
+}
+
+AbstractIoService中的executor线程池变量将在它的构造方法中初始化，在 executeWorker() 方法中被调用来启动一个 Acceptor worker线程，从而处理接收到的客户端连接、注册绑定，解绑等请求。
+AbstractIoService中通过 new IoServiceListener(){}方式生成匿名类,这样可以省去具体实现 IoServiceListener接口的开销，并不是说接口能new一个实例
+
+回到 bindInternal()方法：
+		
+		@Override
+		protected final Set<SocketAddress> bindInternal(List<? extends SocketAddress> localAddresses) throws Exception {
+
+			AcceptorOperationFuture request = new AcceptorOperationFuture(localAddresses);
+
+			registerQueue.add(request);
+
+			startupAcceptor();
+
+			try {
+				lock.acquire();
+
+				// Wait a bit to give a chance to the Acceptor thread to do the select()
+				Thread.sleep(10);
+				wakeup();
+			} finally {
+				lock.release();
+			}
+
+			//***
+
+			return newLocalAddresses;
+		}
+		
+该方法是由 NioSocketAcceptor.bind(address) 方法调用的，属于启动过程中调用的方法，它将绑定事件封装成一个 AcceptorOperationFuture 请求对象 request 放入到 ConcurrentLinkedQueue<AcceptorOperationFuture> 类型队列 registerQueue 中。然后调用 startupAcceptor() 方法在线程池中启动一个Acceptor线程，接着调用wakeup()方法唤醒可能阻塞的selector.select()来处理刚刚添加的绑定请求request.  在方法wakeup()前后调用了lock.acquire()和lock.release(). 因为startupAcceptor()中启动一个Acceptor线程来来执行selector.select()，由于是多线程，可能Acceptor线程还未启动startupAcceptor()就返回执行了wakeup()从而出现错误，所以加了lock.acquire()配合 startupAcceptor()方法：
+		
+		private void startupAcceptor() throws InterruptedException {
+			// If the acceptor is not ready, clear the queues
+			// TODO : they should already be clean : do we have to do that ?
+			if (!selectable) {
+				registerQueue.clear();
+				cancelQueue.clear();
+			}
+
+			// start the acceptor if not already started
+			Acceptor acceptor = acceptorRef.get();
+
+			if (acceptor == null) {
+				lock.acquire();
+				acceptor = new Acceptor();
+
+				if (acceptorRef.compareAndSet(null, acceptor)) {
+					executeWorker(acceptor);
+				} else {
+					lock.release();
+				}
+			}
+		}
+
+可以看到创建Acceptor对象之前调用了 lock.acquire(),然后用 executeWorker(acceptor)启动一个Acceptor线程:
+	
+	public abstract class AbstractPollingIoAcceptor<S extends AbstractIoSession, H> extends AbstractIoAcceptor {
+		private class Acceptor implements Runnable {
+			public void run() {
+				assert (acceptorRef.get() == this);
+
+				int nHandles = 0;
+
+				// Release the lock
+				lock.release();
+
+				while (selectable) {
+					try {
+						//······
+						int selected = select();
+						//······
+					} catch (ClosedSelectorException cse) {
+						//······
+					}
+				}
+				//······
+			}
+		}
+	}
+
+在run()中首先调用 lock.release()表示Acceptor对象创建成功(可以调用selector.wakeup()了)从而 保证了调用wakeup()之前创建Acceptor对象
+PS: 1、本人理解 执行 selector.wakeup()之前 必须执行 selector.select() 所以需要0-1信号量，是不是这样请高人指教， 难道selector对象内部也有个锁么？下次看看Selector源码。
+	2、如果上面假设成立，那么Acceptor中锁的释放时间是不是早了，因为还没执行 selector.select()就调用了lock.release(),还是因为wakeup()之前执行了 Thread.sleep(10)的原因？	
+
+接着看 AbstractIoAcceptor 类 & IoAcceptor 接口：
+AbstractIoAcceptor:	
+	public abstract class AbstractIoAcceptor extends AbstractIoService implements IoAcceptor {
+
+		private final List<SocketAddress> defaultLocalAddresses = new ArrayList<SocketAddress>();
+
+		private final List<SocketAddress> unmodifiableDefaultLocalAddresses = Collections
+				.unmodifiableList(defaultLocalAddresses);
+
+		private final Set<SocketAddress> boundAddresses = new HashSet<SocketAddress>();
+		
+		// Acquire this lock in your property setters which shouldn't be changed while the service is bound.
+		protected final Object bindLock = new Object();
+		
+		protected abstract Set<SocketAddress> bindInternal(List<? extends SocketAddress> localAddresses) throws Exception;
+		
+		// implements method inherited from IoAcceptor
+		
+	}	
+
+IoAcceptor:
+	public interface IoAcceptor extends IoService {
+
+		SocketAddress getLocalAddress();
+		Set<SocketAddress> getLocalAddresses();
+
+		SocketAddress getDefaultLocalAddress();
+		void setDefaultLocalAddress(SocketAddress localAddress);
+	   
+		List<SocketAddress> getDefaultLocalAddresses();
+		void setDefaultLocalAddresses(SocketAddress firstLocalAddress, SocketAddress... otherLocalAddresses);
+		void setDefaultLocalAddresses(Iterable<? extends SocketAddress> localAddresses);
+		void setDefaultLocalAddresses(List<? extends SocketAddress> localAddresses);
+		/**
+		* Returns <tt>true</tt> if and only if all clients are closed when this
+		* acceptor unbinds from all the related local address (i.e. when the
+		* service is deactivated).
+		*/
+		boolean isCloseOnDeactivation();
+		void setCloseOnDeactivation(boolean closeOnDeactivation);
+
+		void bind() throws IOException;
+		void bind(SocketAddress localAddress) throws IOException;
+		void bind(SocketAddress firstLocalAddress, SocketAddress... addresses) throws IOException;
+		void bind(SocketAddress... addresses) throws IOException;
+		void bind(Iterable<? extends SocketAddress> localAddresses) throws IOException;
+		void unbind();
+		void unbind(SocketAddress localAddress);
+		void unbind(SocketAddress firstLocalAddress, SocketAddress... otherLocalAddresses);
+	}
+
+接口IoAcceptor最终继承于IoService接口，它在IoService的基础上添加了与地址相关的读写和各种重载的地址绑定和地址解绑接口。
+AbstractIoAcceptor 主要就实现了 IoService 中定义的一些接口， 其中用到了一个对象锁，我们知道java中每个对象内部都有一个锁，可以用语句 synchronized(object){} 来锁住一块代码。这里的对象锁主要用在 bind(address)和unbind(address)等操作中。
+
+    public final void bind(Iterable<? extends SocketAddress> localAddresses) throws IOException {
+        if (isDisposing()) {
+            throw new IllegalStateException("Already disposed.");
+        }
+
+        if (localAddresses == null) {
+            throw new IllegalArgumentException("localAddresses");
+        }
+
+        List<SocketAddress> localAddressesCopy = new ArrayList<SocketAddress>();
+
+        for (SocketAddress a : localAddresses) {
+            checkAddressType(a);
+            localAddressesCopy.add(a);
+        }
+
+        if (localAddressesCopy.isEmpty()) {
+            throw new IllegalArgumentException("localAddresses is empty.");
+        }
+
+        boolean activate = false;
+        synchronized (bindLock) {
+            synchronized (boundAddresses) {
+                if (boundAddresses.isEmpty()) {
+                    activate = true;
+                }
+            }
+
+            if (getHandler() == null) {
+                throw new IllegalStateException("handler is not set.");
+            }
+
+            try {
+                Set<SocketAddress> addresses = bindInternal(localAddressesCopy);
+
+                synchronized (boundAddresses) {
+                    boundAddresses.addAll(addresses);
+                }
+            } catch (IOException e) {
+                throw e;
+            } catch (RuntimeException e) {
+                throw e;
+            } catch (Throwable e) {
+                throw new RuntimeIoException("Failed to bind to: " + getLocalAddresses(), e);
+            }
+        }
+
+        if (activate) {
+            getListeners().fireServiceActivated();
+        }
+    }
+	
+上面的 bind 方法中用到了嵌套锁，synchronized(bindlock)锁住bind或者unbind, synchronized(boundAddresses)锁住与 boundAddresses相关的读写操作,因为其它地方会读写 boundAddresses. 
+可以看到调用acceptor.bind(SocketAddress)将会最终调用 getListeners().fireServiceActivated(); 而getListeners()返回的就是 AbstractIoService实例中的 private final IoServiceListenerSupport listeners;
+
+IoServiceListenerSupport：
+
+	/**
+	 * A helper class which provides addition and removal of {@link IoServiceListener}s and firing
+	 * events.
+	 */
+	public class IoServiceListenerSupport {
+		/** The {@link IoService} that this instance manages. */
+		private final IoService service;
+
+		/** A list of {@link IoServiceListener}s. */
+		private final List<IoServiceListener> listeners = new CopyOnWriteArrayList<IoServiceListener>();
+
+		/** Tracks managed sessions. */
+		private final ConcurrentMap<Long, IoSession> managedSessions = new ConcurrentHashMap<Long, IoSession>();
+
+		/**  Read only version of {@link #managedSessions}. */
+		private final Map<Long, IoSession> readOnlyManagedSessions = Collections.unmodifiableMap(managedSessions);
+
+		private final AtomicBoolean activated = new AtomicBoolean();
+
+		public IoServiceListenerSupport(IoService service) {
+			if (service == null) {
+				throw new IllegalArgumentException("service");
+			}
+
+			this.service = service;
+		}
+
+		public Map<Long, IoSession> getManagedSessions() {
+			return readOnlyManagedSessions;
+		}
+	
+		public void fireServiceActivated() {
+			if (!activated.compareAndSet(false, true)) {
+				// The instance is already active
+				return;
+			}
+
+			activationTime = System.currentTimeMillis();
+
+			// Activate all the listeners now
+			for (IoServiceListener listener : listeners) {
+				try {
+					listener.serviceActivated(service);
+				} catch (Throwable e) {
+					ExceptionMonitor.getInstance().exceptionCaught(e);
+				}
+			}
+		}
+		
+		public void fireServiceDeactivated() {
+		}
+
+		public void fireSessionCreated(IoSession session) {
+		}
+
+		public void fireSessionDestroyed(IoSession session) {
+		}
+	}
+
+fireServiceActivated方法中调用 listener.serviceActivated(); 而最开始的 listener是在 AbstractIoService抽象类的构造函数中初始化的：
+
+    protected AbstractIoService(IoSessionConfig sessionConfig, Executor executor) {
+
+        // Create the listeners, and add a first listener : a activation listener
+        // for this service, which will give information on the service state.
+        listeners = new IoServiceListenerSupport(this);
+        listeners.add(serviceActivationListener);
+
+        // Stores the given session configuration
+        this.sessionConfig = sessionConfig;
+
+        // Make JVM load the exception monitor before some transports
+        // change the thread context class loader.
+        ExceptionMonitor.getInstance();
+
+        if (executor == null) {
+            this.executor = Executors.newCachedThreadPool();
+            createdExecutor = true;
+        } else {
+            this.executor = executor;
+            createdExecutor = false;
+        }
+
+        threadName = getClass().getSimpleName() + '-' + id.incrementAndGet();
+    }
+	
+原来第一个listener是用来记录这个service状态信息的。
+		
+至此，前面讲的主要是 IoAcceptor acceptor = new NioSocketAcceptor() 时Mina的初始化过程以及 acceptor.bind(SocketAddress)时候的端口绑定过程。后面会知道：
+1、 IoService该接口主要负责套接字的建立，拥有自己的 Selector(NioSocketAcceptor中)和 Executor, 监听是否有连接建立。
+2、 IoProcessor接口也有自己的Executor和Selector(NioProcessor中), 负责通道上数据的I/O操作。这也是与平时的Java Nio的不同之处，平时都是使用一个Selector, 不区分IoService和IoProcess. 另外，IoProcess还负责调用注册在其上的 IoFilter,经过FilterChain之后调用IoHandler.
+3、 IoFilter接口定义一组拦截器(责任链设计模式),拦截器包括日志输出、黑名单过滤、数据的编码（write 方向）与解码（read 方向）等功能，encoder和decoder很重要。
+4、 IoHandler接口负责编写业务逻辑，处理接收和发送数据的地方。
+5、 IoFuture接口大部分与java.util.concurrent.Future有关， await()、awaitUninterruptibly()可以等待异步执行的结果并回调对应的回调方法。
+
+IoService 和 IoProcessor 是如何衔接起来的？
+自从AbstractPollingIoAcceptor中startupAcceptor方法启动一个Acceptor线程之后，如果有连接到来，就调用processHandles()方法处理：
+
+        private void processHandles(Iterator<H> handles) throws Exception {
+            while (handles.hasNext()) {
+                H handle = handles.next();
+                handles.remove();
+
+                // Associates a new created connection to a processor,
+                // and get back a session
+                S session = accept(processor, handle);
+
+                if (session == null) {
+                    continue;
+                }
+
+                initSession(session, null, null);
+
+                // add the session to the SocketIoProcessor
+                session.getProcessor().add(session);
+            }
+        }	
+		
+这里的 processor = new SimpleIoProcessorPool<NioSession>(NioProcessor.class); 调用 S session = accept(processor, handle)来创建一个Session与processor中的某个Processor线程相关联，然后执行：
+
+		session.getProcessor().add(session);
+
+上面的语句将会调用 AbstractPollingProcessor 中的 add()方法:
+
+		public final void add(S session) {
+			if (disposed || disposing) {
+				throw new IllegalStateException("Already disposed.");
+			}
+
+			// Adds the session to the newSession queue and starts the worker
+			newSessions.add(session);
+			startupProcessor();
+		}
+
+把连接会话放入到newSession中，然后调用 AbstractPollingProcessor 中的 startupProcessor()方法；
+
+		private void startupProcessor() {
+			Processor processor = processorRef.get();
+
+			if (processor == null) {
+				processor = new Processor();
+
+				if (processorRef.compareAndSet(null, processor)) {
+					executor.execute(new NamePreservingRunnable(processor, threadName));
+				}
+			}
+
+			// Just stop the select() and start it again, so that the processor
+			// can be activated immediately.
+			wakeup();
+		}
+
+到上面就可以看到在 AbstractPollingProcessor 中启动了一个Processor线程：
+
+    private class Processor implements Runnable {
+        public void run() {
+            assert (processorRef.get() == this);
+
+            int nSessions = 0;
+            lastIdleCheckTime = System.currentTimeMillis();
+
+            for (;;) {
+				
+					// ******
+                    nSessions += handleNewSessions();
+					// ******
+			}
+
+    }
+
+调用 handleNewSessions()函数来处理Session上的I/O的读请求。
+
+    private int handleNewSessions() {
+        int addedSessions = 0;
+
+        for (S session = newSessions.poll(); session != null; session = newSessions.poll()) {
+            if (addNow(session)) {
+                // A new session has been created
+                addedSessions++;
+            }
+        }
+
+        return addedSessions;
+    }
+
+继续调用 addNow()函数：
+
+	private boolean addNow(S session) {
+        boolean registered = false;
+
+        try {
+            init(session);
+            registered = true;
+
+            // Build the filter chain of this session.
+            IoFilterChainBuilder chainBuilder = session.getService().getFilterChainBuilder();
+            chainBuilder.buildFilterChain(session.getFilterChain());
+
+            // DefaultIoFilterChain.CONNECT_FUTURE is cleared inside here
+            // in AbstractIoFilterChain.fireSessionOpened().
+            // Propagate the SESSION_CREATED event up to the chain
+            IoServiceListenerSupport listeners = ((AbstractIoService) session.getService()).getListeners();
+            listeners.fireSessionCreated(session);
+        } catch (Throwable e) {
+            ExceptionMonitor.getInstance().exceptionCaught(e);
+
+            try {
+                destroy(session);
+            } catch (Exception e1) {
+                ExceptionMonitor.getInstance().exceptionCaught(e1);
+            } finally {
+                registered = false;
+            }
+        }
+
+        return registered;
+    }
+
+其中init(Session)如下(NioProcessor)：
+
+    @Override
+    protected void init(NioSession session) throws Exception {
+        SelectableChannel ch = (SelectableChannel) session.getChannel();
+        ch.configureBlocking(false);
+        session.setSelectionKey(ch.register(selector, SelectionKey.OP_READ, session));
+    }
+
+可以看出把 Session关联的Channel上的SelectionKey.OP_READ注册到了NioProcessor上面的Selector。从而实现用IoProcessor专门处理通道上的I/O操作。
+接着在addNow()方法中完成init(session)之后， 开始执行 listeners.fireSessionCreated(session)：
+
+IoServiceListenerSupport:
+
+    public void fireSessionCreated(IoSession session) {
+        boolean firstSession = false;
+
+        if (session.getService() instanceof IoConnector) {
+            synchronized (managedSessions) {
+                firstSession = managedSessions.isEmpty();
+            }
+        }
+
+        // If already registered, ignore.
+        if (managedSessions.putIfAbsent(session.getId(), session) != null) {
+            return;
+        }
+
+        // If the first connector session, fire a virtual service activation event.
+        if (firstSession) {
+            fireServiceActivated();
+        }
+
+        // Fire session events.
+        IoFilterChain filterChain = session.getFilterChain();
+        filterChain.fireSessionCreated();
+        filterChain.fireSessionOpened();
+
+        int managedSessionCount = managedSessions.size();
+
+        if (managedSessionCount > largestManagedSessionCount) {
+            largestManagedSessionCount = managedSessionCount;
+        }
+
+        cumulativeManagedSessionCount++;
+
+        // Fire listener events.
+        for (IoServiceListener l : listeners) {
+            try {
+                l.sessionCreated(session);
+            } catch (Throwable e) {
+                ExceptionMonitor.getInstance().exceptionCaught(e);
+            }
+        }
+    }	
+
+会开始调用IoFilterChain进行处理，最终到链的最末端就开始调用IoHandler进行处理, IoFilterChain又单独是一个很复杂的体系，使用责任链模式实现，用到Java的内部类等。	
+		
+
+
+
