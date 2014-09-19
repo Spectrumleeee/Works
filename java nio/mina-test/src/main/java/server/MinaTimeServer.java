@@ -45,7 +45,5 @@ public class MinaTimeServer {
         acceptor.bind(new InetSocketAddress(PORT));
         
         logger.info("server started! ");
-
     }
-
 }

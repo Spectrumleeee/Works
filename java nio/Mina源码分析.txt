@@ -703,7 +703,255 @@ IoServiceListenerSupport:
     }	
 
 会开始调用IoFilterChain进行处理，最终到链的最末端就开始调用IoHandler进行处理, IoFilterChain又单独是一个很复杂的体系，使用责任链模式实现，用到Java的内部类等。	
+
+Mina---IoFilter  
+
+Mina非常贴心的为广大使用者提供了丰富的Filter实现子类，很多标准服务我们都不需要自己实现。比如：
+	BlacklistFilter				黑名单过滤器
+	BufferedWriteFilter			发送缓存过滤器，缓存发送的消息，避免短小消息频繁发送
+	CompressionFilter			数据压缩过滤器
+	ConnectionThrottleFilter	连接控制过滤器，对同一个IP地址频繁的创建连接的时间间隔进行控制
+	KeepAliveFilter				心跳包过滤器，在idl状态发送心跳包，并能对超时进行处理
+	LoggingFilter				日志记录过滤器，最常用之一
+	ProxyFilter					IoConnector在连接握手时自动加入的过滤器，握手成功后透明
+	SslFilter					TCP/IP层面的SSL加解密过滤器
+	StreamWriteFilter			InputStream直接转换成IoBuffer的过滤器
+还有两个mina自带的过滤器：
+	HeadFilter 					当发生write操作时，将写buffer加入到session.scheduledWriteMessages队列，并发送调用IoProcessor执行write()操作，位于过滤器链头。
+	TailFilter					当所有过滤器都处理完后，他将调用IoHandler的对应方法。位于过滤器链尾。
+IoFilter接口定义：
+
+	public interface IoFilter {
+
+		void init() throws Exception;
+
+		void destroy() throws Exception;
+
+		void onPreAdd(IoFilterChain parent, String name, NextFilter nextFilter) throws Exception;
+
+		void onPostAdd(IoFilterChain parent, String name, NextFilter nextFilter) throws Exception;
+
+		void onPreRemove(IoFilterChain parent, String name, NextFilter nextFilter) throws Exception;
+
+		void onPostRemove(IoFilterChain parent, String name, NextFilter nextFilter) throws Exception;
+
+		void sessionCreated(NextFilter nextFilter, IoSession session) throws Exception;
+
+		void sessionOpened(NextFilter nextFilter, IoSession session) throws Exception;
+
+		void sessionClosed(NextFilter nextFilter, IoSession session) throws Exception;
+
+		void sessionIdle(NextFilter nextFilter, IoSession session, IdleStatus status) throws Exception;
+
+		void exceptionCaught(NextFilter nextFilter, IoSession session, Throwable cause) throws Exception;
+
+		void messageReceived(NextFilter nextFilter, IoSession session, Object message) throws Exception;
+
+		void messageSent(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception;
+
+		void filterClose(NextFilter nextFilter, IoSession session) throws Exception;
+
+		void filterWrite(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception;
+
+		public interface NextFilter {
+
+			void sessionCreated(IoSession session);
+
+			void sessionOpened(IoSession session);
+
+			void sessionClosed(IoSession session);
+
+			void sessionIdle(IoSession session, IdleStatus status);
+
+			void exceptionCaught(IoSession session, Throwable cause);
+
+			void messageReceived(IoSession session, Object message);
+
+			void messageSent(IoSession session, WriteRequest writeRequest);
+
+			void filterWrite(IoSession session, WriteRequest writeRequest);
+
+			void filterClose(IoSession session);
+		}
+	}
+可以看出 IoFilter 接口中包含子接口 NextFilter, 为实现过滤链做准备，但目前还不能实现链式结构，继续看
+
+IoFilterChain接口定义：
+
+public interface IoFilterChain {
+
+    public void fireSessionIdle(IdleStatus status);
+
+    public void fireMessageReceived(Object message);
+
+    public void fireMessageSent(WriteRequest request);
+
+    public void fireFilterWrite(WriteRequest writeRequest);
+
+    public void fireFilterClose();
+
+	//******
+	
+    public interface Entry {
+		//******
+    }
+}
+
+DefaultIoFilterChain类：
+
+	public class DefaultIoFilterChain implements IoFilterChain {
+
+		private final EntryImpl head;
+		private final EntryImpl tail;
+
+		public DefaultIoFilterChain(AbstractIoSession session) {
+			if (session == null) {
+				throw new IllegalArgumentException("session");
+			}
+
+			this.session = session;
+			head = new EntryImpl(null, null, "head", new HeadFilter());
+			tail = new EntryImpl(head, null, "tail", new TailFilter());
+			head.nextEntry = tail;
+		}
+
+		private void callNextMessageSent(Entry entry, IoSession session, WriteRequest writeRequest) {
+				//******
+				IoFilter filter = entry.getFilter();
+				NextFilter nextFilter = entry.getNextFilter();
+				filter.messageSent(nextFilter, session, writeRequest);
+		}
+
+		private class HeadFilter extends IoFilterAdapter {
 		
+			public void filterWrite(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception {
+
+				//******
+				AbstractIoSession s = (AbstractIoSession) session;
+				s.increaseScheduledWriteBytes(remaining);
+				WriteRequestQueue writeRequestQueue = s.getWriteRequestQueue();
+				
+				//******
+				s.getWriteRequestQueue().offer(s, writeRequest);
+				s.getProcessor().flush(s);
+				//******
+			}
+
+			public void filterClose(NextFilter nextFilter, IoSession session) throws Exception {
+				((AbstractIoSession) session).getProcessor().remove(session);
+			}
+		}
+
+		private static class TailFilter extends IoFilterAdapter {
+			
+			//******
+			
+			@Override
+			public void messageReceived(NextFilter nextFilter, IoSession session, Object message) throws Exception {
+				session.getHandler().messageReceived(s, message);
+			}
+
+			@Override
+			public void messageSent(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception {
+				session.getHandler().messageSent(session, writeRequest.getMessage());
+				//******
+			}
+		}
+
+		private class EntryImpl implements Entry {
+			
+			private EntryImpl prevEntry;
+			private EntryImpl nextEntry;
+			private final String name;
+			private IoFilter filter;
+			private final NextFilter nextFilter;
+
+			private EntryImpl(EntryImpl prevEntry, EntryImpl nextEntry, String name, IoFilter filter) {
+
+				this.prevEntry = prevEntry;
+				this.nextEntry = nextEntry;
+				this.name = name;
+				this.filter = filter;
+				this.nextFilter = new NextFilter() {
+					
+					//******
+					public void messageSent(IoSession session, WriteRequest writeRequest) {
+						Entry nextEntry = EntryImpl.this.nextEntry;
+						callNextMessageSent(nextEntry, session, writeRequest);
+					}
+					//******
+				};
+			}
+		}
+	}
+
+DefaultIoFilterChain类继承自 IoFilterChain接口, 并且有一个内部Entry接口的实现类 EntryImpl, 通过prevEntry和 nextEntry两个指针作用变量实现链式结构
+可以看到 TailFilter 中最终都是调用 session.getHandler()来调用 IoHandler处理业务逻辑， HeadFilter 调用 s.getProcessor()来调用 IoProcessor 处理最终的读写操作。
+	
+Mina---IoHandler API:
+
+	public interface IoHandler {
+
+		void sessionCreated(IoSession session) throws Exception;
+		
+		void sessionOpened(IoSession session) throws Exception;
+
+		void sessionClosed(IoSession session) throws Exception;
+
+		void sessionIdle(IoSession session, IdleStatus status) throws Exception;
+
+		void exceptionCaught(IoSession session, Throwable cause) throws Exception;
+
+		void messageReceived(IoSession session, Object message) throws Exception;
+		
+		// Invoked when a message written by {@link IoSession#write(Object)} is sent out.
+		void messageSent(IoSession session, Object message) throws Exception;
+	}
+
+Mina---IoListener
+
+IoServiceListener 负责IoService 的各个声明周期节点时间通知。
+在 AbstractIoService构造函数初始化的时候,都会生成一个 IoServiceListenerSupport 来存储管理IoListener. 实际上就是一个List<IoListener>.
+	
+
+IoFutureListener 能在IoFuture任务完成后被调用, API如下：
+
+	public interface IoFutureListener<F extends IoFuture> extends EventListener {  
+		void operationComplete(F future);  
+	}  
+
+若任务已经执行完后添加的listener将被立刻执行。我们先看看future是怎么实现该功能的：
+    
+	public IoFuture addListener(IoFutureListener<?> listener) {
+        if (listener == null) {
+            throw new IllegalArgumentException("listener");
+        }
+
+        boolean notifyNow = false;
+        synchronized (lock) {
+            if (ready) {
+                notifyNow = true;
+            } else {
+                if (firstListener == null) {
+                    firstListener = listener;
+                } else {
+                    if (otherListeners == null) {
+                        otherListeners = new ArrayList<IoFutureListener<?>>(1);
+                    }
+                    otherListeners.add(listener);
+                }
+            }
+        }
+	//就是这里了！如果ready完成了，则马上执行
+        if (notifyNow) {
+            notifyListener(listener);
+        }
+        return this;
+    }
+	
+那不用说就知道啦，在notiffyListener中将会回调监听器的方法。		
+
+目前根据源码可以看出，IoProcessor 和 IoHandler中间 有一条IoFilterChain,链中有些许IoFIlter, IoFilterChain会触发绑定在IoService或者IoSession上的IoListener.
 
 
 

@@ -63,4 +63,7 @@
 【volatile】							http://hehongwei44.iteye.com/blog/1244732
 
 15:09 2014/9/18
-【mina框架详解】								http://blog.csdn.net/ljx8928358/article/details/7759024
+【mina框架详解】						http://blog.csdn.net/ljx8928358/article/details/7759024
+
+16:39 2014/9/19
+【Mina学习笔记】						http://blog.csdn.net/yoara/article/details/37597141#t0
