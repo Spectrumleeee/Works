@@ -7,8 +7,10 @@
 
 package com.tplink.cloud.lgp.handler;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.util.Map;
 
@@ -25,13 +27,16 @@ public class HandlerProcess {
     private String clientName;
     private Map<String, Observer> observers;
     private Map<String, Subject> subjects;
+    private SelectionKey key;
 
     public HandlerProcess(SocketChannel sc, String clientName,
-            Map<String, Observer> observers, Map<String, Subject> subjects) {
+            Map<String, Observer> observers, Map<String, Subject> subjects,
+            SelectionKey key) {
         this.sc = sc;
         this.clientName = clientName;
         this.observers = observers;
         this.subjects = subjects;
+        this.key = key;
     }
 
     /**
@@ -117,5 +122,24 @@ public class HandlerProcess {
             }
         }
         sc.write(ByteBuffer.wrap(ReturnType.SUCCESS_REGISTERED.getBytes()));
+    }
+    
+    /**
+     * sometimes we write the ByteBuffer to SocketChannel directly like before 
+     * maybe make a mistake when the client doesn't received the messaged just
+     * because of the traffic network. but SocketChannel.write() will return 
+     * instantly while you set it unblocking.
+     * REF: http://blog.csdn.net/spectrumleeee/article/details/39665799
+     */
+    public void nioWrite(ByteBuffer buffer) throws IOException{
+        while(buffer.hasRemaining()){
+            int len = sc.write(buffer);
+            if(len < 0){
+                throw new EOFException();
+            }
+            if(len == 0){
+                key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
+            }
+        }
     }
 }

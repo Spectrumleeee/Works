@@ -82,7 +82,7 @@ public class ObserverSubjectHandler implements Handler {
         log.info("Client Operatioin Code is:"
                 + new String(operation.array(), 0, readBytes));
         // use HandlerProcess to process the concrete request!
-        HandlerProcess handerProcess = new HandlerProcess(socketChannel, clientName, observers, subjects);
+        HandlerProcess handerProcess = new HandlerProcess(socketChannel, clientName, observers, subjects, key);
         if (CLIENT_PULL_MESSAGE == operation.array()[0]) {
             // client pull message from server
             handerProcess.pullMessage();
@@ -106,7 +106,8 @@ public class ObserverSubjectHandler implements Handler {
         byteBuffer.flip();
         SocketChannel socketChannel = (SocketChannel) key.channel();
         socketChannel.write(byteBuffer);
-        if (byteBuffer.hasRemaining()) {
+        if (!byteBuffer.hasRemaining()) {
+            // nothing to write, make it readable
             key.interestOps(SelectionKey.OP_READ);
         }
         byteBuffer.compact();
