@@ -178,6 +178,8 @@ public abstract class AbstractIoService implements IoService {
 	// Maintains the {@link IoServiceListener}s of this service.
 	private final IoServiceListenerSupport listeners;
 	
+	private static final AtomicInteger id = new AtomicInteger();
+	
 	private final IoServiceListener serviceActivationListener = new IoServiceListener() {
         public void serviceActivated(IoService service) {
             // Update lastIoTime.
@@ -235,6 +237,7 @@ public abstract class AbstractIoService implements IoService {
 
 AbstractIoService中的executor线程池变量将在它的构造方法中初始化，在 executeWorker() 方法中被调用来启动一个 Acceptor worker线程，从而处理接收到的客户端连接、注册绑定，解绑等请求。
 AbstractIoService中通过 new IoServiceListener(){}方式生成匿名类,这样可以省去具体实现 IoServiceListener接口的开销，并不是说接口能new一个实例
+AbstractIoService中静态AtomicInteger类型成员变量id保证多线程环境下每个IoService有唯一的ID
 
 回到 bindInternal()方法：
 		
@@ -953,5 +956,16 @@ IoFutureListener 能在IoFuture任务完成后被调用, API如下：
 
 目前根据源码可以看出，IoProcessor 和 IoHandler中间 有一条IoFilterChain,链中有些许IoFIlter, IoFilterChain会触发绑定在IoService或者IoSession上的IoListener.
 
+Mina-2.0.7源码学习（2） 设计模式
+1、观察者模式
+	IoListenerSupport
+2、责任链模式
+	IoFilter
+3、工厂模式
+4、单例模式
+5、适配器模式
+	IoHandlerAdapter就用到了接口适配器模式	
 
+Mina-2.0.7源码学习
+最近几天有看网上其它的Mina相关资料进行学习，受益匪浅，先借用一张很通用的Mina框架图：
 

@@ -67,3 +67,13 @@
 
 16:39 2014/9/19
 【Mina学习笔记】						http://blog.csdn.net/yoara/article/details/37597141#t0
+
+15:41 2014/9/22
+【设计模式分类】						http://www.cnblogs.com/justForMe/archive/2011/07/18/2109211.html
+【适配器模式】							http://galo.iteye.com/blog/741590
+【Mina源码阅读笔记（六）—Mina异步IO的实现IoFuture】		http://my.oschina.net/ielts0909/blog/92035
+
+16:45 2014/9/24
+【JAVA CAS原理深度分析】					http://blog.csdn.net/hsuxu/article/details/9467651
+【Java volatile作用】						http://sakyone.iteye.com/blog/668091
+【java.util.concurrent介绍】					http://www.cnblogs.com/sarafill/archive/2011/05/18/2049461.html
