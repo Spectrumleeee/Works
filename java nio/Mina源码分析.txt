@@ -969,3 +969,16 @@ Mina-2.0.7源码学习（2） 设计模式
 Mina-2.0.7源码学习
 最近几天有看网上其它的Mina相关资料进行学习，受益匪浅，先借用一张很通用的Mina框架图：
 
+
+
+
+Mina-2.0.7源码学习 --- IoFuture
+
+DefaultIoFuture 死锁检测
+
+1、AcceptorOperationFuture（Static，在AbstractIoAcceptor中）它继承自ServiceOperationFuture（Static,在AbstractIoService中），用于绑定和解绑时间Event。
+2、AbstractIoSession中CloseFuture ReadFuture WriteFuture用于读、写、关闭会话时间Event
+3、DefaultIoFutureChain --- messageReceived() --- s.getConfig().isUseReadOperation()
+	默认 session 不使用ReadFuture, 如果使用ReadFuture（用户自定义了MessageReceived方法，并且通过 session.read() （AbstractIoSession中）返回ReadFuture,启动 await,通过 后面的 s.offerReadFuture(message); 通知完成），那么读取的数据会放在内部的一个blockingQueue，便于数据的读取，适合在客户端程序中使用，不适于在服务端程序使用，因为可能造成内存泄露。所以要注意默认Session配置中的useReadOperation选项。
+	从channel.read()读取过程是否阻塞是通过channel.setBlocking(true/false)设置，后面的异步读取是通过IoFuture的wait和notify来实现。为什么要异步，如果读取需要很长时间，可以不至于阻塞程序，使用多线程并发（多核有效）读取，提高效率，读取完成，就通知。
+4、在AbstractIoSession.java中的newReadFuture()方法内部，使用了两个队列，分别是readyReadFuture和waitingReadFuture，当session使用ReadFuture前提下，如果队列waitingReadFuture为空，那么新建一个ReadFuture加入到到队列readyReadFuture中并返回，如果waitingReadFuture不空，那么从waitingReadFuture中取出一个ReadFuture并返回处理。
