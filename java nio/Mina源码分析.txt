@@ -1,6 +1,6 @@
-Mina-2.0.7Ô´ÂëÑ§Ï°£¨1£©
+ï»¿Mina-2.0.7æºç å­¦ä¹ ï¼ˆ1ï¼‰
 
-´ÓÒ»¶Î»ùÓÚMinaµÄ¼òµ¥µÄ·şÎñ¶Ë³ÌĞò¿ªÊ¼£¬´úÂëÈçÏÂ£º
+ä»ä¸€æ®µåŸºäºMinaçš„ç®€å•çš„æœåŠ¡ç«¯ç¨‹åºå¼€å§‹ï¼Œä»£ç å¦‚ä¸‹ï¼š
 
 package server;
 
@@ -47,13 +47,13 @@ public class MinaTimeServer {
 
 }
 
-PS:±¾ÈËÊÇÊ¹ÓÃEclipseµ¼ÈëMinaµÄÏîÄ¿Ô´Âë½øĞĞ²é¿´£¬ÕâÑù¼È¿ÉÒÔ¿´µ½ÏÖÓĞµÄÏîÄ¿ÎÄ¼şÄ¿Â¼½á¹¹£¬¶øÇÒÊ¹ÓÃ¡°Ctrl + Êó±ê×ó¼ü¡±ºÜ·½±ã²é¿´ÀàµÄ¼Ì³Ğ¹ØÏµÒÔ¼°·½·¨±äÁ¿µÄ¶¨Òå,»¹ÄÜdebug²é¿´ÔËĞĞÊ±Ë³Ğò¡£¿ªÊ¼Ê¹ÓÃNotepad++»òÕßSublime²é¿´Ô´Âë²»ÊÇºÜ·½±ã£¬»òĞí°²×°²å¼ş¿ÉÒÔÃÖ²¹¡£
+PS:æœ¬äººæ˜¯ä½¿ç”¨Eclipseå¯¼å…¥Minaçš„é¡¹ç›®æºç è¿›è¡ŒæŸ¥çœ‹ï¼Œè¿™æ ·æ—¢å¯ä»¥çœ‹åˆ°ç°æœ‰çš„é¡¹ç›®æ–‡ä»¶ç›®å½•ç»“æ„ï¼Œè€Œä¸”ä½¿ç”¨â€œCtrl + é¼ æ ‡å·¦é”®â€å¾ˆæ–¹ä¾¿æŸ¥çœ‹ç±»çš„ç»§æ‰¿å…³ç³»ä»¥åŠæ–¹æ³•å˜é‡çš„å®šä¹‰,è¿˜èƒ½debugæŸ¥çœ‹è¿è¡Œæ—¶é¡ºåºã€‚å¼€å§‹ä½¿ç”¨Notepad++æˆ–è€…SublimeæŸ¥çœ‹æºç ä¸æ˜¯å¾ˆæ–¹ä¾¿ï¼Œæˆ–è®¸å®‰è£…æ’ä»¶å¯ä»¥å¼¥è¡¥ã€‚
 
-Ê×ÏÈ´Ó´úÂëÖ÷º¯ÊıµÚÒ»ĞĞ¿ªÊ¼£º
+é¦–å…ˆä»ä»£ç ä¸»å‡½æ•°ç¬¬ä¸€è¡Œå¼€å§‹ï¼š
 
 	IoAcceptor acceptor = new NioSocketAcceptor();
 
-Ctrl + MouseLeft µã»÷ NioSocketAcceptor µ¯³ö²Ëµ¥Ñ¡Ôñ Open Implementation £º
+Ctrl + MouseLeft ç‚¹å‡» NioSocketAcceptor å¼¹å‡ºèœå•é€‰æ‹© Open Implementation ï¼š
 
 	public final class NioSocketAcceptor extends AbstractPollingIoAcceptor<NioSession, ServerSocketChannel> implements
 			SocketAcceptor {
@@ -77,14 +77,14 @@ Ctrl + MouseLeft µã»÷ NioSocketAcceptor µ¯³ö²Ëµ¥Ñ¡Ôñ Open Implementation £º
 			}
 		}
 		
-		// ¡¤¡¤¡¤¡¤¡¤¡¤
+		// Â·Â·Â·Â·Â·Â·
 	}
 
-Ê×ÏÈ£¬¿ÉÒÔ¿´µ½ NioSocketAcceptor µÄ¸¸ÀàÊÇ AbstractPollingIoAcceptor£¬ ²¢ÇÒÊµÏÖÁË SocketAcceptor ½Ó¿Ú·½·¨¡£ ½Ó¿ÚSocketAcceptor extends ½Ó¿ÚIoAcceptor extends ½Ó¿ÚIoService.
-Æä´Î£¬Ëü·â×°ÁËÒ»¸öjava.nio.channels.SelectorÀàĞÍµÄË½ÓĞ³ÉÔ±±äÁ¿£¬²¢ÓÃvolatileĞŞÊÎ£¬ÕâÊÇjava¶àÏß³Ì³ÌĞòÖĞ¾­³£»á³öÏÖµÄ¹Ø¼ü×Ö£¬ÎªÁË±£Ö¤²¢·¢·ÃÎÊËüĞŞÊÎµÄ±äÁ¿µÄÔ­×ÓĞÔ¡¢¿É¼ûĞÔºÍË³ĞòĞÔ¡£Õâ°µÊ¾×ÅÃ¿¸öÏß³Ì·ÃÎÊÒ»¸övolatileÓòÊ±½²¶Áµ½µ±Ç°µÄÄÚ´æÖĞµÄÖµ£¬¶ø²»ÊÇ(ÓĞ¿ÉÄÜ)Ê¹ÓÃÒ»¸ö»º´æÖµ¡£SelectorµÄÊµÀıselectorÔÚ·½·¨init()ÖĞ³õÊ¼»¯£¬ÔÚdestroy()ÖĞÏú»Ù£¬ÕâÁ½¸öÒÔ¼°ÆäËüÓëselectorÏà¹ØµÄÒ»Ğ©·½·¨ÊÇÔÚ¸¸Àà AbstractPollingIoAcceptorÖĞ¶¨ÒåµÄ³éÏó·½·¨£¬×îÖÕÔÚ¸¸Àà AbstractPollingIoAcceptorµÄÄ³¸ö¹¹Ôìº¯Êı£¨Ä£°å·½·¨£©ÖĞ±»µ÷ÓÃ£¬´Ó¶øÊµÏÖÁËselector±äÁ¿µÄ³õÊ¼»¯¡£
-½Ó×Å£¬ NioSocketAcceptorµÄ¹¹Ôìº¯ÊıÖĞµ÷ÓÃ¸¸ÀàµÄ¹¹Ôìº¯Êı£¬²¢ÇÒ´«ÈëÁ½¸ö²ÎÊı£¬Ò»¸öÊÇ DefaultSocketSessionConfigÀàĞÍÊµÀı£¬ÆäÖĞ¶¨ÒåÁËÄ¬ÈÏµÄ»á»°²ÎÊıÅäÖÃ£¬ÁíÍâÒ»¸ö²ÎÊı NioProcessor.class ¿´µ½*.class¾Í¿ÉÒÔÁªÏëµ½ÔÚÄ³¸öµØ·½»áÓÃµ½Java ReflectionÀ´Éú³ÉËüµÄÊµÀı£¬ÎªÊ²Ã´²»ÏñÇ°Ò»¸ö²ÎÊıÒ»ÑùÖ±½ÓnewÒ»¸ö¶ÔÏóÊµÀıÄØ£¿ÏëÏë»òĞíÊÇÒòÎªºóÃæÎÒÃÇĞèÒªµÄNioProcessorÊµÀı¸öÊı²»¶¨£¨CPUºË+1£©£¬ÕâÀïÏàµ±ÓÚÖ»´«ÈëÒ»¸öÃû×Ö£¬ºóÃæ¸ù¾İÊµ¼ÊĞèÒª´´½¨ËüµÄ¶ÔÏó°É£¬µ±È»·´ÉäµÄºÃ´¦²»Ö¹ÕâĞ©¡£DefaultSocketSessionConfigÀàÒÔ¼°ËüµÄÏòÉÏ¼Ì³ĞÌåÏµÖĞÏà¹ØÀàºÍ½Ó¿Ú¶¼ÊÇÓëSessionÏà¹ØµÄÊôĞÔºÍ·½·¨£¬ÕâÀïÔİÊ±²»ÌÖÂÛ£¬NioProcessorÀàµÈÖ÷Òª¸ºÔğ´¦ÀíÓë»á»°Ïà¹ØµÄËùÓĞI/O²Ù×÷£¬°üÀ¨¼ÓÈë»á»°µ½Processor,flushÓÃ»§Ç¿ÖÆË¢ÓÃ»§Ğ´ÇëÇó¶ÓÁĞÖĞÊı¾İ£¬removeÉ¾³ıProcessorÖĞ»á»°²¢ÊÍ·Å×ÊÔ´£¬updateTrafficMask¿ØÖÆ»á»°I/OĞĞÎª£¬ÈçÖ»¶Á»òÖ»Ğ´¡£
+é¦–å…ˆï¼Œå¯ä»¥çœ‹åˆ° NioSocketAcceptor çš„çˆ¶ç±»æ˜¯ AbstractPollingIoAcceptorï¼Œ å¹¶ä¸”å®ç°äº† SocketAcceptor æ¥å£æ–¹æ³•ã€‚ æ¥å£SocketAcceptor extends æ¥å£IoAcceptor extends æ¥å£IoService.
+å…¶æ¬¡ï¼Œå®ƒå°è£…äº†ä¸€ä¸ªjava.nio.channels.Selectorç±»å‹çš„ç§æœ‰æˆå‘˜å˜é‡ï¼Œå¹¶ç”¨volatileä¿®é¥°ï¼Œè¿™æ˜¯javaå¤šçº¿ç¨‹ç¨‹åºä¸­ç»å¸¸ä¼šå‡ºç°çš„å…³é”®å­—ï¼Œä¸ºäº†ä¿è¯å¹¶å‘è®¿é—®å®ƒä¿®é¥°çš„å˜é‡çš„åŸå­æ€§ã€å¯è§æ€§å’Œé¡ºåºæ€§ã€‚è¿™æš—ç¤ºç€æ¯ä¸ªçº¿ç¨‹è®¿é—®ä¸€ä¸ªvolatileåŸŸæ—¶è®²è¯»åˆ°å½“å‰çš„å†…å­˜ä¸­çš„å€¼ï¼Œè€Œä¸æ˜¯(æœ‰å¯èƒ½)ä½¿ç”¨ä¸€ä¸ªç¼“å­˜å€¼ã€‚Selectorçš„å®ä¾‹selectoråœ¨æ–¹æ³•init()ä¸­åˆå§‹åŒ–ï¼Œåœ¨destroy()ä¸­é”€æ¯ï¼Œè¿™ä¸¤ä¸ªä»¥åŠå…¶å®ƒä¸selectorç›¸å…³çš„ä¸€äº›æ–¹æ³•æ˜¯åœ¨çˆ¶ç±» AbstractPollingIoAcceptorä¸­å®šä¹‰çš„æŠ½è±¡æ–¹æ³•ï¼Œæœ€ç»ˆåœ¨çˆ¶ç±» AbstractPollingIoAcceptorçš„æŸä¸ªæ„é€ å‡½æ•°ï¼ˆæ¨¡æ¿æ–¹æ³•ï¼‰ä¸­è¢«è°ƒç”¨ï¼Œä»è€Œå®ç°äº†selectorå˜é‡çš„åˆå§‹åŒ–ã€‚
+æ¥ç€ï¼Œ NioSocketAcceptorçš„æ„é€ å‡½æ•°ä¸­è°ƒç”¨çˆ¶ç±»çš„æ„é€ å‡½æ•°ï¼Œå¹¶ä¸”ä¼ å…¥ä¸¤ä¸ªå‚æ•°ï¼Œä¸€ä¸ªæ˜¯ DefaultSocketSessionConfigç±»å‹å®ä¾‹ï¼Œå…¶ä¸­å®šä¹‰äº†é»˜è®¤çš„ä¼šè¯å‚æ•°é…ç½®ï¼Œå¦å¤–ä¸€ä¸ªå‚æ•° NioProcessor.class çœ‹åˆ°*.classå°±å¯ä»¥è”æƒ³åˆ°åœ¨æŸä¸ªåœ°æ–¹ä¼šç”¨åˆ°Java Reflectionæ¥ç”Ÿæˆå®ƒçš„å®ä¾‹ï¼Œä¸ºä»€ä¹ˆä¸åƒå‰ä¸€ä¸ªå‚æ•°ä¸€æ ·ç›´æ¥newä¸€ä¸ªå¯¹è±¡å®ä¾‹å‘¢ï¼Ÿæƒ³æƒ³æˆ–è®¸æ˜¯å› ä¸ºåé¢æˆ‘ä»¬éœ€è¦çš„NioProcessorå®ä¾‹ä¸ªæ•°ä¸å®šï¼ˆCPUæ ¸+1ï¼‰ï¼Œè¿™é‡Œç›¸å½“äºåªä¼ å…¥ä¸€ä¸ªåå­—ï¼Œåé¢æ ¹æ®å®é™…éœ€è¦åˆ›å»ºå®ƒçš„å¯¹è±¡å§ï¼Œå½“ç„¶åå°„çš„å¥½å¤„ä¸æ­¢è¿™äº›ã€‚DefaultSocketSessionConfigç±»ä»¥åŠå®ƒçš„å‘ä¸Šç»§æ‰¿ä½“ç³»ä¸­ç›¸å…³ç±»å’Œæ¥å£éƒ½æ˜¯ä¸Sessionç›¸å…³çš„å±æ€§å’Œæ–¹æ³•ï¼Œè¿™é‡Œæš‚æ—¶ä¸è®¨è®ºï¼ŒNioProcessorç±»ç­‰ä¸»è¦è´Ÿè´£å¤„ç†ä¸ä¼šè¯ç›¸å…³çš„æ‰€æœ‰I/Oæ“ä½œï¼ŒåŒ…æ‹¬åŠ å…¥ä¼šè¯åˆ°Processor,flushç”¨æˆ·å¼ºåˆ¶åˆ·ç”¨æˆ·å†™è¯·æ±‚é˜Ÿåˆ—ä¸­æ•°æ®ï¼Œremoveåˆ é™¤Processorä¸­ä¼šè¯å¹¶é‡Šæ”¾èµ„æºï¼ŒupdateTrafficMaskæ§åˆ¶ä¼šè¯I/Oè¡Œä¸ºï¼Œå¦‚åªè¯»æˆ–åªå†™ã€‚
 
-ÏÂÃæ½Ó×Å·ÖÎö NioSocketAcceptorµÄ¸¸Àà£ºAbstractPollingIoAcceptor Ä£°åÀà£¬ÕâÀïËü´øÁ½¸öÄ£°å²ÎÊı NioSession ºÍ ServerSocketChannel£º
+ä¸‹é¢æ¥ç€åˆ†æ NioSocketAcceptorçš„çˆ¶ç±»ï¼šAbstractPollingIoAcceptor æ¨¡æ¿ç±»ï¼Œè¿™é‡Œå®ƒå¸¦ä¸¤ä¸ªæ¨¡æ¿å‚æ•° NioSession å’Œ ServerSocketChannelï¼š
 	public abstract class AbstractPollingIoAcceptor<S extends AbstractIoSession, H> extends AbstractIoAcceptor {
 		/** A lock used to protect the selector to be waked up before it's created */
 		private final Semaphore lock = new Semaphore(1);	
@@ -147,18 +147,18 @@ Ctrl + MouseLeft µã»÷ NioSocketAcceptor µ¯³ö²Ëµ¥Ñ¡Ôñ Open Implementation £º
 			
 		}
 		
-		//¡¤¡¤¡¤¡¤¡¤¡¤
+		//Â·Â·Â·Â·Â·Â·
 	}
 
-ËüÓĞÒ»¸öĞÅºÅÁ¿±äÁ¿£¬¸ù¾İ×¢ÊÍ¿ÉÖª£¬¸ÃĞÅºÅÁ¿ÓÃÓÚ·ÀÖ¹ÔÚselector±»´´½¨Ö®Ç°¾Íµ÷ÓÃwakeup·½·¨¡£selector.wakeupÖ÷ÒªÊÇÎªÁË»½ĞÑ×èÈûÔÚselector.selectÑ¡ÔñÉÏµÄÏß³Ì£¬ÈÃ¸ÃÏß³Ì¼°Ê±È¥´¦ÀíÆäËûÊÂÇé£¬ÀıÈç×¢²áchannel£¬¸Ä±äinterestOps¡¢ÅĞ¶Ï³¬Ê±µÈµÈ£¬selector.select()µÄÑ¡Ôñ¹ı³ÌÊÇ×èÈûµÄ£¬¼´Èç¹ûÃ»ÓĞ¸ĞĞËÈ¤µÄÊÂ¼ş·¢Éú£¬¾Í»á×èÈûµÈ´ıÖ±µ½·¢ÉúÎªÖ¹¡£
-ÕâÀïÓĞ¼¸¸ö·½·¨½²½âÏÂ£¬¹¹Ôì·½·¨AbstractPollingIoAcceptor()£¬ÆÕÍ¨·½·¨bindInternal()¡¢startupAcceptor()ÒÔ¼°ÄÚ²¿RunnableÀà Acceptor¡£ÏÈ¿´¿´¹¹Ôì·½·¨£º
+å®ƒæœ‰ä¸€ä¸ªä¿¡å·é‡å˜é‡ï¼Œæ ¹æ®æ³¨é‡Šå¯çŸ¥ï¼Œè¯¥ä¿¡å·é‡ç”¨äºé˜²æ­¢åœ¨selectorè¢«åˆ›å»ºä¹‹å‰å°±è°ƒç”¨wakeupæ–¹æ³•ã€‚selector.wakeupä¸»è¦æ˜¯ä¸ºäº†å”¤é†’é˜»å¡åœ¨selector.selecté€‰æ‹©ä¸Šçš„çº¿ç¨‹ï¼Œè®©è¯¥çº¿ç¨‹åŠæ—¶å»å¤„ç†å…¶ä»–äº‹æƒ…ï¼Œä¾‹å¦‚æ³¨å†Œchannelï¼Œæ”¹å˜interestOpsã€åˆ¤æ–­è¶…æ—¶ç­‰ç­‰ï¼Œselector.select()çš„é€‰æ‹©è¿‡ç¨‹æ˜¯é˜»å¡çš„ï¼Œå³å¦‚æœæ²¡æœ‰æ„Ÿå…´è¶£çš„äº‹ä»¶å‘ç”Ÿï¼Œå°±ä¼šé˜»å¡ç­‰å¾…ç›´åˆ°å‘ç”Ÿä¸ºæ­¢ã€‚
+è¿™é‡Œæœ‰å‡ ä¸ªæ–¹æ³•è®²è§£ä¸‹ï¼Œæ„é€ æ–¹æ³•AbstractPollingIoAcceptor()ï¼Œæ™®é€šæ–¹æ³•bindInternal()ã€startupAcceptor()ä»¥åŠå†…éƒ¨Runnableç±» Acceptorã€‚å…ˆçœ‹çœ‹æ„é€ æ–¹æ³•ï¼š
 		
 		protected AbstractPollingIoAcceptor(IoSessionConfig sessionConfig, Class<? extends IoProcessor<S>> processorClass) {
 			this(sessionConfig, null, new SimpleIoProcessorPool<S>(processorClass), true);
 		}
 
-ÆäÖĞÓĞÒ»¸öprocessorClassÀàĞÍµÄÏß³Ì³Ø¶ÔÏó SimpleIoProcessorPool, Í¨¹ı·´Éä´´½¨Ò»¸öIoProcessorµÄÏß³Ì³Øexecutor, Õâ¸öÏß³Ì³Ø×¨ÃÅÓÃÓÚÆô¶¯ IoProcessorÏß³ÌÓÃÓÚ ´¦ÀíSessionµÄI/O²Ù×÷¡£
-this(¡¤¡¤¡¤)µÄµÚ¶ş¸ö²ÎÊınull±íÊ¾´«ÈëExecutorÎªnull, ×îÖÕ´«Èëµ½³éÏóÀà AbstractIoService ÖĞ:
+å…¶ä¸­æœ‰ä¸€ä¸ªprocessorClassç±»å‹çš„çº¿ç¨‹æ± å¯¹è±¡ SimpleIoProcessorPool, é€šè¿‡åå°„åˆ›å»ºä¸€ä¸ªIoProcessorçš„çº¿ç¨‹æ± executor, è¿™ä¸ªçº¿ç¨‹æ± ä¸“é—¨ç”¨äºå¯åŠ¨ IoProcessorçº¿ç¨‹ç”¨äº å¤„ç†Sessionçš„I/Oæ“ä½œã€‚
+this(Â·Â·Â·)çš„ç¬¬äºŒä¸ªå‚æ•°nullè¡¨ç¤ºä¼ å…¥Executorä¸ºnull, æœ€ç»ˆä¼ å…¥åˆ°æŠ½è±¡ç±» AbstractIoService ä¸­:
 
 public abstract class AbstractIoService implements IoService {
 	
@@ -235,11 +235,11 @@ public abstract class AbstractIoService implements IoService {
 	//***
 }
 
-AbstractIoServiceÖĞµÄexecutorÏß³Ì³Ø±äÁ¿½«ÔÚËüµÄ¹¹Ôì·½·¨ÖĞ³õÊ¼»¯£¬ÔÚ executeWorker() ·½·¨ÖĞ±»µ÷ÓÃÀ´Æô¶¯Ò»¸ö Acceptor workerÏß³Ì£¬´Ó¶ø´¦Àí½ÓÊÕµ½µÄ¿Í»§¶ËÁ¬½Ó¡¢×¢²á°ó¶¨£¬½â°óµÈÇëÇó¡£
-AbstractIoServiceÖĞÍ¨¹ı new IoServiceListener(){}·½Ê½Éú³ÉÄäÃûÀà,ÕâÑù¿ÉÒÔÊ¡È¥¾ßÌåÊµÏÖ IoServiceListener½Ó¿ÚµÄ¿ªÏú£¬²¢²»ÊÇËµ½Ó¿ÚÄÜnewÒ»¸öÊµÀı
-AbstractIoServiceÖĞ¾²Ì¬AtomicIntegerÀàĞÍ³ÉÔ±±äÁ¿id±£Ö¤¶àÏß³Ì»·¾³ÏÂÃ¿¸öIoServiceÓĞÎ¨Ò»µÄID
+AbstractIoServiceä¸­çš„executorçº¿ç¨‹æ± å˜é‡å°†åœ¨å®ƒçš„æ„é€ æ–¹æ³•ä¸­åˆå§‹åŒ–ï¼Œåœ¨ executeWorker() æ–¹æ³•ä¸­è¢«è°ƒç”¨æ¥å¯åŠ¨ä¸€ä¸ª Acceptor workerçº¿ç¨‹ï¼Œä»è€Œå¤„ç†æ¥æ”¶åˆ°çš„å®¢æˆ·ç«¯è¿æ¥ã€æ³¨å†Œç»‘å®šï¼Œè§£ç»‘ç­‰è¯·æ±‚ã€‚
+AbstractIoServiceä¸­é€šè¿‡ new IoServiceListener(){}æ–¹å¼ç”ŸæˆåŒ¿åç±»,è¿™æ ·å¯ä»¥çœå»å…·ä½“å®ç° IoServiceListeneræ¥å£çš„å¼€é”€ï¼Œå¹¶ä¸æ˜¯è¯´æ¥å£èƒ½newä¸€ä¸ªå®ä¾‹
+AbstractIoServiceä¸­é™æ€AtomicIntegerç±»å‹æˆå‘˜å˜é‡idä¿è¯å¤šçº¿ç¨‹ç¯å¢ƒä¸‹æ¯ä¸ªIoServiceæœ‰å”¯ä¸€çš„ID
 
-»Øµ½ bindInternal()·½·¨£º
+å›åˆ° bindInternal()æ–¹æ³•ï¼š
 		
 		@Override
 		protected final Set<SocketAddress> bindInternal(List<? extends SocketAddress> localAddresses) throws Exception {
@@ -265,7 +265,7 @@ AbstractIoServiceÖĞ¾²Ì¬AtomicIntegerÀàĞÍ³ÉÔ±±äÁ¿id±£Ö¤¶àÏß³Ì»·¾³ÏÂÃ¿¸öIoServiceÓ
 			return newLocalAddresses;
 		}
 		
-¸Ã·½·¨ÊÇÓÉ NioSocketAcceptor.bind(address) ·½·¨µ÷ÓÃµÄ£¬ÊôÓÚÆô¶¯¹ı³ÌÖĞµ÷ÓÃµÄ·½·¨£¬Ëü½«°ó¶¨ÊÂ¼ş·â×°³ÉÒ»¸ö AcceptorOperationFuture ÇëÇó¶ÔÏó request ·ÅÈëµ½ ConcurrentLinkedQueue<AcceptorOperationFuture> ÀàĞÍ¶ÓÁĞ registerQueue ÖĞ¡£È»ºóµ÷ÓÃ startupAcceptor() ·½·¨ÔÚÏß³Ì³ØÖĞÆô¶¯Ò»¸öAcceptorÏß³Ì£¬½Ó×Åµ÷ÓÃwakeup()·½·¨»½ĞÑ¿ÉÄÜ×èÈûµÄselector.select()À´´¦Àí¸Õ¸ÕÌí¼ÓµÄ°ó¶¨ÇëÇórequest.  ÔÚ·½·¨wakeup()Ç°ºóµ÷ÓÃÁËlock.acquire()ºÍlock.release(). ÒòÎªstartupAcceptor()ÖĞÆô¶¯Ò»¸öAcceptorÏß³ÌÀ´À´Ö´ĞĞselector.select()£¬ÓÉÓÚÊÇ¶àÏß³Ì£¬¿ÉÄÜAcceptorÏß³Ì»¹Î´Æô¶¯startupAcceptor()¾Í·µ»ØÖ´ĞĞÁËwakeup()´Ó¶ø³öÏÖ´íÎó£¬ËùÒÔ¼ÓÁËlock.acquire()ÅäºÏ startupAcceptor()·½·¨£º
+è¯¥æ–¹æ³•æ˜¯ç”± NioSocketAcceptor.bind(address) æ–¹æ³•è°ƒç”¨çš„ï¼Œå±äºå¯åŠ¨è¿‡ç¨‹ä¸­è°ƒç”¨çš„æ–¹æ³•ï¼Œå®ƒå°†ç»‘å®šäº‹ä»¶å°è£…æˆä¸€ä¸ª AcceptorOperationFuture è¯·æ±‚å¯¹è±¡ request æ”¾å…¥åˆ° ConcurrentLinkedQueue<AcceptorOperationFuture> ç±»å‹é˜Ÿåˆ— registerQueue ä¸­ã€‚ç„¶åè°ƒç”¨ startupAcceptor() æ–¹æ³•åœ¨çº¿ç¨‹æ± ä¸­å¯åŠ¨ä¸€ä¸ªAcceptorçº¿ç¨‹ï¼Œæ¥ç€è°ƒç”¨wakeup()æ–¹æ³•å”¤é†’å¯èƒ½é˜»å¡çš„selector.select()æ¥å¤„ç†åˆšåˆšæ·»åŠ çš„ç»‘å®šè¯·æ±‚request.  åœ¨æ–¹æ³•wakeup()å‰åè°ƒç”¨äº†lock.acquire()å’Œlock.release(). å› ä¸ºstartupAcceptor()ä¸­å¯åŠ¨ä¸€ä¸ªAcceptorçº¿ç¨‹æ¥æ¥æ‰§è¡Œselector.select()ï¼Œç”±äºæ˜¯å¤šçº¿ç¨‹ï¼Œå¯èƒ½Acceptorçº¿ç¨‹è¿˜æœªå¯åŠ¨startupAcceptor()å°±è¿”å›æ‰§è¡Œäº†wakeup()ä»è€Œå‡ºç°é”™è¯¯ï¼Œæ‰€ä»¥åŠ äº†lock.acquire()é…åˆ startupAcceptor()æ–¹æ³•ï¼š
 		
 		private void startupAcceptor() throws InterruptedException {
 			// If the acceptor is not ready, clear the queues
@@ -290,7 +290,7 @@ AbstractIoServiceÖĞ¾²Ì¬AtomicIntegerÀàĞÍ³ÉÔ±±äÁ¿id±£Ö¤¶àÏß³Ì»·¾³ÏÂÃ¿¸öIoServiceÓ
 			}
 		}
 
-¿ÉÒÔ¿´µ½´´½¨Acceptor¶ÔÏóÖ®Ç°µ÷ÓÃÁË lock.acquire(),È»ºóÓÃ executeWorker(acceptor)Æô¶¯Ò»¸öAcceptorÏß³Ì:
+å¯ä»¥çœ‹åˆ°åˆ›å»ºAcceptorå¯¹è±¡ä¹‹å‰è°ƒç”¨äº† lock.acquire(),ç„¶åç”¨ executeWorker(acceptor)å¯åŠ¨ä¸€ä¸ªAcceptorçº¿ç¨‹:
 	
 	public abstract class AbstractPollingIoAcceptor<S extends AbstractIoSession, H> extends AbstractIoAcceptor {
 		private class Acceptor implements Runnable {
@@ -304,23 +304,23 @@ AbstractIoServiceÖĞ¾²Ì¬AtomicIntegerÀàĞÍ³ÉÔ±±äÁ¿id±£Ö¤¶àÏß³Ì»·¾³ÏÂÃ¿¸öIoServiceÓ
 
 				while (selectable) {
 					try {
-						//¡¤¡¤¡¤¡¤¡¤¡¤
+						//Â·Â·Â·Â·Â·Â·
 						int selected = select();
-						//¡¤¡¤¡¤¡¤¡¤¡¤
+						//Â·Â·Â·Â·Â·Â·
 					} catch (ClosedSelectorException cse) {
-						//¡¤¡¤¡¤¡¤¡¤¡¤
+						//Â·Â·Â·Â·Â·Â·
 					}
 				}
-				//¡¤¡¤¡¤¡¤¡¤¡¤
+				//Â·Â·Â·Â·Â·Â·
 			}
 		}
 	}
 
-ÔÚrun()ÖĞÊ×ÏÈµ÷ÓÃ lock.release()±íÊ¾Acceptor¶ÔÏó´´½¨³É¹¦(¿ÉÒÔµ÷ÓÃselector.wakeup()ÁË)´Ó¶ø ±£Ö¤ÁËµ÷ÓÃwakeup()Ö®Ç°´´½¨Acceptor¶ÔÏó
-PS: 1¡¢±¾ÈËÀí½â Ö´ĞĞ selector.wakeup()Ö®Ç° ±ØĞëÖ´ĞĞ selector.select() ËùÒÔĞèÒª0-1ĞÅºÅÁ¿£¬ÊÇ²»ÊÇÕâÑùÇë¸ßÈËÖ¸½Ì£¬ ÄÑµÀselector¶ÔÏóÄÚ²¿Ò²ÓĞ¸öËøÃ´£¿ÏÂ´Î¿´¿´SelectorÔ´Âë¡£
-	2¡¢Èç¹ûÉÏÃæ¼ÙÉè³ÉÁ¢£¬ÄÇÃ´AcceptorÖĞËøµÄÊÍ·ÅÊ±¼äÊÇ²»ÊÇÔçÁË£¬ÒòÎª»¹Ã»Ö´ĞĞ selector.select()¾Íµ÷ÓÃÁËlock.release(),»¹ÊÇÒòÎªwakeup()Ö®Ç°Ö´ĞĞÁË Thread.sleep(10)µÄÔ­Òò£¿	
+åœ¨run()ä¸­é¦–å…ˆè°ƒç”¨ lock.release()è¡¨ç¤ºAcceptorå¯¹è±¡åˆ›å»ºæˆåŠŸ(å¯ä»¥è°ƒç”¨selector.wakeup()äº†)ä»è€Œ ä¿è¯äº†è°ƒç”¨wakeup()ä¹‹å‰åˆ›å»ºAcceptorå¯¹è±¡
+PS: 1ã€æœ¬äººç†è§£ æ‰§è¡Œ selector.wakeup()ä¹‹å‰ å¿…é¡»æ‰§è¡Œ selector.select() æ‰€ä»¥éœ€è¦0-1ä¿¡å·é‡ï¼Œæ˜¯ä¸æ˜¯è¿™æ ·è¯·é«˜äººæŒ‡æ•™ï¼Œ éš¾é“selectorå¯¹è±¡å†…éƒ¨ä¹Ÿæœ‰ä¸ªé”ä¹ˆï¼Ÿä¸‹æ¬¡çœ‹çœ‹Selectoræºç ã€‚
+	2ã€å¦‚æœä¸Šé¢å‡è®¾æˆç«‹ï¼Œé‚£ä¹ˆAcceptorä¸­é”çš„é‡Šæ”¾æ—¶é—´æ˜¯ä¸æ˜¯æ—©äº†ï¼Œå› ä¸ºè¿˜æ²¡æ‰§è¡Œ selector.select()å°±è°ƒç”¨äº†lock.release(),è¿˜æ˜¯å› ä¸ºwakeup()ä¹‹å‰æ‰§è¡Œäº† Thread.sleep(10)çš„åŸå› ï¼Ÿ	
 
-½Ó×Å¿´ AbstractIoAcceptor Àà & IoAcceptor ½Ó¿Ú£º
+æ¥ç€çœ‹ AbstractIoAcceptor ç±» & IoAcceptor æ¥å£ï¼š
 AbstractIoAcceptor:	
 	public abstract class AbstractIoAcceptor extends AbstractIoService implements IoAcceptor {
 
@@ -371,8 +371,8 @@ IoAcceptor:
 		void unbind(SocketAddress firstLocalAddress, SocketAddress... otherLocalAddresses);
 	}
 
-½Ó¿ÚIoAcceptor×îÖÕ¼Ì³ĞÓÚIoService½Ó¿Ú£¬ËüÔÚIoServiceµÄ»ù´¡ÉÏÌí¼ÓÁËÓëµØÖ·Ïà¹ØµÄ¶ÁĞ´ºÍ¸÷ÖÖÖØÔØµÄµØÖ·°ó¶¨ºÍµØÖ·½â°ó½Ó¿Ú¡£
-AbstractIoAcceptor Ö÷Òª¾ÍÊµÏÖÁË IoService ÖĞ¶¨ÒåµÄÒ»Ğ©½Ó¿Ú£¬ ÆäÖĞÓÃµ½ÁËÒ»¸ö¶ÔÏóËø£¬ÎÒÃÇÖªµÀjavaÖĞÃ¿¸ö¶ÔÏóÄÚ²¿¶¼ÓĞÒ»¸öËø£¬¿ÉÒÔÓÃÓï¾ä synchronized(object){} À´Ëø×¡Ò»¿é´úÂë¡£ÕâÀïµÄ¶ÔÏóËøÖ÷ÒªÓÃÔÚ bind(address)ºÍunbind(address)µÈ²Ù×÷ÖĞ¡£
+æ¥å£IoAcceptoræœ€ç»ˆç»§æ‰¿äºIoServiceæ¥å£ï¼Œå®ƒåœ¨IoServiceçš„åŸºç¡€ä¸Šæ·»åŠ äº†ä¸åœ°å€ç›¸å…³çš„è¯»å†™å’Œå„ç§é‡è½½çš„åœ°å€ç»‘å®šå’Œåœ°å€è§£ç»‘æ¥å£ã€‚
+AbstractIoAcceptor ä¸»è¦å°±å®ç°äº† IoService ä¸­å®šä¹‰çš„ä¸€äº›æ¥å£ï¼Œ å…¶ä¸­ç”¨åˆ°äº†ä¸€ä¸ªå¯¹è±¡é”ï¼Œæˆ‘ä»¬çŸ¥é“javaä¸­æ¯ä¸ªå¯¹è±¡å†…éƒ¨éƒ½æœ‰ä¸€ä¸ªé”ï¼Œå¯ä»¥ç”¨è¯­å¥ synchronized(object){} æ¥é”ä½ä¸€å—ä»£ç ã€‚è¿™é‡Œçš„å¯¹è±¡é”ä¸»è¦ç”¨åœ¨ bind(address)å’Œunbind(address)ç­‰æ“ä½œä¸­ã€‚
 
     public final void bind(Iterable<? extends SocketAddress> localAddresses) throws IOException {
         if (isDisposing()) {
@@ -426,10 +426,10 @@ AbstractIoAcceptor Ö÷Òª¾ÍÊµÏÖÁË IoService ÖĞ¶¨ÒåµÄÒ»Ğ©½Ó¿Ú£¬ ÆäÖĞÓÃµ½ÁËÒ»¸ö¶ÔÏóË
         }
     }
 	
-ÉÏÃæµÄ bind ·½·¨ÖĞÓÃµ½ÁËÇ¶Ì×Ëø£¬synchronized(bindlock)Ëø×¡bind»òÕßunbind, synchronized(boundAddresses)Ëø×¡Óë boundAddressesÏà¹ØµÄ¶ÁĞ´²Ù×÷,ÒòÎªÆäËüµØ·½»á¶ÁĞ´ boundAddresses. 
-¿ÉÒÔ¿´µ½µ÷ÓÃacceptor.bind(SocketAddress)½«»á×îÖÕµ÷ÓÃ getListeners().fireServiceActivated(); ¶øgetListeners()·µ»ØµÄ¾ÍÊÇ AbstractIoServiceÊµÀıÖĞµÄ private final IoServiceListenerSupport listeners;
+ä¸Šé¢çš„ bind æ–¹æ³•ä¸­ç”¨åˆ°äº†åµŒå¥—é”ï¼Œsynchronized(bindlock)é”ä½bindæˆ–è€…unbind, synchronized(boundAddresses)é”ä½ä¸ boundAddressesç›¸å…³çš„è¯»å†™æ“ä½œ,å› ä¸ºå…¶å®ƒåœ°æ–¹ä¼šè¯»å†™ boundAddresses. 
+å¯ä»¥çœ‹åˆ°è°ƒç”¨acceptor.bind(SocketAddress)å°†ä¼šæœ€ç»ˆè°ƒç”¨ getListeners().fireServiceActivated(); è€ŒgetListeners()è¿”å›çš„å°±æ˜¯ AbstractIoServiceå®ä¾‹ä¸­çš„ private final IoServiceListenerSupport listeners;
 
-IoServiceListenerSupport£º
+IoServiceListenerSupportï¼š
 
 	/**
 	 * A helper class which provides addition and removal of {@link IoServiceListener}s and firing
@@ -490,7 +490,7 @@ IoServiceListenerSupport£º
 		}
 	}
 
-fireServiceActivated·½·¨ÖĞµ÷ÓÃ listener.serviceActivated(); ¶ø×î¿ªÊ¼µÄ listenerÊÇÔÚ AbstractIoService³éÏóÀàµÄ¹¹Ôìº¯ÊıÖĞ³õÊ¼»¯µÄ£º
+fireServiceActivatedæ–¹æ³•ä¸­è°ƒç”¨ listener.serviceActivated(); è€Œæœ€å¼€å§‹çš„ listeneræ˜¯åœ¨ AbstractIoServiceæŠ½è±¡ç±»çš„æ„é€ å‡½æ•°ä¸­åˆå§‹åŒ–çš„ï¼š
 
     protected AbstractIoService(IoSessionConfig sessionConfig, Executor executor) {
 
@@ -517,17 +517,17 @@ fireServiceActivated·½·¨ÖĞµ÷ÓÃ listener.serviceActivated(); ¶ø×î¿ªÊ¼µÄ listenerÊ
         threadName = getClass().getSimpleName() + '-' + id.incrementAndGet();
     }
 	
-Ô­À´µÚÒ»¸ölistenerÊÇÓÃÀ´¼ÇÂ¼Õâ¸öservice×´Ì¬ĞÅÏ¢µÄ¡£
+åŸæ¥ç¬¬ä¸€ä¸ªlisteneræ˜¯ç”¨æ¥è®°å½•è¿™ä¸ªserviceçŠ¶æ€ä¿¡æ¯çš„ã€‚
 		
-ÖÁ´Ë£¬Ç°Ãæ½²µÄÖ÷ÒªÊÇ IoAcceptor acceptor = new NioSocketAcceptor() Ê±MinaµÄ³õÊ¼»¯¹ı³ÌÒÔ¼° acceptor.bind(SocketAddress)Ê±ºòµÄ¶Ë¿Ú°ó¶¨¹ı³Ì¡£ºóÃæ»áÖªµÀ£º
-1¡¢ IoService¸Ã½Ó¿ÚÖ÷Òª¸ºÔğÌ×½Ó×ÖµÄ½¨Á¢£¬ÓµÓĞ×Ô¼ºµÄ Selector(NioSocketAcceptorÖĞ)ºÍ Executor, ¼àÌıÊÇ·ñÓĞÁ¬½Ó½¨Á¢¡£
-2¡¢ IoProcessor½Ó¿ÚÒ²ÓĞ×Ô¼ºµÄExecutorºÍSelector(NioProcessorÖĞ), ¸ºÔğÍ¨µÀÉÏÊı¾İµÄI/O²Ù×÷¡£ÕâÒ²ÊÇÓëÆ½Ê±µÄJava NioµÄ²»Í¬Ö®´¦£¬Æ½Ê±¶¼ÊÇÊ¹ÓÃÒ»¸öSelector, ²»Çø·ÖIoServiceºÍIoProcess. ÁíÍâ£¬IoProcess»¹¸ºÔğµ÷ÓÃ×¢²áÔÚÆäÉÏµÄ IoFilter,¾­¹ıFilterChainÖ®ºóµ÷ÓÃIoHandler.
-3¡¢ IoFilter½Ó¿Ú¶¨ÒåÒ»×éÀ¹½ØÆ÷(ÔğÈÎÁ´Éè¼ÆÄ£Ê½),À¹½ØÆ÷°üÀ¨ÈÕÖ¾Êä³ö¡¢ºÚÃûµ¥¹ıÂË¡¢Êı¾İµÄ±àÂë£¨write ·½Ïò£©Óë½âÂë£¨read ·½Ïò£©µÈ¹¦ÄÜ£¬encoderºÍdecoderºÜÖØÒª¡£
-4¡¢ IoHandler½Ó¿Ú¸ºÔğ±àĞ´ÒµÎñÂß¼­£¬´¦Àí½ÓÊÕºÍ·¢ËÍÊı¾İµÄµØ·½¡£
-5¡¢ IoFuture½Ó¿Ú´ó²¿·ÖÓëjava.util.concurrent.FutureÓĞ¹Ø£¬ await()¡¢awaitUninterruptibly()¿ÉÒÔµÈ´ıÒì²½Ö´ĞĞµÄ½á¹û²¢»Øµ÷¶ÔÓ¦µÄ»Øµ÷·½·¨¡£
+è‡³æ­¤ï¼Œå‰é¢è®²çš„ä¸»è¦æ˜¯ IoAcceptor acceptor = new NioSocketAcceptor() æ—¶Minaçš„åˆå§‹åŒ–è¿‡ç¨‹ä»¥åŠ acceptor.bind(SocketAddress)æ—¶å€™çš„ç«¯å£ç»‘å®šè¿‡ç¨‹ã€‚åé¢ä¼šçŸ¥é“ï¼š
+1ã€ IoServiceè¯¥æ¥å£ä¸»è¦è´Ÿè´£å¥—æ¥å­—çš„å»ºç«‹ï¼Œæ‹¥æœ‰è‡ªå·±çš„ Selector(NioSocketAcceptorä¸­)å’Œ Executor, ç›‘å¬æ˜¯å¦æœ‰è¿æ¥å»ºç«‹ã€‚
+2ã€ IoProcessoræ¥å£ä¹Ÿæœ‰è‡ªå·±çš„Executorå’ŒSelector(NioProcessorä¸­), è´Ÿè´£é€šé“ä¸Šæ•°æ®çš„I/Oæ“ä½œã€‚è¿™ä¹Ÿæ˜¯ä¸å¹³æ—¶çš„Java Nioçš„ä¸åŒä¹‹å¤„ï¼Œå¹³æ—¶éƒ½æ˜¯ä½¿ç”¨ä¸€ä¸ªSelector, ä¸åŒºåˆ†IoServiceå’ŒIoProcess. å¦å¤–ï¼ŒIoProcessè¿˜è´Ÿè´£è°ƒç”¨æ³¨å†Œåœ¨å…¶ä¸Šçš„ IoFilter,ç»è¿‡FilterChainä¹‹åè°ƒç”¨IoHandler.
+3ã€ IoFilteræ¥å£å®šä¹‰ä¸€ç»„æ‹¦æˆªå™¨(è´£ä»»é“¾è®¾è®¡æ¨¡å¼),æ‹¦æˆªå™¨åŒ…æ‹¬æ—¥å¿—è¾“å‡ºã€é»‘åå•è¿‡æ»¤ã€æ•°æ®çš„ç¼–ç ï¼ˆwrite æ–¹å‘ï¼‰ä¸è§£ç ï¼ˆread æ–¹å‘ï¼‰ç­‰åŠŸèƒ½ï¼Œencoderå’Œdecoderå¾ˆé‡è¦ã€‚
+4ã€ IoHandleræ¥å£è´Ÿè´£ç¼–å†™ä¸šåŠ¡é€»è¾‘ï¼Œå¤„ç†æ¥æ”¶å’Œå‘é€æ•°æ®çš„åœ°æ–¹ã€‚
+5ã€ IoFutureæ¥å£å¤§éƒ¨åˆ†ä¸java.util.concurrent.Futureæœ‰å…³ï¼Œ await()ã€awaitUninterruptibly()å¯ä»¥ç­‰å¾…å¼‚æ­¥æ‰§è¡Œçš„ç»“æœå¹¶å›è°ƒå¯¹åº”çš„å›è°ƒæ–¹æ³•ã€‚
 
-IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
-×Ô´ÓAbstractPollingIoAcceptorÖĞstartupAcceptor·½·¨Æô¶¯Ò»¸öAcceptorÏß³ÌÖ®ºó£¬Èç¹ûÓĞÁ¬½Óµ½À´£¬¾Íµ÷ÓÃprocessHandles()·½·¨´¦Àí£º
+IoService å’Œ IoProcessor æ˜¯å¦‚ä½•è¡”æ¥èµ·æ¥çš„ï¼Ÿ
+è‡ªä»AbstractPollingIoAcceptorä¸­startupAcceptoræ–¹æ³•å¯åŠ¨ä¸€ä¸ªAcceptorçº¿ç¨‹ä¹‹åï¼Œå¦‚æœæœ‰è¿æ¥åˆ°æ¥ï¼Œå°±è°ƒç”¨processHandles()æ–¹æ³•å¤„ç†ï¼š
 
         private void processHandles(Iterator<H> handles) throws Exception {
             while (handles.hasNext()) {
@@ -549,11 +549,11 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
             }
         }	
 		
-ÕâÀïµÄ processor = new SimpleIoProcessorPool<NioSession>(NioProcessor.class); µ÷ÓÃ S session = accept(processor, handle)À´´´½¨Ò»¸öSessionÓëprocessorÖĞµÄÄ³¸öProcessorÏß³ÌÏà¹ØÁª£¬È»ºóÖ´ĞĞ£º
+è¿™é‡Œçš„ processor = new SimpleIoProcessorPool<NioSession>(NioProcessor.class); è°ƒç”¨ S session = accept(processor, handle)æ¥åˆ›å»ºä¸€ä¸ªSessionä¸processorä¸­çš„æŸä¸ªProcessorçº¿ç¨‹ç›¸å…³è”ï¼Œç„¶åæ‰§è¡Œï¼š
 
 		session.getProcessor().add(session);
 
-ÉÏÃæµÄÓï¾ä½«»áµ÷ÓÃ AbstractPollingProcessor ÖĞµÄ add()·½·¨:
+ä¸Šé¢çš„è¯­å¥å°†ä¼šè°ƒç”¨ AbstractPollingProcessor ä¸­çš„ add()æ–¹æ³•:
 
 		public final void add(S session) {
 			if (disposed || disposing) {
@@ -565,7 +565,7 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
 			startupProcessor();
 		}
 
-°ÑÁ¬½Ó»á»°·ÅÈëµ½newSessionÖĞ£¬È»ºóµ÷ÓÃ AbstractPollingProcessor ÖĞµÄ startupProcessor()·½·¨£»
+æŠŠè¿æ¥ä¼šè¯æ”¾å…¥åˆ°newSessionä¸­ï¼Œç„¶åè°ƒç”¨ AbstractPollingProcessor ä¸­çš„ startupProcessor()æ–¹æ³•ï¼›
 
 		private void startupProcessor() {
 			Processor processor = processorRef.get();
@@ -583,7 +583,7 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
 			wakeup();
 		}
 
-µ½ÉÏÃæ¾Í¿ÉÒÔ¿´µ½ÔÚ AbstractPollingProcessor ÖĞÆô¶¯ÁËÒ»¸öProcessorÏß³Ì£º
+åˆ°ä¸Šé¢å°±å¯ä»¥çœ‹åˆ°åœ¨ AbstractPollingProcessor ä¸­å¯åŠ¨äº†ä¸€ä¸ªProcessorçº¿ç¨‹ï¼š
 
     private class Processor implements Runnable {
         public void run() {
@@ -601,7 +601,7 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
 
     }
 
-µ÷ÓÃ handleNewSessions()º¯ÊıÀ´´¦ÀíSessionÉÏµÄI/OµÄ¶ÁÇëÇó¡£
+è°ƒç”¨ handleNewSessions()å‡½æ•°æ¥å¤„ç†Sessionä¸Šçš„I/Oçš„è¯»è¯·æ±‚ã€‚
 
     private int handleNewSessions() {
         int addedSessions = 0;
@@ -616,7 +616,7 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
         return addedSessions;
     }
 
-¼ÌĞøµ÷ÓÃ addNow()º¯Êı£º
+ç»§ç»­è°ƒç”¨ addNow()å‡½æ•°ï¼š
 
 	private boolean addNow(S session) {
         boolean registered = false;
@@ -649,7 +649,7 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
         return registered;
     }
 
-ÆäÖĞinit(Session)ÈçÏÂ(NioProcessor)£º
+å…¶ä¸­init(Session)å¦‚ä¸‹(NioProcessor)ï¼š
 
     @Override
     protected void init(NioSession session) throws Exception {
@@ -658,8 +658,8 @@ IoService ºÍ IoProcessor ÊÇÈçºÎÏÎ½ÓÆğÀ´µÄ£¿
         session.setSelectionKey(ch.register(selector, SelectionKey.OP_READ, session));
     }
 
-¿ÉÒÔ¿´³ö°Ñ Session¹ØÁªµÄChannelÉÏµÄSelectionKey.OP_READ×¢²áµ½ÁËNioProcessorÉÏÃæµÄSelector¡£´Ó¶øÊµÏÖÓÃIoProcessor×¨ÃÅ´¦ÀíÍ¨µÀÉÏµÄI/O²Ù×÷¡£
-½Ó×ÅÔÚaddNow()·½·¨ÖĞÍê³Éinit(session)Ö®ºó£¬ ¿ªÊ¼Ö´ĞĞ listeners.fireSessionCreated(session)£º
+å¯ä»¥çœ‹å‡ºæŠŠ Sessionå…³è”çš„Channelä¸Šçš„SelectionKey.OP_READæ³¨å†Œåˆ°äº†NioProcessorä¸Šé¢çš„Selectorã€‚ä»è€Œå®ç°ç”¨IoProcessorä¸“é—¨å¤„ç†é€šé“ä¸Šçš„I/Oæ“ä½œã€‚
+æ¥ç€åœ¨addNow()æ–¹æ³•ä¸­å®Œæˆinit(session)ä¹‹åï¼Œ å¼€å§‹æ‰§è¡Œ listeners.fireSessionCreated(session)ï¼š
 
 IoServiceListenerSupport:
 
@@ -705,24 +705,24 @@ IoServiceListenerSupport:
         }
     }	
 
-»á¿ªÊ¼µ÷ÓÃIoFilterChain½øĞĞ´¦Àí£¬×îÖÕµ½Á´µÄ×îÄ©¶Ë¾Í¿ªÊ¼µ÷ÓÃIoHandler½øĞĞ´¦Àí, IoFilterChainÓÖµ¥¶ÀÊÇÒ»¸öºÜ¸´ÔÓµÄÌåÏµ£¬Ê¹ÓÃÔğÈÎÁ´Ä£Ê½ÊµÏÖ£¬ÓÃµ½JavaµÄÄÚ²¿ÀàµÈ¡£	
+ä¼šå¼€å§‹è°ƒç”¨IoFilterChainè¿›è¡Œå¤„ç†ï¼Œæœ€ç»ˆåˆ°é“¾çš„æœ€æœ«ç«¯å°±å¼€å§‹è°ƒç”¨IoHandlerè¿›è¡Œå¤„ç†, IoFilterChainåˆå•ç‹¬æ˜¯ä¸€ä¸ªå¾ˆå¤æ‚çš„ä½“ç³»ï¼Œä½¿ç”¨è´£ä»»é“¾æ¨¡å¼å®ç°ï¼Œç”¨åˆ°Javaçš„å†…éƒ¨ç±»ç­‰ã€‚	
 
 Mina---IoFilter  
 
-Mina·Ç³£ÌùĞÄµÄÎª¹ã´óÊ¹ÓÃÕßÌá¹©ÁË·á¸»µÄFilterÊµÏÖ×ÓÀà£¬ºÜ¶à±ê×¼·şÎñÎÒÃÇ¶¼²»ĞèÒª×Ô¼ºÊµÏÖ¡£±ÈÈç£º
-	BlacklistFilter				ºÚÃûµ¥¹ıÂËÆ÷
-	BufferedWriteFilter			·¢ËÍ»º´æ¹ıÂËÆ÷£¬»º´æ·¢ËÍµÄÏûÏ¢£¬±ÜÃâ¶ÌĞ¡ÏûÏ¢Æµ·±·¢ËÍ
-	CompressionFilter			Êı¾İÑ¹Ëõ¹ıÂËÆ÷
-	ConnectionThrottleFilter	Á¬½Ó¿ØÖÆ¹ıÂËÆ÷£¬¶ÔÍ¬Ò»¸öIPµØÖ·Æµ·±µÄ´´½¨Á¬½ÓµÄÊ±¼ä¼ä¸ô½øĞĞ¿ØÖÆ
-	KeepAliveFilter				ĞÄÌø°ü¹ıÂËÆ÷£¬ÔÚidl×´Ì¬·¢ËÍĞÄÌø°ü£¬²¢ÄÜ¶Ô³¬Ê±½øĞĞ´¦Àí
-	LoggingFilter				ÈÕÖ¾¼ÇÂ¼¹ıÂËÆ÷£¬×î³£ÓÃÖ®Ò»
-	ProxyFilter					IoConnectorÔÚÁ¬½ÓÎÕÊÖÊ±×Ô¶¯¼ÓÈëµÄ¹ıÂËÆ÷£¬ÎÕÊÖ³É¹¦ºóÍ¸Ã÷
-	SslFilter					TCP/IP²ãÃæµÄSSL¼Ó½âÃÜ¹ıÂËÆ÷
-	StreamWriteFilter			InputStreamÖ±½Ó×ª»»³ÉIoBufferµÄ¹ıÂËÆ÷
-»¹ÓĞÁ½¸ömina×Ô´øµÄ¹ıÂËÆ÷£º
-	HeadFilter 					µ±·¢Éúwrite²Ù×÷Ê±£¬½«Ğ´buffer¼ÓÈëµ½session.scheduledWriteMessages¶ÓÁĞ£¬²¢·¢ËÍµ÷ÓÃIoProcessorÖ´ĞĞwrite()²Ù×÷£¬Î»ÓÚ¹ıÂËÆ÷Á´Í·¡£
-	TailFilter					µ±ËùÓĞ¹ıÂËÆ÷¶¼´¦ÀíÍêºó£¬Ëû½«µ÷ÓÃIoHandlerµÄ¶ÔÓ¦·½·¨¡£Î»ÓÚ¹ıÂËÆ÷Á´Î²¡£
-IoFilter½Ó¿Ú¶¨Òå£º
+Minaéå¸¸è´´å¿ƒçš„ä¸ºå¹¿å¤§ä½¿ç”¨è€…æä¾›äº†ä¸°å¯Œçš„Filterå®ç°å­ç±»ï¼Œå¾ˆå¤šæ ‡å‡†æœåŠ¡æˆ‘ä»¬éƒ½ä¸éœ€è¦è‡ªå·±å®ç°ã€‚æ¯”å¦‚ï¼š
+	BlacklistFilter				é»‘åå•è¿‡æ»¤å™¨
+	BufferedWriteFilter			å‘é€ç¼“å­˜è¿‡æ»¤å™¨ï¼Œç¼“å­˜å‘é€çš„æ¶ˆæ¯ï¼Œé¿å…çŸ­å°æ¶ˆæ¯é¢‘ç¹å‘é€
+	CompressionFilter			æ•°æ®å‹ç¼©è¿‡æ»¤å™¨
+	ConnectionThrottleFilter	è¿æ¥æ§åˆ¶è¿‡æ»¤å™¨ï¼Œå¯¹åŒä¸€ä¸ªIPåœ°å€é¢‘ç¹çš„åˆ›å»ºè¿æ¥çš„æ—¶é—´é—´éš”è¿›è¡Œæ§åˆ¶
+	KeepAliveFilter				å¿ƒè·³åŒ…è¿‡æ»¤å™¨ï¼Œåœ¨idlçŠ¶æ€å‘é€å¿ƒè·³åŒ…ï¼Œå¹¶èƒ½å¯¹è¶…æ—¶è¿›è¡Œå¤„ç†
+	LoggingFilter				æ—¥å¿—è®°å½•è¿‡æ»¤å™¨ï¼Œæœ€å¸¸ç”¨ä¹‹ä¸€
+	ProxyFilter					IoConnectoråœ¨è¿æ¥æ¡æ‰‹æ—¶è‡ªåŠ¨åŠ å…¥çš„è¿‡æ»¤å™¨ï¼Œæ¡æ‰‹æˆåŠŸåé€æ˜
+	SslFilter					TCP/IPå±‚é¢çš„SSLåŠ è§£å¯†è¿‡æ»¤å™¨
+	StreamWriteFilter			InputStreamç›´æ¥è½¬æ¢æˆIoBufferçš„è¿‡æ»¤å™¨
+è¿˜æœ‰ä¸¤ä¸ªminaè‡ªå¸¦çš„è¿‡æ»¤å™¨ï¼š
+	HeadFilter 					å½“å‘ç”Ÿwriteæ“ä½œæ—¶ï¼Œå°†å†™bufferåŠ å…¥åˆ°session.scheduledWriteMessagesé˜Ÿåˆ—ï¼Œå¹¶å‘é€è°ƒç”¨IoProcessoræ‰§è¡Œwrite()æ“ä½œï¼Œä½äºè¿‡æ»¤å™¨é“¾å¤´ã€‚
+	TailFilter					å½“æ‰€æœ‰è¿‡æ»¤å™¨éƒ½å¤„ç†å®Œåï¼Œä»–å°†è°ƒç”¨IoHandlerçš„å¯¹åº”æ–¹æ³•ã€‚ä½äºè¿‡æ»¤å™¨é“¾å°¾ã€‚
+IoFilteræ¥å£å®šä¹‰ï¼š
 
 	public interface IoFilter {
 
@@ -777,9 +777,9 @@ IoFilter½Ó¿Ú¶¨Òå£º
 			void filterClose(IoSession session);
 		}
 	}
-¿ÉÒÔ¿´³ö IoFilter ½Ó¿ÚÖĞ°üº¬×Ó½Ó¿Ú NextFilter, ÎªÊµÏÖ¹ıÂËÁ´×ö×¼±¸£¬µ«Ä¿Ç°»¹²»ÄÜÊµÏÖÁ´Ê½½á¹¹£¬¼ÌĞø¿´
+å¯ä»¥çœ‹å‡º IoFilter æ¥å£ä¸­åŒ…å«å­æ¥å£ NextFilter, ä¸ºå®ç°è¿‡æ»¤é“¾åšå‡†å¤‡ï¼Œä½†ç›®å‰è¿˜ä¸èƒ½å®ç°é“¾å¼ç»“æ„ï¼Œç»§ç»­çœ‹
 
-IoFilterChain½Ó¿Ú¶¨Òå£º
+IoFilterChainæ¥å£å®šä¹‰ï¼š
 
 public interface IoFilterChain {
 
@@ -800,7 +800,7 @@ public interface IoFilterChain {
     }
 }
 
-DefaultIoFilterChainÀà£º
+DefaultIoFilterChainç±»ï¼š
 
 	public class DefaultIoFilterChain implements IoFilterChain {
 
@@ -888,8 +888,8 @@ DefaultIoFilterChainÀà£º
 		}
 	}
 
-DefaultIoFilterChainÀà¼Ì³Ğ×Ô IoFilterChain½Ó¿Ú, ²¢ÇÒÓĞÒ»¸öÄÚ²¿Entry½Ó¿ÚµÄÊµÏÖÀà EntryImpl, Í¨¹ıprevEntryºÍ nextEntryÁ½¸öÖ¸Õë×÷ÓÃ±äÁ¿ÊµÏÖÁ´Ê½½á¹¹
-¿ÉÒÔ¿´µ½ TailFilter ÖĞ×îÖÕ¶¼ÊÇµ÷ÓÃ session.getHandler()À´µ÷ÓÃ IoHandler´¦ÀíÒµÎñÂß¼­£¬ HeadFilter µ÷ÓÃ s.getProcessor()À´µ÷ÓÃ IoProcessor ´¦Àí×îÖÕµÄ¶ÁĞ´²Ù×÷¡£
+DefaultIoFilterChainç±»ç»§æ‰¿è‡ª IoFilterChainæ¥å£, å¹¶ä¸”æœ‰ä¸€ä¸ªå†…éƒ¨Entryæ¥å£çš„å®ç°ç±» EntryImpl, é€šè¿‡prevEntryå’Œ nextEntryä¸¤ä¸ªæŒ‡é’ˆä½œç”¨å˜é‡å®ç°é“¾å¼ç»“æ„
+å¯ä»¥çœ‹åˆ° TailFilter ä¸­æœ€ç»ˆéƒ½æ˜¯è°ƒç”¨ session.getHandler()æ¥è°ƒç”¨ IoHandlerå¤„ç†ä¸šåŠ¡é€»è¾‘ï¼Œ HeadFilter è°ƒç”¨ s.getProcessor()æ¥è°ƒç”¨ IoProcessor å¤„ç†æœ€ç»ˆçš„è¯»å†™æ“ä½œã€‚
 	
 Mina---IoHandler API:
 
@@ -913,17 +913,17 @@ Mina---IoHandler API:
 
 Mina---IoListener
 
-IoServiceListener ¸ºÔğIoService µÄ¸÷¸öÉùÃ÷ÖÜÆÚ½ÚµãÊ±¼äÍ¨Öª¡£
-ÔÚ AbstractIoService¹¹Ôìº¯Êı³õÊ¼»¯µÄÊ±ºò,¶¼»áÉú³ÉÒ»¸ö IoServiceListenerSupport À´´æ´¢¹ÜÀíIoListener. Êµ¼ÊÉÏ¾ÍÊÇÒ»¸öList<IoListener>.
+IoServiceListener è´Ÿè´£IoService çš„å„ä¸ªå£°æ˜å‘¨æœŸèŠ‚ç‚¹æ—¶é—´é€šçŸ¥ã€‚
+åœ¨ AbstractIoServiceæ„é€ å‡½æ•°åˆå§‹åŒ–çš„æ—¶å€™,éƒ½ä¼šç”Ÿæˆä¸€ä¸ª IoServiceListenerSupport æ¥å­˜å‚¨ç®¡ç†IoListener. å®é™…ä¸Šå°±æ˜¯ä¸€ä¸ªList<IoListener>.
 	
 
-IoFutureListener ÄÜÔÚIoFutureÈÎÎñÍê³Éºó±»µ÷ÓÃ, APIÈçÏÂ£º
+IoFutureListener èƒ½åœ¨IoFutureä»»åŠ¡å®Œæˆåè¢«è°ƒç”¨, APIå¦‚ä¸‹ï¼š
 
 	public interface IoFutureListener<F extends IoFuture> extends EventListener {  
 		void operationComplete(F future);  
 	}  
 
-ÈôÈÎÎñÒÑ¾­Ö´ĞĞÍêºóÌí¼ÓµÄlistener½«±»Á¢¿ÌÖ´ĞĞ¡£ÎÒÃÇÏÈ¿´¿´futureÊÇÔõÃ´ÊµÏÖ¸Ã¹¦ÄÜµÄ£º
+è‹¥ä»»åŠ¡å·²ç»æ‰§è¡Œå®Œåæ·»åŠ çš„listenerå°†è¢«ç«‹åˆ»æ‰§è¡Œã€‚æˆ‘ä»¬å…ˆçœ‹çœ‹futureæ˜¯æ€ä¹ˆå®ç°è¯¥åŠŸèƒ½çš„ï¼š
     
 	public IoFuture addListener(IoFutureListener<?> listener) {
         if (listener == null) {
@@ -945,41 +945,41 @@ IoFutureListener ÄÜÔÚIoFutureÈÎÎñÍê³Éºó±»µ÷ÓÃ, APIÈçÏÂ£º
                 }
             }
         }
-	//¾ÍÊÇÕâÀïÁË£¡Èç¹ûreadyÍê³ÉÁË£¬ÔòÂíÉÏÖ´ĞĞ
+	//å°±æ˜¯è¿™é‡Œäº†ï¼å¦‚æœreadyå®Œæˆäº†ï¼Œåˆ™é©¬ä¸Šæ‰§è¡Œ
         if (notifyNow) {
             notifyListener(listener);
         }
         return this;
     }
 	
-ÄÇ²»ÓÃËµ¾ÍÖªµÀÀ²£¬ÔÚnotiffyListenerÖĞ½«»á»Øµ÷¼àÌıÆ÷µÄ·½·¨¡£		
+é‚£ä¸ç”¨è¯´å°±çŸ¥é“å•¦ï¼Œåœ¨notiffyListenerä¸­å°†ä¼šå›è°ƒç›‘å¬å™¨çš„æ–¹æ³•ã€‚		
 
-Ä¿Ç°¸ù¾İÔ´Âë¿ÉÒÔ¿´³ö£¬IoProcessor ºÍ IoHandlerÖĞ¼ä ÓĞÒ»ÌõIoFilterChain,Á´ÖĞÓĞĞ©ĞíIoFIlter, IoFilterChain»á´¥·¢°ó¶¨ÔÚIoService»òÕßIoSessionÉÏµÄIoListener.
+ç›®å‰æ ¹æ®æºç å¯ä»¥çœ‹å‡ºï¼ŒIoProcessor å’Œ IoHandlerä¸­é—´ æœ‰ä¸€æ¡IoFilterChain,é“¾ä¸­æœ‰äº›è®¸IoFIlter, IoFilterChainä¼šè§¦å‘ç»‘å®šåœ¨IoServiceæˆ–è€…IoSessionä¸Šçš„IoListener.
 
-Mina-2.0.7Ô´ÂëÑ§Ï°£¨2£© Éè¼ÆÄ£Ê½
-1¡¢¹Û²ìÕßÄ£Ê½
+Mina-2.0.7æºç å­¦ä¹ ï¼ˆ2ï¼‰ è®¾è®¡æ¨¡å¼
+1ã€è§‚å¯Ÿè€…æ¨¡å¼
 	IoListenerSupport
-2¡¢ÔğÈÎÁ´Ä£Ê½
+2ã€è´£ä»»é“¾æ¨¡å¼
 	IoFilter
-3¡¢¹¤³§Ä£Ê½
-4¡¢µ¥ÀıÄ£Ê½
-5¡¢ÊÊÅäÆ÷Ä£Ê½
-	IoHandlerAdapter¾ÍÓÃµ½ÁË½Ó¿ÚÊÊÅäÆ÷Ä£Ê½	
+3ã€å·¥å‚æ¨¡å¼
+4ã€å•ä¾‹æ¨¡å¼
+5ã€é€‚é…å™¨æ¨¡å¼
+	IoHandlerAdapterå°±ç”¨åˆ°äº†æ¥å£é€‚é…å™¨æ¨¡å¼	
 
-Mina-2.0.7Ô´ÂëÑ§Ï°
-×î½ü¼¸ÌìÓĞ¿´ÍøÉÏÆäËüµÄMinaÏà¹Ø×ÊÁÏ½øĞĞÑ§Ï°£¬ÊÜÒæ·ËÇ³£¬ÏÈ½èÓÃÒ»ÕÅºÜÍ¨ÓÃµÄMina¿ò¼ÜÍ¼£º
-
-
-
-
-Mina-2.0.7Ô´ÂëÑ§Ï° --- IoFuture
-
-IoFutureÊÇMinaÓÃÀ´ÊµÏÖÒì²½I/O²Ù×÷µÄ£¬Ëü
+Mina-2.0.7æºç å­¦ä¹ 
+æœ€è¿‘å‡ å¤©æœ‰çœ‹ç½‘ä¸Šå…¶å®ƒçš„Minaç›¸å…³èµ„æ–™è¿›è¡Œå­¦ä¹ ï¼Œå—ç›ŠåŒªæµ…ï¼Œå…ˆå€Ÿç”¨ä¸€å¼ å¾ˆé€šç”¨çš„Minaæ¡†æ¶å›¾ï¼š
 
 
 
-1¡¢DefaultIoFuture ËÀËø¼ì²â
-Ñ­»·µÈ´ı£¬ÎªÊ²Ã´»áÑ­»·µÈ´ı£¬×Ô¼ºµÄÀí½â[²»ÖªÕı½â£¬ÇóÖ¸Õı]£¬ÓĞ¿ÉÄÜÔÚAbstractPollingIoProcessor£¨»òÕßIoProcessorµÄÄ³¸öÅÉÉúÀà£©ÖĞµÄread·½·¨ÖĞÊ¹ÓÃÁËÒì²½¶Á
+
+Mina-2.0.7æºç å­¦ä¹  --- IoFuture
+
+IoFutureæ˜¯Minaç”¨æ¥å®ç°å¼‚æ­¥I/Oæ“ä½œçš„ï¼Œå®ƒ
+
+
+
+1ã€DefaultIoFuture æ­»é”æ£€æµ‹
+å¾ªç¯ç­‰å¾…ï¼Œä¸ºä»€ä¹ˆä¼šå¾ªç¯ç­‰å¾…ï¼Œè‡ªå·±çš„ç†è§£[ä¸çŸ¥æ­£è§£ï¼Œæ±‚æŒ‡æ­£]ï¼Œæœ‰å¯èƒ½åœ¨AbstractPollingIoProcessorï¼ˆæˆ–è€…IoProcessorçš„æŸä¸ªæ´¾ç”Ÿç±»ï¼‰ä¸­çš„readæ–¹æ³•ä¸­ä½¿ç”¨äº†å¼‚æ­¥è¯»
  IoSession session = ...;
  // useReadOperation must be enabled to use read operation.
  session.getConfig().setUseReadOperation(true);
@@ -992,16 +992,16 @@ IoFutureÊÇMinaÓÃÀ´ÊµÏÖÒì²½I/O²Ù×÷µÄ£¬Ëü
  } catch (Exception e) {
      ...
  }
-´Ó¶øµ¼ÖÂ×èÈû£¬¶øAbstractPollingIoProcessor»¹ĞèÒª´´½¨ProcessorÏß³Ì½øĞĞ¶ÁĞ´²ÅÄÜ×îÖÕµ÷ÓÃfuture.setRead()À´Í¨Öªfuture.wait(£©£¬Ñ­»·µ÷ÓÃµ¼ÖÂËÀËø¡£
+ä»è€Œå¯¼è‡´é˜»å¡ï¼Œè€ŒAbstractPollingIoProcessorè¿˜éœ€è¦åˆ›å»ºProcessorçº¿ç¨‹è¿›è¡Œè¯»å†™æ‰èƒ½æœ€ç»ˆè°ƒç”¨future.setRead()æ¥é€šçŸ¥future.wait(ï¼‰ï¼Œå¾ªç¯è°ƒç”¨å¯¼è‡´æ­»é”ã€‚
 
 REF-1: http://www.cnblogs.com/ilahsa/archive/2013/06/03/3115410.html
 
-1¡¢AcceptorOperationFuture£¨Static£¬ÔÚAbstractIoAcceptorÖĞ£©Ëü¼Ì³Ğ×ÔServiceOperationFuture£¨Static,ÔÚAbstractIoServiceÖĞ£©£¬ÓÃÓÚ°ó¶¨ºÍ½â°óÊÂ¼şEvent¡£
-2¡¢AbstractIoSessionÖĞCloseFuture ReadFuture WriteFutureÓÃÓÚ¶Á¡¢Ğ´¡¢¹Ø±Õ»á»°Ê±¼äEvent
-3¡¢DefaultIoFutureChain --- messageReceived() --- s.getConfig().isUseReadOperation()
-	Ä¬ÈÏ session ²»Ê¹ÓÃReadFuture, Èç¹ûÊ¹ÓÃReadFuture£¨ÓÃ»§×Ô¶¨ÒåÁËMessageReceived·½·¨£¬²¢ÇÒÍ¨¹ı session.read() £¨AbstractIoSessionÖĞ£©·µ»ØReadFuture,Æô¶¯ await,Í¨¹ı ºóÃæµÄ s.offerReadFuture(message); Í¨ÖªÍê³É£©£¬ÄÇÃ´¶ÁÈ¡µÄÊı¾İ»á·ÅÔÚÄÚ²¿µÄÒ»¸öblockingQueue£¬±ãÓÚÊı¾İµÄ¶ÁÈ¡£¬ÊÊºÏÔÚ¿Í»§¶Ë³ÌĞòÖĞÊ¹ÓÃ£¬²»ÊÊÓÚÔÚ·şÎñ¶Ë³ÌĞòÊ¹ÓÃ£¬ÒòÎª¿ÉÄÜÔì³ÉÄÚ´æĞ¹Â¶¡£ËùÒÔÒª×¢ÒâÄ¬ÈÏSessionÅäÖÃÖĞµÄuseReadOperationÑ¡Ïî¡£
-	´Óchannel.read()¶ÁÈ¡¹ı³ÌÊÇ·ñ×èÈûÊÇÍ¨¹ıchannel.setBlocking(true/false)ÉèÖÃ£¬ºóÃæµÄÒì²½¶ÁÈ¡ÊÇÍ¨¹ıIoFutureµÄwaitºÍnotifyÀ´ÊµÏÖ¡£ÎªÊ²Ã´ÒªÒì²½£¬Èç¹û¶ÁÈ¡ĞèÒªºÜ³¤Ê±¼ä£¬¿ÉÒÔ²»ÖÁÓÚ×èÈû³ÌĞò£¬Ê¹ÓÃ¶àÏß³Ì²¢·¢£¨¶àºËÓĞĞ§£©¶ÁÈ¡£¬Ìá¸ßĞ§ÂÊ£¬¶ÁÈ¡Íê³É£¬¾ÍÍ¨Öª¡£
-4¡¢ÔÚAbstractIoSession.javaÖĞµÄnewReadFuture()·½·¨ÄÚ²¿£¬Ê¹ÓÃÁËÁ½¸ö¶ÓÁĞ£¬·Ö±ğÊÇreadyReadFutureºÍwaitingReadFuture£¬µ±sessionÊ¹ÓÃReadFutureÇ°ÌáÏÂ£¬Èç¹û¶ÓÁĞwaitingReadFutureÎª¿Õ£¬ÄÇÃ´ĞÂ½¨Ò»¸öReadFuture¼ÓÈëµ½µ½¶ÓÁĞreadyReadFutureÖĞ²¢·µ»Ø£¬Èç¹ûwaitingReadFuture²»¿Õ£¬ÄÇÃ´´ÓwaitingReadFutureÖĞÈ¡³öÒ»¸öReadFuture²¢·µ»Ø´¦Àí¡£
+1ã€AcceptorOperationFutureï¼ˆStaticï¼Œåœ¨AbstractIoAcceptorä¸­ï¼‰å®ƒç»§æ‰¿è‡ªServiceOperationFutureï¼ˆStatic,åœ¨AbstractIoServiceä¸­ï¼‰ï¼Œç”¨äºç»‘å®šå’Œè§£ç»‘äº‹ä»¶Eventã€‚
+2ã€AbstractIoSessionä¸­CloseFuture ReadFuture WriteFutureç”¨äºè¯»ã€å†™ã€å…³é—­ä¼šè¯æ—¶é—´Event
+3ã€DefaultIoFutureChain --- messageReceived() --- s.getConfig().isUseReadOperation()
+	é»˜è®¤ session ä¸ä½¿ç”¨ReadFuture, å¦‚æœä½¿ç”¨ReadFutureï¼ˆç”¨æˆ·è‡ªå®šä¹‰äº†MessageReceivedæ–¹æ³•ï¼Œå¹¶ä¸”é€šè¿‡ session.read() ï¼ˆAbstractIoSessionä¸­ï¼‰è¿”å›ReadFuture,å¯åŠ¨ await,é€šè¿‡ åé¢çš„ s.offerReadFuture(message); é€šçŸ¥å®Œæˆï¼‰ï¼Œé‚£ä¹ˆè¯»å–çš„æ•°æ®ä¼šæ”¾åœ¨å†…éƒ¨çš„ä¸€ä¸ªblockingQueueï¼Œä¾¿äºæ•°æ®çš„è¯»å–ï¼Œé€‚åˆåœ¨å®¢æˆ·ç«¯ç¨‹åºä¸­ä½¿ç”¨ï¼Œä¸é€‚äºåœ¨æœåŠ¡ç«¯ç¨‹åºä½¿ç”¨ï¼Œå› ä¸ºå¯èƒ½é€ æˆå†…å­˜æ³„éœ²ã€‚æ‰€ä»¥è¦æ³¨æ„é»˜è®¤Sessioné…ç½®ä¸­çš„useReadOperationé€‰é¡¹ã€‚
+	ä»channel.read()è¯»å–è¿‡ç¨‹æ˜¯å¦é˜»å¡æ˜¯é€šè¿‡channel.setBlocking(true/false)è®¾ç½®ï¼Œåé¢çš„å¼‚æ­¥è¯»å–æ˜¯é€šè¿‡IoFutureçš„waitå’Œnotifyæ¥å®ç°ã€‚ä¸ºä»€ä¹ˆè¦å¼‚æ­¥ï¼Œå¦‚æœè¯»å–éœ€è¦å¾ˆé•¿æ—¶é—´ï¼Œå¯ä»¥ä¸è‡³äºé˜»å¡ç¨‹åºï¼Œä½¿ç”¨å¤šçº¿ç¨‹å¹¶å‘ï¼ˆå¤šæ ¸æœ‰æ•ˆï¼‰è¯»å–ï¼Œæé«˜æ•ˆç‡ï¼Œè¯»å–å®Œæˆï¼Œå°±é€šçŸ¥ã€‚
+4ã€åœ¨AbstractIoSession.javaä¸­çš„newReadFuture()æ–¹æ³•å†…éƒ¨ï¼Œä½¿ç”¨äº†ä¸¤ä¸ªé˜Ÿåˆ—ï¼Œåˆ†åˆ«æ˜¯readyReadFutureå’ŒwaitingReadFutureï¼Œå½“sessionä½¿ç”¨ReadFutureå‰æä¸‹ï¼Œå¦‚æœé˜Ÿåˆ—waitingReadFutureä¸ºç©ºï¼Œé‚£ä¹ˆæ–°å»ºä¸€ä¸ªReadFutureåŠ å…¥åˆ°åˆ°é˜Ÿåˆ—readyReadFutureä¸­å¹¶è¿”å›ï¼Œå¦‚æœwaitingReadFutureä¸ç©ºï¼Œé‚£ä¹ˆä»waitingReadFutureä¸­å–å‡ºä¸€ä¸ªReadFutureå¹¶è¿”å›å¤„ç†ã€‚
 
-5¡¢IoFutureListenerµÄ×÷ÓÃ£º
-	¹Û²ìÕßÄ£Ê½£¬Í¨ÖªÄ³¸öFuture¹Ø×¢µÄÊÂ¼şÒÑ¾­Íê³É¡£
+5ã€IoFutureListenerçš„ä½œç”¨ï¼š
+	è§‚å¯Ÿè€…æ¨¡å¼ï¼Œé€šçŸ¥æŸä¸ªFutureå…³æ³¨çš„äº‹ä»¶å·²ç»å®Œæˆã€‚
