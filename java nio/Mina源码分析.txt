@@ -1005,3 +1005,5 @@ REF-1: http://www.cnblogs.com/ilahsa/archive/2013/06/03/3115410.html
 
 5、IoFutureListener的作用：
 	观察者模式，通知某个Future关注的事件已经完成。
+	
+Mina-2.0.7源码学习 --- IoAcceptor
