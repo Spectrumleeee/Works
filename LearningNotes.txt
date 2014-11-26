@@ -1,79 +1,79 @@
-¡¾mavenÖĞÑë²Ö¿â¾µÏñµØÖ·¡¿					http://mirrors.ibiblio.org/
-¡¾»ùÓÚNIOµÄ¶àÏß³Ì·şÎñÆ÷¶Ë¡¿					http://www.oschina.net/code/snippet_860673_22507
+ï»¿ã€mavenä¸­å¤®ä»“åº“é•œåƒåœ°å€ã€‘					http://mirrors.ibiblio.org/
+ã€åŸºäºNIOçš„å¤šçº¿ç¨‹æœåŠ¡å™¨ç«¯ã€‘					http://www.oschina.net/code/snippet_860673_22507
 
 13:50 2014/7/30
-¡¾TP-LINKË½ÓĞÖĞÑë¿âµØÖ·¡¿					http://172.29.88.120:8081/nexus/content/groups/public/
-¡¾java×Ô´øÏß³Ì³ØºÍ¶ÓÁĞÏêÏ¸½²½â¡¿				http://www.oschina.net/question/565065_86540
-¡¾java NIOÏê½â¡¿						http://blog.csdn.net/zapldy/article/details/5850440
-¡¾java NIO selector»úÖÆ½âÎö¡¿					http://haoel.blog.51cto.com/313033/124582
-¡¾IOµÄ×èÈûÓë·Ç×èÈû¡¢Í¬²½ÓëÒì²½ÒÔ¼°JavaÍøÂçIO½»»¥·½Ê½¡¿		http://www.cnblogs.com/zhuYears/archive/2012/09/28/2690194.html
+ã€TP-LINKç§æœ‰ä¸­å¤®åº“åœ°å€ã€‘					http://172.29.88.120:8081/nexus/content/groups/public/
+ã€javaè‡ªå¸¦çº¿ç¨‹æ± å’Œé˜Ÿåˆ—è¯¦ç»†è®²è§£ã€‘				http://www.oschina.net/question/565065_86540
+ã€java NIOè¯¦è§£ã€‘						http://blog.csdn.net/zapldy/article/details/5850440
+ã€java NIO selectoræœºåˆ¶è§£æã€‘					http://haoel.blog.51cto.com/313033/124582
+ã€IOçš„é˜»å¡ä¸éé˜»å¡ã€åŒæ­¥ä¸å¼‚æ­¥ä»¥åŠJavaç½‘ç»œIOäº¤äº’æ–¹å¼ã€‘		http://www.cnblogs.com/zhuYears/archive/2012/09/28/2690194.html
 
 11:10 2014/8/4
-¡¾»ùÓÚNIOµÄ¶àÏß³Ì·şÎñÆ÷¡¿					http://www.ibm.com/developerworks/cn/java/l-niosvr/
-¡¾Merlin¸øJavaÆ½Ì¨´øÀ´ÁË·Ç×èÈûIO¡¿				http://www.ibm.com/developerworks/cn/java/j-javaio/
-¡¾Netty NIO ¿ò¼ÜĞÔÄÜÑ¹²â-¶ÌÁ´½Ó-¶Ô±ÈTomcat¡¿			http://www.oschina.net/question/12_8749#tags_nav
+ã€åŸºäºNIOçš„å¤šçº¿ç¨‹æœåŠ¡å™¨ã€‘					http://www.ibm.com/developerworks/cn/java/l-niosvr/
+ã€Merlinç»™Javaå¹³å°å¸¦æ¥äº†éé˜»å¡IOã€‘				http://www.ibm.com/developerworks/cn/java/j-javaio/
+ã€Netty NIO æ¡†æ¶æ€§èƒ½å‹æµ‹-çŸ­é“¾æ¥-å¯¹æ¯”Tomcatã€‘			http://www.oschina.net/question/12_8749#tags_nav
 
 17:23 2014/8/7
-1¡¢¡¾Java ´úÂë¸ñÊ½¡¿ ¿ÉÒÔ°ÑEclipse/MyEclipseµÄTABµ÷Îª4¸ö¿Õ¸ñ£¬²½ÖèÍøÉÏ²éÑ¯£¬Ö®ºóÔÚÏîÄ¿ÉÏÓÒ¼ü-->source-->Format
-2¡¢¡¾²âÊÔ¹¤¾ß¡¿ apache-JMeter-2.11 ·Ç³£·½±ãÓÃµÄ²âÊÔ¹¤¾ß£¬¿ÉÒÔ²âÊÔwebÎÈ¶¨ĞÔ£¬²¢·¢Á¿£¬»¹ÄÜ²âÊÔSocket·şÎñÆ÷²¢·¢£¬¹¦ÄÜÇ¿´ó¡£
+1ã€ã€Java ä»£ç æ ¼å¼ã€‘ å¯ä»¥æŠŠEclipse/MyEclipseçš„TABè°ƒä¸º4ä¸ªç©ºæ ¼ï¼Œæ­¥éª¤ç½‘ä¸ŠæŸ¥è¯¢ï¼Œä¹‹ååœ¨é¡¹ç›®ä¸Šå³é”®-->source-->Format
+2ã€ã€æµ‹è¯•å·¥å…·ã€‘ apache-JMeter-2.11 éå¸¸æ–¹ä¾¿ç”¨çš„æµ‹è¯•å·¥å…·ï¼Œå¯ä»¥æµ‹è¯•webç¨³å®šæ€§ï¼Œå¹¶å‘é‡ï¼Œè¿˜èƒ½æµ‹è¯•SocketæœåŠ¡å™¨å¹¶å‘ï¼ŒåŠŸèƒ½å¼ºå¤§ã€‚
 
 15:11 2014/8/8
-¡¾¼ÆËã»úÓïÑÔ¡¿
-	£¨1£©¶¯Ì¬ÓïÑÔ  £ºpython(tornado),ruby,go,lisp,pascall.
-	£¨2£©°ë¾²Ì¬ÓïÑÔ£ºjava
-	£¨3£©¾²Ì¬ÓïÑÔ  £ºc,c++,object-c
-¡¾Ê®´óÍøÕ¾Ê¹ÓÃµÄweb·şÎñÆ÷¹Û²ì¡¿					http://blog.csdn.net/kimsoft/article/details/5912941
+ã€è®¡ç®—æœºè¯­è¨€ã€‘
+	ï¼ˆ1ï¼‰åŠ¨æ€è¯­è¨€  ï¼špython(tornado),ruby,go,lisp,pascall.
+	ï¼ˆ2ï¼‰åŠé™æ€è¯­è¨€ï¼šjava
+	ï¼ˆ3ï¼‰é™æ€è¯­è¨€  ï¼šc,c++,object-c
+ã€åå¤§ç½‘ç«™ä½¿ç”¨çš„webæœåŠ¡å™¨è§‚å¯Ÿã€‘					http://blog.csdn.net/kimsoft/article/details/5912941
 
 17:42 2014/8/12
-¡¾thriftµÄ°²×°ºÍ¼òµ¥ÊÂÀı¡¿					http://www.open-open.com/lib/view/open1400460273402.html
+ã€thriftçš„å®‰è£…å’Œç®€å•äº‹ä¾‹ã€‘					http://www.open-open.com/lib/view/open1400460273402.html
 
 15:03 2014/8/19
-¡¾jettyÇ¶ÈëÊ½Ê¹ÓÃ·½·¨¡¿						http://zyn010101.iteye.com/blog/1679798
-¡¾ Java½âÎöXML»ã×Ü¡¿						http://blog.csdn.net/smcwwh/article/details/7183869
+ã€jettyåµŒå…¥å¼ä½¿ç”¨æ–¹æ³•ã€‘						http://zyn010101.iteye.com/blog/1679798
+ã€ Javaè§£æXMLæ±‡æ€»ã€‘						http://blog.csdn.net/smcwwh/article/details/7183869
 
 16:44 2014/8/29
-¡¾×¡·¿²¹Ìù¡¿ 							http://pan.baidu.com/s/1qWLQBSS
-¡¾ÎªÊ²Ã´ÓĞIPµØÖ·»¹ĞèÒªMACµØÖ·¡¿					http://www.zhihu.com/question/21546408
+ã€ä½æˆ¿è¡¥è´´ã€‘ 							http://pan.baidu.com/s/1qWLQBSS
+ã€ä¸ºä»€ä¹ˆæœ‰IPåœ°å€è¿˜éœ€è¦MACåœ°å€ã€‘					http://www.zhihu.com/question/21546408
 
 17:50 2014/9/2
-¡¾dubbo¡¿ 							http://alibaba.github.io/dubbo-doc-static/User+Guide-zh.htm
+ã€dubboã€‘ 							http://alibaba.github.io/dubbo-doc-static/User+Guide-zh.htm
 
 8:52 2014/9/3
-¡¾¿ªÔ´ÖĞ¹ú-dubbo¡¿						http://www.oschina.net/p/dubbo
-¡¾´úÀíÄ£Ê½¡¿							http://www.cnblogs.com/cbf4life/archive/2010/01/27/1657438.html
+ã€å¼€æºä¸­å›½-dubboã€‘						http://www.oschina.net/p/dubbo
+ã€ä»£ç†æ¨¡å¼ã€‘							http://www.cnblogs.com/cbf4life/archive/2010/01/27/1657438.html
 
 8:46 2014/9/5
-¡¾Ë¼Î¬µ¼Í¼¹¤¾ß¡¿						MindManager(±È½Ï´ó100M+)	FreeMind(±È½ÏĞ¡£¬10M+ »ùÓÚJava,Ò×ÓÃ)
-¡¾¸ù¾İIP²éÑ¯ÏêÏ¸ÎïÀíµØÖ·¡¿					http://comedsh.iteye.com/blog/707304
-¡¾´¿ÕæIP½á¹¹¡¿							°Ù¶ÈÎÄ¿â£¬´¿Õæip¿âµÄ¸ñÊ½Ïê½â
+ã€æ€ç»´å¯¼å›¾å·¥å…·ã€‘						MindManager(æ¯”è¾ƒå¤§100M+)	FreeMind(æ¯”è¾ƒå°ï¼Œ10M+ åŸºäºJava,æ˜“ç”¨)
+ã€æ ¹æ®IPæŸ¥è¯¢è¯¦ç»†ç‰©ç†åœ°å€ã€‘					http://comedsh.iteye.com/blog/707304
+ã€çº¯çœŸIPç»“æ„ã€‘							ç™¾åº¦æ–‡åº“ï¼Œçº¯çœŸipåº“çš„æ ¼å¼è¯¦è§£
 
 11:22 2014/9/9
-¡¾javaÒì³£»úÖÆ¡¿						http://www.cnblogs.com/alexlo/archive/2013/04/10/3011895.html
+ã€javaå¼‚å¸¸æœºåˆ¶ã€‘						http://www.cnblogs.com/alexlo/archive/2013/04/10/3011895.html
 
 9:23 2014/9/10
-¡¾spring context:property-placeholder¡¿				http://blog.sina.com.cn/s/blog_4550f3ca0100ubmt.html
+ã€spring context:property-placeholderã€‘				http://blog.sina.com.cn/s/blog_4550f3ca0100ubmt.html
 
 18:02 2014/9/12
-¡¾°Ù¶È¿ª·¢ÕßÆ½Ì¨¡¿						http://developer.baidu.com/
+ã€ç™¾åº¦å¼€å‘è€…å¹³å°ã€‘						http://developer.baidu.com/
 
 15:28 2014/9/16
-¡¾MinaÆô¶¯Óë°ó¶¨¡¿						http://javabeezer.iteye.com/blog/1119505
+ã€Minaå¯åŠ¨ä¸ç»‘å®šã€‘						http://javabeezer.iteye.com/blog/1119505
 
 11:19 2014/9/17
-¡¾volatile¡¿							http://hehongwei44.iteye.com/blog/1244732
+ã€volatileã€‘							http://hehongwei44.iteye.com/blog/1244732
 
 15:09 2014/9/18
-¡¾mina¿ò¼ÜÏê½â¡¿						http://blog.csdn.net/ljx8928358/article/details/7759024
+ã€minaæ¡†æ¶è¯¦è§£ã€‘						http://blog.csdn.net/ljx8928358/article/details/7759024
 
 16:39 2014/9/19
-¡¾MinaÑ§Ï°±Ê¼Ç¡¿						http://blog.csdn.net/yoara/article/details/37597141#t0
+ã€Minaå­¦ä¹ ç¬”è®°ã€‘						http://blog.csdn.net/yoara/article/details/37597141#t0
 
 15:41 2014/9/22
-¡¾Éè¼ÆÄ£Ê½·ÖÀà¡¿						http://www.cnblogs.com/justForMe/archive/2011/07/18/2109211.html
-¡¾ÊÊÅäÆ÷Ä£Ê½¡¿							http://galo.iteye.com/blog/741590
-¡¾MinaÔ´ÂëÔÄ¶Á±Ê¼Ç£¨Áù£©¡ªMinaÒì²½IOµÄÊµÏÖIoFuture¡¿		http://my.oschina.net/ielts0909/blog/92035
+ã€è®¾è®¡æ¨¡å¼åˆ†ç±»ã€‘						http://www.cnblogs.com/justForMe/archive/2011/07/18/2109211.html
+ã€é€‚é…å™¨æ¨¡å¼ã€‘							http://galo.iteye.com/blog/741590
+ã€Minaæºç é˜…è¯»ç¬”è®°ï¼ˆå…­ï¼‰â€”Minaå¼‚æ­¥IOçš„å®ç°IoFutureã€‘		http://my.oschina.net/ielts0909/blog/92035
 
 16:45 2014/9/24
-¡¾JAVA CASÔ­ÀíÉî¶È·ÖÎö¡¿					http://blog.csdn.net/hsuxu/article/details/9467651
-¡¾Java volatile×÷ÓÃ¡¿						http://sakyone.iteye.com/blog/668091
-¡¾java.util.concurrent½éÉÜ¡¿					http://www.cnblogs.com/sarafill/archive/2011/05/18/2049461.html
+ã€JAVA CASåŸç†æ·±åº¦åˆ†æã€‘					http://blog.csdn.net/hsuxu/article/details/9467651
+ã€Java volatileä½œç”¨ã€‘						http://sakyone.iteye.com/blog/668091
+ã€java.util.concurrentä»‹ç»ã€‘					http://www.cnblogs.com/sarafill/archive/2011/05/18/2049461.html
