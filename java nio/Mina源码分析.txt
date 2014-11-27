@@ -1007,3 +1007,4 @@ REF-1: http://www.cnblogs.com/ilahsa/archive/2013/06/03/3115410.html
 	观察者模式，通知某个Future关注的事件已经完成。
 	
 Mina-2.0.7源码学习 --- IoAcceptor
+1、都说Selector.select()函数当没有感兴趣的事件发生时候，就会阻塞，那为什么还会返回0呢，因为比如A线程调用了Selector.select()阻塞了，然后B线程调用了Selector.wakeup()唤醒了A线程的Selector.select(),这时候就返回0了。（是唤醒所有阻塞在Selector.select()上的线程，还是只唤醒一个呢？经过测试一次wakeup()只唤醒一个阻塞在select()的线程），从 http://zhhphappy.iteye.com/blog/2032893 可以了解唤醒原理，然后就知道Windows上面会使用两个端口实现内部的管道Pipe，而Linux直接使用内部的管道机制，所以当有很多线程各自有Selector的时候，在Windows上面就会占用更多的端口，也算是Linux做服务器的好处之一吧。

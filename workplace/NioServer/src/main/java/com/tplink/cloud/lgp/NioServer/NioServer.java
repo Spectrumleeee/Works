@@ -66,29 +66,47 @@ class NioTcpServer extends Thread {
         try {
             // open a selector
             final Selector selector = Selector.open();
-//*******************************Test Selector.wakeup()******************************************
-            Thread innerWakeupThread = new Thread(){
-                public void run(){
-                    
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+// *******************************Test Selector.wakeup()******************************************
+            Thread innerWakeupThread = new Thread() {
+                public void run() {
+                    while (true) {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                        selector.wakeup(); // inner class can just access final
+                                           // variable
                     }
-                    
-                    selector.wakeup();      // inner class can just access final variable
                 }
             };
             innerWakeupThread.start();
-            
+
             try {
+                for (int i = 1; i < 5; i++) {
+                    Thread severalThreadCallSelect = new Thread() {
+                        public void run() {
+                            try {
+                                selector.select();
+                                System.out.println("thread was wakeup ");
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+
+                        }
+                    };
+                    severalThreadCallSelect.start();
+                }
+
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-//*******************************Test Selector.wakeup()******************************************
+// *******************************Test Selector.wakeup()******************************************
             // open a server socket channel
             ServerSocketChannel serverSocketChannel = ServerSocketChannel
                     .open();
