@@ -65,7 +65,30 @@ class NioTcpServer extends Thread {
     public void run() {
         try {
             // open a selector
-            Selector selector = Selector.open();
+            final Selector selector = Selector.open();
+//*******************************Test Selector.wakeup()******************************************
+            Thread innerWakeupThread = new Thread(){
+                public void run(){
+                    
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    
+                    selector.wakeup();      // inner class can just access final variable
+                }
+            };
+            innerWakeupThread.start();
+            
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+//*******************************Test Selector.wakeup()******************************************
             // open a server socket channel
             ServerSocketChannel serverSocketChannel = ServerSocketChannel
                     .open();
