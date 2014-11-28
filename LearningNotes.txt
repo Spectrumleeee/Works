@@ -78,3 +78,7 @@
 【Java volatile作用】						http://sakyone.iteye.com/blog/668091
 【java.util.concurrent介绍】					http://www.cnblogs.com/sarafill/archive/2011/05/18/2049461.html
 
+16:42 2014/11/28						生活经验，搜索问题，很有用
+【百度经验】							http://jingyan.baidu.com/
+【知乎】								http://www.zhihu.com/
+
