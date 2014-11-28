@@ -82,3 +82,7 @@
 【百度经验】							http://jingyan.baidu.com/
 【知乎】								http://www.zhihu.com/
 
+GitHub上很多有用的开源项目，使用 Watch 功能，当项目有更新的时候，就会收到通知，实时跟进项目状态，很实用的一个功能。
+【redis】								https://github.com/antirez/redis/releases
+【jedis】								https://github.com/xetorthio/jedis
+
