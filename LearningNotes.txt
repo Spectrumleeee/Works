@@ -96,3 +96,9 @@ GitHub上很多有用的开源项目，使用 Watch 功能，当项目有更新�
 【哈哈-我的硕士论文】					http://www.shellsec.com/tech/148075.html
 【哈哈-我的硕士论文】					http://www.tuicool.com/articles/E3IBzua
 【哈哈-我的硕士论文】					http://www.tudoull.com/a/yunjisuan/2014/0824/11597.html
+
+20:58 2014/12/5
+周会任务：
+1、集群支持多少个节点？节点多时，对节点故障检测时间的影响
+2、Raft算法选举新节点的收敛性
+3、加入两个新节点，一主一从，开始分片给新主节点，这时候主节点故障，能否迁移到新的从节点？
