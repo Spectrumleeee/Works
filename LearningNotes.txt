@@ -105,3 +105,5 @@ GitHub上很多有用的开源项目，使用 Watch 功能，当项目有更新�
 
 17:53 2014/12/9
 【分布式选举算法Raft】					http://www.jdon.com/artichect/raft.html
+【Raft一致性算法】					http://blog.csdn.net/cszhouwei/article/details/38374603
+【Raft一致性算法分析与总结】				http://www.thinkingyu.com/articles/Raft/

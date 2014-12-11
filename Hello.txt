@@ -1,2 +1,16 @@
 Hello Welcome to China!
 Hello Welcome to GitHub!
+
+¡¾abbr.¡¿
+ASAP : as soon as possible
+btw : by the way
+YMMV: your mileage may vary!
+
+
+@name, Thanks for the feedback! 
+@name, Thanks for your answer!
+To implement this we could resort to two APIs
+Prior to this commit
+It is a bit more generic
+We usually spawn multiple instances at the same time
+There is a need to understand how to orchestrate different instances with different save points
