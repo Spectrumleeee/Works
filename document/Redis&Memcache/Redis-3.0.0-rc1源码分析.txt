@@ -1,0 +1,5 @@
+【源文件功能描述】
+1、redis.c/redis.h				main函数入口,声明了全局redisServer类型变量 server。
+2、config.c/config.h			配置操作，从配置文件读取信息初始化redisServer实例
+								运行时修改配置信息，并持久化保存到配置文件中
+3、
