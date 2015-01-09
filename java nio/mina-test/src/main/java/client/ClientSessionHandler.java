@@ -18,11 +18,10 @@ public class ClientSessionHandler extends IoHandlerAdapter {
     
     private Logger logger = LoggerFactory.getLogger(ClientSessionHandler.class);
     
-    @SuppressWarnings("deprecation")
     private void releaseSession(IoSession session) throws Exception {
         logger.info("releaseSession");
         if (session.isConnected()) {
-            session.close();
+            session.close(true);
         }
     }
 

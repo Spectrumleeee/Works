@@ -25,22 +25,19 @@ public class TimeServerHandler extends IoHandlerAdapter {
         logger.info("session closed " + count++);
 //        cause.printStackTrace();
     }
-
     @Override
     public void messageReceived(IoSession session, Object message)
             throws Exception {
         logger.info("receive a message from client : " + session.getRemoteAddress());
         String str = message.toString();
         if (str.trim().equalsIgnoreCase("quit")) {
-            session.close();
+            session.close(true);
             return;
         }
-
         Date date = new Date();
         session.write(date.toString());
         logger.info("Message written...");
     }
-
     @Override
     public void sessionIdle(IoSession session, IdleStatus status)
             throws Exception {
