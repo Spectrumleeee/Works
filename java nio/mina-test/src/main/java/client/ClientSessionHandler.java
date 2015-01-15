@@ -7,7 +7,6 @@
 
 package client;
 
-import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
@@ -17,33 +16,30 @@ import org.slf4j.LoggerFactory;
 public class ClientSessionHandler extends IoHandlerAdapter {
     
     private Logger logger = LoggerFactory.getLogger(ClientSessionHandler.class);
+    private static int num = 1;
     
-    private void releaseSession(IoSession session) throws Exception {
-        logger.info("releaseSession");
-        if (session.isConnected()) {
-            session.close(true);
-        }
+    public void sessionCreated(IoSession session) throws Exception {
+        // Empty handler
+        logger.info("Session " + num + " created");
+        session.setAttribute("num", num++);
     }
-
+    
     @Override
     public void sessionOpened(IoSession session) throws Exception {
         // session.getConfig().setBothIdleTime(10);
-        logger.info("sessionOpened");
+
     }
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
-        logger.info("sessionClosed");
+        logger.info("Session " + session.getAttribute("num") + " closed From IoHandler");
+        super.sessionClosed(session);
     }
 
     @Override
     public void sessionIdle(IoSession session, IdleStatus status)
             throws Exception {
-        logger.info("sessionIdle");
-        try {
-            releaseSession(session);
-        } catch (RuntimeIoException e) {
-        }
+        logger.info("Session " + session.getAttribute("num") + " IDLE");
     }
 
     @Override
