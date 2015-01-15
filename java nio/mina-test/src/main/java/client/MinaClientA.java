@@ -22,7 +22,6 @@ package client;
 import java.net.InetSocketAddress;
 
 import org.apache.mina.core.RuntimeIoException;
-import org.apache.mina.core.filterchain.IoFilterAdapter;
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.service.IoService;
 import org.apache.mina.core.service.IoServiceListener;
@@ -33,8 +32,6 @@ import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.SocketConnector;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * MinaClientA.java
@@ -43,7 +40,9 @@ import org.slf4j.LoggerFactory;
  * <liguangpu@tp-link.net> Created: Jan 14, 2015
  */
 public class MinaClientA {
-    
+    /*
+     * a Client with auto-reconnect feature.
+     */
     private SocketConnector socketConnector;
     private SocketSessionConfig sessionConfig;
     private static final int DEFAULT_CONNECT_TIMEOUT = 10;
@@ -148,28 +147,18 @@ public class MinaClientA {
 class IoListener implements IoServiceListener{
     @Override
     public void serviceActivated(IoService arg0) throws Exception {
-        // TODO Auto-generated method stub
     }
     @Override
     public void serviceDeactivated(IoService arg0) throws Exception {
-        // TODO Auto-generated method stub
     }
     @Override
     public void sessionCreated(IoSession arg0) throws Exception {
-        // TODO Auto-generated method stub
     }
-
     @Override
     public void sessionDestroyed(IoSession arg0) throws Exception {
-        // TODO Auto-generated method stub
     }
-    /* (non-Javadoc)
-     * @see org.apache.mina.core.service.IoServiceListener#serviceIdle(org.apache.mina.core.service.IoService, org.apache.mina.core.session.IdleStatus)
-     */
     @Override
     public void serviceIdle(IoService service, IdleStatus idleStatus)
             throws Exception {
-        // TODO Auto-generated method stub
-        
     }
 }
