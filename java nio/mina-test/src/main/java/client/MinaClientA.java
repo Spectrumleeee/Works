@@ -71,7 +71,8 @@ public class MinaClientA {
         
         socketConnector.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 5);
         
-        socketConnector.addListener(new IoListener(){
+        socketConnector.addListener(new IoListener(){ 
+            // MAY DEADLOCK, it will capture all the IoProcessor threads
             public void sessionDestroyed(IoSession arg0) throws Exception {
                 int num = (int) arg0.getAttribute("num");
                 for (;;) {
