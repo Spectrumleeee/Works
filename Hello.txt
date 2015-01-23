@@ -2,10 +2,11 @@ Hello Welcome to China!
 Hello Welcome to GitHub!
 
 ¡¾abbr.¡¿
-ASAP : as soon as possible
-btw : by the way
-YMMV: your mileage may vary!
-
+ASAP£ºas soon as possible
+btw £ºby the way
+YMMV£ºyour mileage may vary!
+WTF £ºwhat the fuck
+LGTM£ºLooks good to me
 
 @name, Thanks for the feedback! 
 @name, Thanks for your answer!
