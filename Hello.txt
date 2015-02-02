@@ -1,17 +1,23 @@
-Hello Welcome to China!
+﻿Hello Welcome to China!
 Hello Welcome to GitHub!
 
-��abbr.��
-ASAP��as soon as possible
-btw ��by the way
-YMMV��your mileage may vary!
-WTF ��what the fuck
-LGTM��Looks good to me
+【abbr.】
+ASAP：as soon as possible
+btw ：by the way
+YMMV：your mileage may vary!
+WTF ：what the fuck
+LGTM：Looks good to me
 
-@name, Thanks for the feedback! 
-@name, Thanks for your answer!
-To implement this we could resort to two APIs
-Prior to this commit
-It is a bit more generic
-We usually spawn multiple instances at the same time
-There is a need to understand how to orchestrate different instances with different save points
+Scenario:												场景：
+@name, Thanks for the feedback!							多谢你的回复 
+@name, Thanks for your answer!							多谢你的解答
+@HeartSaVioR, do you have any clue about this?			@HeartSaVioR, 你有这方面的线索么
+To implement this we could resort to two APIs			我们可以用两个APIs实现这个功能
+Prior to this commit									在此之前提交							
+It is a bit more generic								这更加通用
+We usually spawn multiple instances at the same time	我们经常同时生成多个实例。
+We can take a staged approach here						我们可以在这里采取分阶段的方式
+There is a need to understand how to orchestrate different instances with different save points		有必要理解如何去协调在不同保存点上的不同实例。
+This is not a bug report per se(itself) but here are some thoughts.									这儿只是一些观点想法，它本身不是个bug报告。
+It would be helpful if you could paste the whole stack so we can track the source of the problem.	这将对我们很有帮助如果你贴上所有栈信息，我们就能够追踪源码中的问题了。
+Please feel free to comment when you have an question or have any suggestion / recommendation.		请随时当你有一个问题，或者有任何建议/建议发表评论。
