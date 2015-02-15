@@ -2,11 +2,13 @@
 Hello Welcome to GitHub!
 
 【abbr.】
-ASAP：as soon as possible
-btw ：by the way
-YMMV：your mileage may vary!
-WTF ：what the fuck
-LGTM：Looks good to me
+YMMV：your mileage may vary!							你那边的情况可能有所不同
+LGTM：Looks good to me									我看起来很好，我赞同
+IMHO: In My Humble Opinion								恕我直言
+ASAP：as soon as possible								尽快
+WTF ：what the fuck										到底是什么
+BTW ：by the way										顺便
+OT  : Off Topic											题外话
 
 Scenario:												场景：
 @name, Thanks for the feedback!							多谢你的回复 
@@ -15,8 +17,11 @@ Scenario:												场景：
 To implement this we could resort to two APIs			我们可以用两个APIs实现这个功能
 Prior to this commit									在此之前提交							
 It is a bit more generic								这更加通用
+Sorry, I don't want a Babel of fragile code.			我不想要受到脆弱代码的干扰
 We usually spawn multiple instances at the same time	我们经常同时生成多个实例。
 We can take a staged approach here						我们可以在这里采取分阶段的方式
+To answer additional question : Actually, no. 			不回答其它的问题，只关注这个问题。
+SPAM, Please don't take things personally @Robot7 :(	垃圾邮件/广告，请不要因私废公		
 There is a need to understand how to orchestrate different instances with different save points		有必要理解如何去协调在不同保存点上的不同实例。
 This is not a bug report per se(itself) but here are some thoughts.									这儿只是一些观点想法，它本身不是个bug报告。
 It would be helpful if you could paste the whole stack so we can track the source of the problem.	这将对我们很有帮助如果你贴上所有栈信息，我们就能够追踪源码中的问题了。
