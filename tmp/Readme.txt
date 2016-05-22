@@ -1,1 +1,0 @@
-https://jcenter.bintray.com/
